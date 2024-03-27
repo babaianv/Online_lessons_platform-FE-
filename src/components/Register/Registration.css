@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+
+/* Base styles to ensure consistency across different browsers */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+/* Container for the form, centering it in the page */
+.form-container {
+    font-family: 'Poppins', sans-serif;
+    width: 560px;
+    padding: 40px;
+    margin: 30px auto;
+}
+
+/* Styles for the form title */
+.form-title {
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+/* General styles for form elements */
+.form-field {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 3px;
+    border: 1px solid #dcdcdc;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+.form-field::placeholder {
+  color: #c7c7c7;
+}
+
+/* Label styling */
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+/* Style for the submit button */
+.submit-button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #4caf50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+/* Style for the form footer text */
+.form-footer {
+    text-align: left;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: #666;
+    font-size: 13px;
+}
+
+/* Style for the 'Log in' link in the form footer */
+.form-footer a {
+    color: #666;
+}
+
+
+.password-label-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-password {
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  margin-bottom: 8px;
+  color: #333;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.toggle-password .icon {
+  margin-right: 4px; 
+}
+
+#password{
+  margin-bottom: 5px; 
+}
+
+/* Helper text under the password input */
+.password-helper {
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.login-link {
+  margin-top: 13px;
+  text-align: center;
+  color: #666;
+  font-size: 14px;
+}
+
+.login-link a {
+  color: #666;
+}
+
