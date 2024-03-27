@@ -6,7 +6,7 @@ import Companies from '../../components/Companies/Companies';
 
 import BenefitsTeacher from '../../components/Benefits/BenefitsTeacher';
 import BenefitsStudent from '../../components/Benefits/BenefitsStudent';
-import Courses from '../../components/CoursesCards/Courses';
+import Courses from '../../components/CoursesCards/CoursesCards';
 import Footer from '../../components/Footer/Footer';
 
 const Home: React.FC = () => {

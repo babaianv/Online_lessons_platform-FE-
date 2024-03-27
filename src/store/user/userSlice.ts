@@ -24,9 +24,7 @@ interface RegisterPayload {
 }
 
 export const registerUser = createAsyncThunk<
-  // Return type of the payload creator
   UserResponse,
-  // First argument to the payload creator
   RegisterPayload,
   {
     rejectValue: string;
