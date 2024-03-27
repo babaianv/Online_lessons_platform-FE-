@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import "./CourseDetails.css";
+import "./CourseDetailsP";
 
 interface CourseDetails {
   id: number;
@@ -11,7 +11,7 @@ interface CourseDetails {
   authorId: number;
 }
 
-const CourseDetails: React.FC = () => {
+const CourseDetailsP: React.FC = () => {
   const { courseId } = useParams<{ courseId: string }>();
   const [loading, setLoading] = useState(true);
   const [courseDetails, setCourseDetails] = useState<CourseDetails | null>(null);
@@ -46,9 +46,10 @@ const CourseDetails: React.FC = () => {
   return (
     <div className="courseDetailsContainer">
       <h1>{courseDetails.title}</h1>
-      <p>Price: ${courseDetails.price}</p>
+      <p>Price: €{courseDetails.price}</p>
       <p>Description: {courseDetails.description}</p>
       <p>Author ID: {courseDetails.authorId}</p>
+      
       <div className="buttonsContainer">
         <button className="demoButton">View demo lessons</button>
         <Link to={`/cart/${courseDetails.id}`}>
@@ -59,4 +60,4 @@ const CourseDetails: React.FC = () => {
   );
 };
 
-export default CourseDetails;
+export default CourseDetailsP;
