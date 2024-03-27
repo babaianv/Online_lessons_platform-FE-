@@ -1,0 +1,98 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 0 30px 0;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+}
+
+.headerLogo {
+  width: 35px;
+  height: 45px;
+}
+
+.logoText {
+  color: #29a354;
+  font-size: 30px;
+  font-weight: 700;
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.5);
+}
+
+.loginBtn,
+.signUpBtn {
+  max-width: 100px;
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 10px 20px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.loginBtn {
+  border: 2px solid #29a354;
+  color: #827a7a;
+  margin-right: 10px;
+}
+
+.signUpBtn {
+  background-color: #29a354;
+  color: #ffffff;
+  border: 2px solid #29a354;
+}
+
+.loginBtn:hover,
+.loginBtn:focus {
+  background-color: #f0f0f0;
+  border-color: #29a354;
+}
+
+.signUpBtn:hover,
+.signUpBtn:focus {
+  background-color: #1c7f44;
+  border-color: #1c7f44;
+}
+
+.navContainer,
+.headerBtnContainer {
+  display: flex;
+  align-items: center;
+}
+
+.navLink,
+.navItem a {
+  text-decoration: none;
+  color: #827a7a;
+  transition: transform 0.3s ease;
+  margin-right: 60px;
+}
+
+.navLink:hover,
+.navLink:focus,
+.navLink:active,
+.navItem a:hover,
+.navItem a:focus,
+.navItem a:active {
+  background: linear-gradient(to right, #29a354, #cd9872);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  transition: all 0.7s;
+}
+
+.navItem:not(:last-child) {
+  margin-right: 60px;
+}
+
+.btn {
+  border: 2px solid transparent;
+  border-radius: 20px;
+  padding: 10px 20px;
+  height: 30px;
+}

@@ -1,0 +1,51 @@
+.courseDetailsContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .courseDetailsContainer h1 {
+    font-size: 28px;
+    margin-bottom: 10px;
+  }
+  
+  .courseDetailsContainer p {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+  
+  .buttonsContainer {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .demoButton, .cartButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .demoButton {
+    background-color:  rgb(255, 255, 255);
+    color:  rgb(103, 70, 211);
+  }
+  
+  .cartButton {
+    background-color:  rgb(255, 255, 255);
+    color:  rgb(103, 70, 211);
+  }
+  
+  .demoButton:hover, .cartButton:hover {
+    filter: brightness(0.9);
+  }
+  
+  .demoButton:focus, .cartButton:focus {
+    outline: none;
+  }
+  
