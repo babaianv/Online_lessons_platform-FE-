@@ -1,5 +1,6 @@
 import React from "react";
 import NavItem from "../NavItem/NavItem";
+import { Link } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => {
@@ -12,11 +13,12 @@ const Header = () => {
       <div className="navContainer">
         <NavItem to="/" textContent="Home"></NavItem>
         <NavItem to="/courses" textContent="Courses"></NavItem>
-        <NavItem to="/contact" textContent="Contact"></NavItem>
+        <NavItem to="/contact" textContent="Contact" ></NavItem>
+        
       </div>
       <div className="headerBtnContainer">
         <button className="loginBtn">Login</button>
-        <button className="signUpBtn">Sign up</button>
+        <Link className="signUpBtn" to="/reg#">Sign up</Link>
       </div>
     </div>
   );

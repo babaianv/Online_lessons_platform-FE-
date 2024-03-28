@@ -1,8 +1,8 @@
 export interface UserResponse {
-    nickname: string;
-    email: string;
-    password: string;
-  }
+  nickname: string;
+  email: string;
+  password: string;
+}
 
 export interface Course {
   id: number;
@@ -11,3 +11,5 @@ export interface Course {
   description: string;
   authorId: number;
 }
+
+
