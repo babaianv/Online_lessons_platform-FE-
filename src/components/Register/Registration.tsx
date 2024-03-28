@@ -77,6 +77,7 @@ const Registration: React.FC = () => {
             </label>
             <button
               onClick={togglePasswordVisibility}
+              type="button"
               className="toggle-password"
               aria-label={isPasswordVisible ? "Hide password" : "Show password"}
             >
