@@ -48,7 +48,7 @@
 }
 
 /* Style for the submit button */
-.submit-button {
+.submit-reg-button {
     width: 100%;
     padding: 15px;
     border: none;
@@ -60,7 +60,7 @@
     transition: background-color 0.2s;
 }
 
-.submit-button:hover {
+.submit-reg-button:hover {
     background-color: #45a049;
 }
 
@@ -97,7 +97,7 @@
 }
 
 .toggle-password .icon {
-  margin-right: 4px; 
+  margin-right: 1px; 
 }
 
 #password{
