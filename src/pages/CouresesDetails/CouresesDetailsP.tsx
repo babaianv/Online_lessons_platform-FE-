@@ -1,9 +1,11 @@
+
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCourseDetails } from "../../Slices/courseDetailsSlice";
 import { RootState } from "../../store/store";
 import { Course } from "../../types/types";
 import { AppDispatch } from "../../store/store";
+
 
 
 const CourseDetailsP: React.FC = () => {
