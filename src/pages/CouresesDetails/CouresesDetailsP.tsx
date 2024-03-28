@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
-import "./CourseDetailsP";
+import "./CourseDetailsP.css";
 
 interface CourseDetails {
   id: number;
