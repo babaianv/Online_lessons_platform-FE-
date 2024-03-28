@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { Course } from "../types/types";
+import instance from "../api/axios";
 
 interface CoursesState {
   coursesData: Course[] | null;
@@ -20,9 +21,8 @@ export const fetchCourses = createAsyncThunk<
   { rejectValue: string }
 >("courses/fetchCourses", async (_, { rejectWithValue }) => {
   try {
-    const response = await axios.get<Course[]>(
-      "http://localhost:8080/api/courses"
-    );
+    const response = await instance.get<Course[]>("/courses");
+
     return response.data;
   } catch (error) {
     return rejectWithValue("Failed to fetch courses data");

@@ -1,42 +1,46 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import "./CourseDetailsP.css";
 
-interface CourseDetails {
-  id: number;
-  title: string;
-  price: number;
-  description: string;
-  authorId: number;
-}
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCourseDetails } from "../../Slices/courseDetailsSlice";
+import { RootState } from "../../store/store";
+import { Course } from "../../types/types";
+import { AppDispatch } from "../../store/store";
+
+
 
 const CourseDetailsP: React.FC = () => {
-  const { courseId } = useParams<{ courseId: string }>();
-  const [loading, setLoading] = useState(true);
-  const [courseDetails, setCourseDetails] = useState<CourseDetails | null>(null);
+  const dispatch: AppDispatch = useDispatch();
+  const selectedCourseId = useSelector<RootState, number | null>(
+    (state) => state.coursesDetails.selectedCourseId 
+  );
+
+  const courseDetails = useSelector<RootState, Course | null>(
+    (state) => state.coursesDetails.courseDetails
+  );
+  const loading = useSelector<RootState, boolean>(
+    (state) => state.coursesDetails.loading
+  );
+  const error = useSelector<RootState, string | null>(
+    (state) => state.coursesDetails.error
+  );
 
   useEffect(() => {
-    const fetchCourseDetails = async () => {
-      try {
-        const response = await fetch(`http://localhost:8080/api/courses/${courseId}`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch course details");
-        }
-        const data: CourseDetails = await response.json();
-        setCourseDetails(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching course details:", error);
-        setLoading(false);
-      }
-    };
+    if (selectedCourseId) {
+  
+      dispatch(fetchCourseDetails(selectedCourseId));
+    }
+  }, [dispatch, selectedCourseId]);
 
-    fetchCourseDetails();
-  }, [courseId]);
+  if (!selectedCourseId) {
+    return <div>No course selected</div>;
+  }
 
   if (loading) {
     return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
   }
 
   if (!courseDetails) {
@@ -49,13 +53,6 @@ const CourseDetailsP: React.FC = () => {
       <p>Price: €{courseDetails.price}</p>
       <p>Description: {courseDetails.description}</p>
       <p>Author ID: {courseDetails.authorId}</p>
-      
-      <div className="buttonsContainer">
-        <button className="demoButton">View demo lessons</button>
-        <Link to={`/cart/${courseDetails.id}`}>
-          <button className="cartButton">Add to Cart</button>
-        </Link>
-      </div>
     </div>
   );
 };
