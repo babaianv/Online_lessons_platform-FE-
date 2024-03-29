@@ -16,7 +16,7 @@ const BenefitsTeacher = () => (
           <div className="benefitDetails">
             <div>
               <h3 className="subtitle">Simplicity</h3>
-              <p className="description">
+              <p className="descriptionBenefit">
                 Teachers can easily showcase their lessons on our website
                 without the hassle of creating and maintaining their own web
                 resource.
@@ -31,7 +31,7 @@ const BenefitsTeacher = () => (
           <div className="benefitDetails">
             <div>
               <h3 className="subtitle">Education Focus</h3>
-              <p className="description">
+              <p className="descriptionBenefit">
                 Thanks to our platform, teachers can concentrate on developing
                 quality lessons without being distracted by the technical
                 aspects of web development.
@@ -47,7 +47,7 @@ const BenefitsTeacher = () => (
           <div className="benefitDetails">
             <div>
               <h3 className="subtitle">Additional Income</h3>
-              <p className="description">
+              <p className="descriptionBenefit">
                 Our website offers teachers the opportunity to start earning by
                 sharing their knowledge and experience through online lessons,
                 without the need to worry about marketing and promotion.
