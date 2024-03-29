@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../store/store";
-import { fetchCourseDetails } from "../../Slices/courseDetailsSlice";
+import { fetchCourseDetails } from "../../slices/courseDetailsSlice";
 import { Course } from "../../types/types";
 import { Link } from "react-router-dom";
-import { addToCart } from "../../Slices/cartSlice";
+import { addToCart } from "../../slices/cartSlice";
+import { incrementTotalCount } from "../../slices/totalCountSlice";
 
 import "./CourseDetails.css";
 
@@ -14,15 +15,16 @@ interface Props {
 
 const CourseDetails: React.FC<Props> = ({ courseId }) => {
   const dispatch: AppDispatch = useDispatch();
+  const [showPopup, setShowPopup] = useState<boolean>(false);
+  const autoCloseTimeout = 1800;
+  const [isCourseAdded, setIsCourseAdded] = useState<boolean>(false); 
   const selectedCourseId = useSelector<RootState, number | null>(
     (state) => state.coursesDetails.selectedCourseId
   );
   const courseDetails = useSelector<RootState, Course | null>(
     (state) => state.coursesDetails.courseDetails
   );
-  const loading = useSelector<RootState, boolean>(
-    (state) => state.coursesDetails.loading
-  );
+
   const error = useSelector<RootState, string | null>(
     (state) => state.coursesDetails.error
   );
@@ -36,7 +38,7 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   }, [dispatch, courseId, selectedCourseId]);
 
   const handleAddToCart = () => {
-    if (courseDetails) {
+    if (courseDetails && !isCourseAdded) { 
       dispatch(
         addToCart({
           id: courseDetails.id.toString(),
@@ -45,12 +47,18 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
           price: courseDetails.price,
         })
       );
+      dispatch(incrementTotalCount());
+      setShowPopup(true);
+      setIsCourseAdded(true); 
+
+      setTimeout(() => {
+        setShowPopup(false);
+      }, autoCloseTimeout);
     }
   };
 
   return (
     <>
-      {loading && <div>Loading...</div>}
       {error && <div>Error: {error}</div>}
       {courseDetails && (
         <div className="courseContainer">
@@ -79,6 +87,13 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
             <h2 className="description">Description:</h2>
             <br />
             <p className="descriptionText">{courseDetails.description}</p>
+          </div>
+        </div>
+      )}
+      {showPopup && (
+        <div className="popup">
+          <div className="popup-content">
+            <p>The course has been successfully added to your cart!</p>
           </div>
         </div>
       )}

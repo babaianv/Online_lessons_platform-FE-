@@ -1,20 +1,18 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCourses } from "../../Slices/coursesSlice";
+import { fetchCourses } from "../../slices/coursesSlice";
 import { RootState, AppDispatch } from "../../store/store";
 import { Course } from "../../types/types";
 import "./CoursesCards.css";
 import { Link } from "react-router-dom";
-import { setSelectedCourseId } from "../../Slices/courseDetailsSlice";
+import { setSelectedCourseId } from "../../slices/courseDetailsSlice";
 
 const CoursesCards: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const coursesData = useSelector<RootState, Course[] | null>(
     (state) => state.courses.coursesData
   );
-  const loading = useSelector<RootState, boolean>(
-    (state) => state.courses.loading
-  );
+
   const error = useSelector<RootState, string | null>(
     (state) => state.courses.error
   );
@@ -34,7 +32,6 @@ const CoursesCards: React.FC = () => {
         <p className="subtitleCourses">Choose the course of your dreams</p>
       </div>
       <div className="cardsWrapper">
-        {loading && <p>Loading...</p>}
         {error && <p>Error: {error}</p>}
         {coursesData &&
           coursesData.map((course) => (

@@ -1,19 +1,18 @@
-
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 // import { RootState } from '../store';
-import { UserResponse } from '../types/types';
-import { AxiosError } from 'axios';
-import instance from '../api/axios';
+import { UserResponse } from "../types/types";
+import { AxiosError } from "axios";
+import instance from "../api/axios";
 
 interface UserState {
   userInfo: UserResponse | null;
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null | undefined;
 }
 
 const initialState: UserState = {
   userInfo: null,
-  status: 'idle',
+  status: "idle",
   error: null,
 };
 
@@ -34,9 +33,9 @@ export const registerUser = createAsyncThunk<
   {
     rejectValue: string;
   }
->('user/register', async (userData, { rejectWithValue }) => {
+>("user/register", async (userData, { rejectWithValue }) => {
   try {
-    const response = await instance.post('/users/register', userData);
+    const response = await instance.post("/users/register", userData);
     return response.data;
   } catch (err) {
     const error: AxiosError<string> = err as AxiosError<string>;
@@ -54,11 +53,11 @@ export const loginUser = createAsyncThunk<
   {
     rejectValue: string;
   }
->('user/login', async (credentials, { rejectWithValue }) => {
+>("user/login", async (credentials, { rejectWithValue }) => {
   try {
-    const response = await instance.post('/users/login', credentials);
+    const response = await instance.post("/users/login", credentials);
     // Сохраняем полученный токен
-    localStorage.setItem('token', response.data.accessToken);
+    localStorage.setItem("token", response.data.accessToken);
     return response.data;
   } catch (err) {
     const error: AxiosError<string> = err as AxiosError<string>;
@@ -71,38 +70,44 @@ export const loginUser = createAsyncThunk<
 });
 
 export const userSlice = createSlice({
-  name: 'user',
+  name: "user",
   initialState,
   reducers: {
     logout(state) {
       state.userInfo = null;
-      state.status = 'idle';
-      localStorage.removeItem('token');
+      state.status = "idle";
+      localStorage.removeItem("token");
     },
   },
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
-      .addCase(registerUser.fulfilled, (state, action: PayloadAction<UserResponse>) => {
-        state.status = 'succeeded';
-        state.userInfo = action.payload;
-      })
+      .addCase(
+        registerUser.fulfilled,
+        (state, action: PayloadAction<UserResponse>) => {
+          state.status = "succeeded";
+          state.userInfo = action.payload;
+        }
+      )
       .addCase(registerUser.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status = "failed";
         state.error = action.payload;
       })
       .addCase(loginUser.pending, (state) => {
-        state.status = 'loading';
+        state.status = "loading";
       })
-      .addCase(loginUser.fulfilled, (state, action: PayloadAction<UserResponse>) => {
-        state.status = 'succeeded';
-        // Сохраняем информацию о пользователе из action.payload
-        state.userInfo = action.payload;
-      })
+      .addCase(
+        loginUser.fulfilled,
+        (state, action: PayloadAction<UserResponse>) => {
+          state.status = "succeeded";
+          // Сохраняем информацию о пользователе из action.payload
+          state.userInfo = action.payload;
+        }
+      )
       .addCase(loginUser.rejected, (state, action) => {
-        state.status = 'failed';
+        state.status = "failed";
         // Сохраняем сообщение об ошибке
         state.error = action.payload;
       });
