@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+
+/* Base styles to ensure consistency across different browsers */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+/* Container for the form, centering it in the page */
+.form-container {
+    font-family: 'Poppins', sans-serif;
+    width: 560px;
+    padding: 40px;
+    margin: 30px auto;
+}
+
+/* Styles for the form title */
+.form-title {
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 32px;
+    font-weight: 500;
+}
+
+/* General styles for form elements */
+.form-field {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: 3px;
+    border: 1px solid #dcdcdc;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+.form-field::placeholder {
+  color: #c7c7c7;
+}
+
+/* Label styling */
+.form-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+/* Style for the submit button */
+.submit-log-button {
+    width: 100%;
+    margin-top: 24px;
+    padding: 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #29a354;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.submit-log-button:hover {
+    background-color: #45a049;
+}
+
+.line {
+    content: ''; /* Псевдоэлементы требуют свойства content */
+    margin:40px auto; 
+    height: 1px; 
+    width: 100%; 
+    background: black; 
+}
+
+.password-label-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.toggle-password {
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  margin-bottom: 8px;
+  color: #333;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+#password{
+  margin-bottom: 5px; 
+}
+
+.register-helper {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 22px;
+  }
+
+  .registration-button {
+    width: 100%;
+    margin-top: 16px;
+    padding: 15px;
+    border: none;
+    border-radius: 20px;
+    background-color: #29a354;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .registration-button:hover {
+    background-color: #45a049;
+}

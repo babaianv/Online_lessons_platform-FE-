@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "../../hooks/hooks";
-import { registerUser } from "../../slices/userSlice";
+<<<<<<< HEAD:src/components/Register/Registration.tsx
+import { registerUser } from "../../Slices/userSlice";
+=======
+import { registerUser } from "../../Slices/userSlice";
+>>>>>>> 09c255ea1e0b907a4dd15a6be95eae3470502d42:src/components/Registration/Registration.tsx
 import { useNavigate } from "react-router-dom";
 import "./Registration.css";
 import { BiHide, BiShow } from "react-icons/bi";
@@ -77,6 +81,7 @@ const Registration: React.FC = () => {
             </label>
             <button
               onClick={togglePasswordVisibility}
+              type="button"
               className="toggle-password"
               aria-label={isPasswordVisible ? "Hide password" : "Show password"}
             >
@@ -112,11 +117,11 @@ const Registration: React.FC = () => {
           </a>
           .
         </div>
-        <button type="submit" className="submit-button">
+        <button type="submit" className="submit-reg-button">
           Sign up
         </button>
         <div className="login-link">
-          Already have an account? <a href="#">Log in</a>
+          Already have an account? <a href="/log">Log in</a>
         </div>
       </form>
     </div>

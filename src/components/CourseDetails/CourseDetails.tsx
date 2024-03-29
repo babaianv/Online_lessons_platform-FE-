@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../store/store";
-import { fetchCourseDetails } from "../../slices/courseDetailsSlice";
+import { fetchCourseDetails } from "../../Slices/courseDetailsSlice";
 import { Course } from "../../types/types";
 import { Link } from "react-router-dom";
-import { addToCart } from "../../slices/cartSlice";
+import { addToCart } from "../../Slices/cartSlice";
 
 import "./CourseDetails.css";
 
