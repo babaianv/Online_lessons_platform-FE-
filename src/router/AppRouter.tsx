@@ -4,7 +4,7 @@ import Layout from "../layout/Layout";
 import LoginPage from "../pages/Login/LoginPage";
 import Home from "../pages/Home/Home";
 import RegistrationPage from "../pages/Registration/RegistrationPage";
-import CourseDetailsP from "../pages/CouresesDetails/CouresesDetailsP";
+import CourseDetailsP from "../pages/CouresesDetails/CoursesDetailsP";
 
 
 const AppRouter: React.FC = () => {
@@ -14,7 +14,7 @@ const AppRouter: React.FC = () => {
       <Route path="/" element={<Home />} />
       <Route path="/log" element={<LoginPage/>} />
       <Route path="/reg" element={<RegistrationPage/>} />
-      <Route path="/course_detail" element={<CourseDetailsP/>} />
+      <Route path="/courses/:courseId" element={<CourseDetailsP />} />
     </Routes>
   );
 };

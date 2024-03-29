@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "../../hooks/hooks";
-<<<<<<< HEAD:src/components/Register/Registration.tsx
 import { registerUser } from "../../Slices/userSlice";
-=======
-import { registerUser } from "../../Slices/userSlice";
->>>>>>> 09c255ea1e0b907a4dd15a6be95eae3470502d42:src/components/Registration/Registration.tsx
 import { useNavigate } from "react-router-dom";
 import "./Registration.css";
 import { BiHide, BiShow } from "react-icons/bi";
