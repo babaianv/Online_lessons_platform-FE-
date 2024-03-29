@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "../../hooks/hooks";
-import { registerUser } from "../../store/user/userSlice";
+import { registerUser } from "../../Slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import "./Registration.css";
 import { BiHide, BiShow } from "react-icons/bi";
@@ -109,11 +109,11 @@ const Registration: React.FC = () => {
           </a>
           .
         </div>
-        <button type="submit" className="submit-button">
+        <button type="submit" className="submit-reg-button">
           Sign up
         </button>
         <div className="login-link">
-          Already have an account? <a href="#">Log in</a>
+          Already have an account? <a href="/log">Log in</a>
         </div>
       </form>
     </div>

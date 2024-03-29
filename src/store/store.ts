@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import coursesReducer from '../Slices/coursesSlice';
-import userReducer from './user/userSlice';
+import userReducer from '../Slices/userSlice';
 import courseDetailsReducer from "../Slices/courseDetailsSlice"
 import cartReducer from "../Slices/cartSlice";
 
