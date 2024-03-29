@@ -2,8 +2,9 @@
   display: flex;
   justify-content: space-between;
   padding: 20px 0 30px 0;
-  max-width: 1400px;
+  max-width: 1200px;
   margin: 0 auto;
+  
 }
 
 .logoContainer {
@@ -34,6 +35,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+
 }
 
 .loginBtn {
@@ -56,12 +58,14 @@
 .loginBtn:focus {
   background-color: #f0f0f0;
   border-color: #29a354;
+  transform: scale(1.05); 
 }
 
 .signUpBtn:hover,
 .signUpBtn:focus {
   background-color: #45a049;
   border-color: #1c7f44;
+  transform: scale(1.05); 
 }
 
 .navContainer,
@@ -88,11 +92,11 @@
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
-  transition: all 0.7s;
+  transform: scale(1.05); 
 }
 
 .navItem:not(:last-child) {
-  margin-right: 60px;
+  margin-right: 30px;
 }
 
 .btn {
@@ -101,3 +105,14 @@
   padding: 10px 20px;
   height: 30px;
 }
+
+.cartIcon {
+  width: 34px; 
+  margin-right: 30px; 
+  transition: transform 0.5s ease;
+}
+
+.cartIcon:hover {
+  transform: scale(1.3); 
+}
+

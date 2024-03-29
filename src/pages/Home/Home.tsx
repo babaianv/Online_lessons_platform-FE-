@@ -3,11 +3,10 @@ import "../Home/Home.css"
 import Header from '../../components/Header/Header';
 import Main from '../../components/Main/Main';
 import Companies from '../../components/Companies/Companies';
-
 import BenefitsTeacher from '../../components/Benefits/BenefitsTeacher';
 import BenefitsStudent from '../../components/Benefits/BenefitsStudent';
-import Courses from '../../components/CoursesCards/CoursesCards';
 import Footer from '../../components/Footer/Footer';
+import CoursesCards from '../../components/CoursesCards/CoursesCards';
 
 const Home: React.FC = () => {
   return (
@@ -17,7 +16,7 @@ const Home: React.FC = () => {
       <Companies/>
       <BenefitsStudent/>
       <BenefitsTeacher/>
-      <Courses/>
+      <CoursesCards/>
       <Footer/>
     </>
   );

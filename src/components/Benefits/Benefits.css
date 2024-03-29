@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   width: 100%;
   margin: 0 auto 50px;
 }
@@ -12,7 +11,7 @@
   align-items: center;
   margin-bottom: 20px;
   justify-content: space-between;
-  max-width: 1400px;
+  max-width: 1250px;
   width: 100%;
 }
 
@@ -37,6 +36,7 @@
   margin-bottom: 50px;
   text-align: left;
 }
+
 .benefitsTitleStudent {
   font-size: 40px;
   margin-bottom: 50px;
@@ -63,7 +63,7 @@
   margin-bottom: 20px;
 }
 
-.description {
+.descriptionBenefit {
   font-size: 20px;
   margin-right: 10px;
   margin-bottom: 20px;

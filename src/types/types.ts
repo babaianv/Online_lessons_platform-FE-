@@ -7,6 +7,7 @@ export interface UserResponse {
 export interface Course {
   id: number;
   title: string;
+  photoPath: string;
   price: number;
   description: string;
   authorId: number;
