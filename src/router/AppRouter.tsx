@@ -9,9 +9,9 @@ import Layout from "../layout/Layout";
 const AppRouter: React.FC = () => {
   return (
     <Routes>
-            <Route element={<Layout />}> 
+      <Route element={<Layout />} />
       <Route path="/" element={<Home />} />
-      <Route path="/reg" element={<Registration/>} />
+      <Route path="/reg" element={<Registration />} />
       <Route path="/courses/:courseId" element={<CourseDetailsP />} />
     </Routes>
   );
