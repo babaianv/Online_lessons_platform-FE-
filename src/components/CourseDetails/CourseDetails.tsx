@@ -1,12 +1,22 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../store/store";
-import { fetchCourseDetails } from "../../Slices/courseDetailsSlice";
+import { fetchCourseDetails } from "../../slices/courseDetailsSlice";
 import { Course } from "../../types/types";
 import { Link } from "react-router-dom";
+import { addToCart } from "../../slices/cartSlice";
 
-const CourseDetails: React.FC<{ courseId: number }> = ({ courseId }) => {
+import "./CourseDetails.css";
+
+interface Props {
+  courseId?: number;
+}
+
+const CourseDetails: React.FC<Props> = ({ courseId }) => {
   const dispatch: AppDispatch = useDispatch();
+  const selectedCourseId = useSelector<RootState, number | null>(
+    (state) => state.coursesDetails.selectedCourseId
+  );
   const courseDetails = useSelector<RootState, Course | null>(
     (state) => state.coursesDetails.courseDetails
   );
@@ -18,47 +28,61 @@ const CourseDetails: React.FC<{ courseId: number }> = ({ courseId }) => {
   );
 
   useEffect(() => {
-    dispatch(fetchCourseDetails(courseId));
-  }, [dispatch, courseId]);
+    if (!courseId && selectedCourseId) {
+      dispatch(fetchCourseDetails(selectedCourseId));
+    } else if (courseId) {
+      dispatch(fetchCourseDetails(courseId));
+    }
+  }, [dispatch, courseId, selectedCourseId]);
+
+  const handleAddToCart = () => {
+    if (courseDetails) {
+      dispatch(
+        addToCart({
+          id: courseDetails.id.toString(),
+          name: courseDetails.title,
+          count: 1,
+          price: courseDetails.price,
+        })
+      );
+    }
+  };
 
   return (
-    <div>
+    <>
       {loading && <div>Loading...</div>}
       {error && <div>Error: {error}</div>}
       {courseDetails && (
-        // <div>
-        //   <h2>{courseDetails.title}</h2>
-        //   <p>{courseDetails.description}</p>
-        // </div>
-
-        <div className="CourseContainer">
-          <div>
-          <img className="imgCourse" src="./img/mainImg1.png" alt="mainImg1" />
-          </div>
-          <div className="CourseDetWrapper">
-          <h1 className="courseTitle">Web design basic to advance</h1>
-          <p className="currency">EUR(incl. of all taxes)</p>
-          <p className="price">€400</p>
-          </div>
-          <div className="dividerCourseM"></div>
-          <div>
-            <div className="buttonsContainer">
-              <Link className="lessonsBtn" to="/lessons">
-                View demo lessons
-              </Link>
-              <button className="cartButton">Add to Cart</button>
+        <div className="courseContainer">
+          <div className="coursePreviewWrapper">
+            <div className="coverPhoto">
+              <img className="" src={courseDetails.photoPath} alt="imgCover" />
+            </div>
+            <div className="coursePreviewWrapperContent">
+              <div className="courseDet">
+                <h1 className="titleDet">{courseDetails.title}</h1>
+                <p className="taxes">EUR(incl. of all taxes)</p>
+                <p className="priceDet">€{courseDetails.price}</p>
+              </div>
+              <div className="dividerCourseM"></div>
+              <div className="coursePreviewWrapperBtnWrapper">
+                <Link to="/demo_lessons">
+                  <button className="demoBtn">View lessons</button>
+                </Link>
+                <button className="addToCartBtn" onClick={handleAddToCart}>
+                  Add to Cart
+                </button>
+              </div>
             </div>
           </div>
-
-          <div>
-            <h2 className="description">Description</h2>
-            <div className="dividerCourseM"></div>
+          <div className="coursesDescriptionWrapper">
+            <h2 className="description">Description:</h2>
+            <br />
+            <p className="descriptionText">{courseDetails.description}</p>
           </div>
-          <p className="subDescription"></p>
         </div>
-      ) 
-      }
-    </div>
+      )}
+    </>
   );
 };
 

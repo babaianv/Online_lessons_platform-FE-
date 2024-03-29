@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "../../hooks/hooks";
-import { registerUser } from "../../store/user/userSlice";
+import { registerUser } from "../../slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import "./Registration.css";
 import { BiHide, BiShow } from "react-icons/bi";
@@ -80,8 +80,12 @@ const Registration: React.FC = () => {
               className="toggle-password"
               aria-label={isPasswordVisible ? "Hide password" : "Show password"}
             >
-              {isPasswordVisible ? <BiHide className="icon" /> : <BiShow className="icon" />}
-              {isPasswordVisible ? 'Hide' : 'Show'}
+              {isPasswordVisible ? (
+                <BiHide className="icon" />
+              ) : (
+                <BiShow className="icon" />
+              )}
+              {isPasswordVisible ? "Hide" : "Show"}
             </button>
           </div>
           <input

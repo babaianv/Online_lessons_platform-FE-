@@ -1,4 +1,8 @@
 import React from "react";
+import facebookIcon from "../../../public/icons/facebook.svg";
+import instagramIcon from "../../../public/icons/instagram.svg";
+import logoIcon from "../../../public/icons/bulbFooterIcon.svg";
+import logoTextFooter from "../../../public/icons/logoFooterIcon.svg";
 import "./Footer.css";
 
 const Footer = () => {
@@ -8,16 +12,12 @@ const Footer = () => {
         <h6 className="socialMedia">Follow on social service:</h6>
         <div className="socialMediaIcons">
           <a href="https://www.facebook.com/" target="_blank">
-            <img
-              className="facebookIcon"
-              src="./icons/facebook.svg"
-              alt="facebook"
-            />
+            <img className="facebookIcon" src={facebookIcon} alt="facebook" />
           </a>
           <a href="https://www.instagram.com/" target="_blank">
             <img
               className="instagramIcon"
-              src="./icons/instagram.svg"
+              src={instagramIcon}
               alt="instagram"
             />
           </a>
@@ -35,8 +35,8 @@ const Footer = () => {
         </a>
       </div>
       <div className="logoFooter">
-        <img src="./icons/bulbFooterIcon.svg" alt="bulbFooterIcon" />
-        <img src="./icons/logoFooterIcon.svg" alt="logoFooterIcon" />
+        <img src={logoIcon} alt="bulbFooterIcon" />
+        <img src={logoTextFooter} alt="logoFooterIcon" />
       </div>
     </div>
   );

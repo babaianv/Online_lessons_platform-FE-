@@ -17,7 +17,7 @@ const BenefitsStudent = () => (
           <div className="benefitDetails">
             <div>
               <h3 className="subtitle">Online Degree</h3>
-              <p className="description">
+              <p className="descriptionBenefit">
                 Earning an online degree offers the flexibility to pursue higher
                 education from anywhere.
               </p>
@@ -31,7 +31,7 @@ const BenefitsStudent = () => (
           <div className="benefitDetails">
             <div>
               <h3 className="subtitle">Short course</h3>
-              <p className="description">
+              <p className="descriptionBenefit">
                 Short courses provide efficient and focused learning
                 experiences, enabling individuals to acquire specific skills or
                 knowledge in a condensed timeframe.
@@ -47,7 +47,7 @@ const BenefitsStudent = () => (
           <div className="benefitDetails">
             <div>
               <h3 className="subtitle">Learn with expert</h3>
-              <p className="description">
+              <p className="descriptionBenefit">
                 Acquire new skills and knowledge through interactive online
                 courses, fostering self-paced education and personal
                 development.

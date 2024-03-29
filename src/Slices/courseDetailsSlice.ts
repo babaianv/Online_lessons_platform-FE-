@@ -1,6 +1,4 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
-
 import { Course } from "../types/types";
 import instance from "../api/axios";
 
@@ -34,7 +32,11 @@ export const fetchCourseDetails = createAsyncThunk<
 const courseDetailsSlice = createSlice({
   name: "courseDetails",
   initialState,
-  reducers: {},
+  reducers: {
+    setSelectedCourseId(state, action: PayloadAction<number>) {
+      state.selectedCourseId = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCourseDetails.pending, (state) => {
@@ -55,5 +57,7 @@ const courseDetailsSlice = createSlice({
       });
   },
 });
+
+export const { setSelectedCourseId } = courseDetailsSlice.actions;
 
 export default courseDetailsSlice.reducer;

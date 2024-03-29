@@ -1,15 +1,18 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "../pages/Home/Home";
+import Registration from "../components/Register/Registration";
 import RegistrationPage from "../pages/Registration/RegistrationPage";
 import CourseDetailsP from "../pages/CouresesDetails/CouresesDetailsP";
+import Layout from "../layout/Layout";
 
 const AppRouter: React.FC = () => {
   return (
     <Routes>
+            <Route element={<Layout />}> 
       <Route path="/" element={<Home />} />
-      <Route path="/reg" element={<RegistrationPage/>} />
-      <Route path="/course_detail" element={<CourseDetailsP/>} />
+      <Route path="/reg" element={<Registration/>} />
+      <Route path="/courses/:courseId" element={<CourseDetailsP />} />
     </Routes>
   );
 };
