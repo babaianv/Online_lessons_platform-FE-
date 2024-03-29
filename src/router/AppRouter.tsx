@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "../pages/Home/Home";
 import Registration from "../components/Register/Registration";
-import RegistrationPage from "../pages/Registration/RegistrationPage";
 import CourseDetailsP from "../pages/CouresesDetails/CouresesDetailsP";
 import Layout from "../layout/Layout";
 
