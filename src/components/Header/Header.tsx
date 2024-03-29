@@ -22,7 +22,7 @@ const Header = () => {
       <Link to="/shopping_cart" className="cartLink">
           <img className="cartIcon" src={cartIcon} alt="cartIcon" />
         </Link>
-        <button className="loginBtn">Login</button>
+        <Link className="loginBtn" to="/log#">Log in</Link>
         <Link className="signUpBtn" to="/reg#">Sign up</Link>
       </div>
     </div>
