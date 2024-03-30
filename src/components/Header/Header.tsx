@@ -5,7 +5,7 @@ import headerLogo from "/icons/logo.svg";
 import cartIcon from "/icons/cartIcon.svg";
 import "./Header.css";
 import { useSelector } from "react-redux";
-import { selectCart } from "../../slices/cartSlice";
+import { selectCart } from "../../Slices/cartSlice";
 
 const Header: React.FC = () => {
   const { items } = useSelector(selectCart);

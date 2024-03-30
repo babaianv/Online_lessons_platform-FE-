@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { fetchCourseDetails } from "../../slices/courseDetailsSlice";
+import { fetchCourseDetails } from "../../Slices/courseDetailsSlice";
 import CourseDetails from "../../components/CourseDetails/CourseDetails";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
