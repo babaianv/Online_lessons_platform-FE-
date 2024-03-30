@@ -5,7 +5,7 @@ import Layout from "../layout/Layout";
 import LoginPage from "../pages/Login/LoginPage";
 import Home from "../pages/Home/Home";
 import RegistrationPage from "../pages/Registration/RegistrationPage";
-import CourseDetailsP from "../pages/CouresesDetails/CoursesDetailsP";
+import CourseDetailsP from "../pages/CoursesDetails/CoursesDetailsP";
 import ShoppingCartP from "../pages/ShoppingCart/ShoppingCartP";
 
 const AppRouter: React.FC = () => {

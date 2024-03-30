@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import "./Layout.css";
 
-const Layout = () => {
+const Layout: React.FC = () => {
   const [isVisible, setIsVisible] = useState<boolean>(false);
 
   function visibleToTop() {

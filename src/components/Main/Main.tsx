@@ -1,7 +1,7 @@
 import React from "react";
 import "./Main.css";
 
-const Main = () => (
+const Main: React.FC = () => (
   <div id="home" className="mainContainer">
     <div className="mainContentContainer">
       <img className="mainBulb" src="./icons/bulbIcon.svg" alt="bulbIcon" />

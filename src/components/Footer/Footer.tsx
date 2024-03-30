@@ -1,11 +1,11 @@
 import React from "react";
-import facebookIcon from "../../../public/icons/facebook.svg";
-import instagramIcon from "../../../public/icons/instagram.svg";
-import logoIcon from "../../../public/icons/bulbFooterIcon.svg";
-import logoTextFooter from "../../../public/icons/logoFooterIcon.svg";
+import facebookIcon from "/icons/facebook.svg";
+import instagramIcon from "/icons/instagram.svg";
+import logoIcon from "/icons/bulbFooterIcon.svg";
+import logoTextFooter from "/icons/logoFooterIcon.svg";
 import "./Footer.css";
 
-const Footer = () => {
+const Footer: React.FC = () => {
   return (
     <div id="contact" className="footerContainer">
       <div>

@@ -1,7 +1,7 @@
 import React from "react";
 import "./Companies.css";
 
-const Companies = () => {
+const Companies: React.FC = () => {
   return (
     <div>
       <div className="companiesСontainer">

@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import NavItem from "../NavItem/NavItem";
 import { Link } from "react-router-dom";
-import headerLogo from "../../../public/icons/logo.svg";
-import cartIcon from "../../../public/icons/cartIcon.svg";
+import headerLogo from "/icons/logo.svg";
+import cartIcon from "/icons/cartIcon.svg";
 import "./Header.css";
 import { useSelector } from "react-redux";
 import { selectCart } from "../../slices/cartSlice";
 
-const Header = () => {
+const Header: React.FC = () => {
   const { items } = useSelector(selectCart);
   const totalCount = items.reduce(
     (acc: number, item: { count: number }) => acc + item.count,

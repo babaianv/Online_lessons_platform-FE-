@@ -1,7 +1,7 @@
 import React from "react";
 import "./Benefits.css";
 
-const BenefitsStudent = () => (
+const BenefitsStudent: React.FC = () => (
   <div className="benefitWrapper">
     <div className="benefitContainer">
       <img

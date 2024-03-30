@@ -2,7 +2,7 @@ import React from "react";
 import "./Benefits.css";
 import "./BenefitsTeacher.css";
 
-const BenefitsTeacher = () => (
+const BenefitsTeacher: React.FC = () => (
   <div className="benefitWrapper">
     <div className="benefitContainerTeacher">
       <img

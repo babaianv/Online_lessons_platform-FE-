@@ -3,7 +3,7 @@ import ShoppingCart from "../../components/ShoppingCart/ShoppingCart";
 import Header from "../../components/Header/Header";
 
 
-const ShoppingCartP = () => {
+const ShoppingCartP: React.FC = () => {
   return (
     <div className="">
       <Header/>     

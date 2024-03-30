@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { selectCart } from "../../slices/cartSlice";
 import "./HeaderCart.css";
 
-const HeaderCart = () => {
+const HeaderCart: React.FC = () => {
   const { items } = useSelector(selectCart);
   const totalCount = items.reduce(
     (acc: number, item: { count: number }) => acc + item.count,

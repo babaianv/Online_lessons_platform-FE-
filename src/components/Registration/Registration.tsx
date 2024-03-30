@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "../../hooks/hooks";
-import { registerUser } from "../../Slices/userSlice";
+import { registerUser } from "../../slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import "./Registration.css";
 import { BiHide, BiShow } from "react-icons/bi";

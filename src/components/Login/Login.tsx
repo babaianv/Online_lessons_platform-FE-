@@ -3,7 +3,7 @@ import { useAppDispatch } from '../../hooks/hooks';
 import { useNavigate } from 'react-router-dom';
 import { BiHide, BiShow } from 'react-icons/bi';
 import "./Login.css";
-import { loginUser } from '../../Slices/userSlice';
+import { loginUser } from '../../slices/userSlice';
 
 interface FormData {
     email: string;
