@@ -79,7 +79,7 @@
   color: #ffffff;
   border: none;
   transition: background-color 0.3s ease;
-  margin-right: 40px;
+  margin-right: 10px;
 }
 
 .demoBtn:hover,
@@ -91,8 +91,7 @@
   max-width: 800px;
 }
 
-.popupDone,
-.popupReject {
+.popupDone {
   position: fixed;
   bottom: 20px;
   right: 20px;
@@ -106,7 +105,13 @@
 }
 
 .popupReject {
-  background-color: #eb2a0c;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: #eb2a0c;
+  padding: 20px;
+  z-index: 9999;
+  max-width: 300px;
 }
 
 .popupText {

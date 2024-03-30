@@ -4,7 +4,7 @@ import { RootState, AppDispatch } from "../../store/store";
 import { fetchCourseDetails } from "../../Slices/courseDetailsSlice";
 import { Course } from "../../types/types";
 import { Link } from "react-router-dom";
-import { addToCart } from "../../Slices/cartSlice";
+import { addToCart, selectCart } from "../../Slices/cartSlice";
 import { incrementTotalCount } from "../../Slices/totalCountSlice";
 
 import "./CourseDetails.css";
@@ -16,7 +16,6 @@ interface Props {
 const CourseDetails: React.FC<Props> = ({ courseId }) => {
   const dispatch: AppDispatch = useDispatch();
   const [showPopup, setShowPopup] = useState<boolean>(false);
-  const [isCourseAdded, setIsCourseAdded] = useState<boolean>(false);
   const [isAlreadyAdded, setIsAlreadyAdded] = useState<boolean>(false);
   const autoCloseTimeout = 1800;
 
@@ -31,7 +30,10 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
     (state) => state.coursesDetails.error
   );
 
+  const cart = useSelector(selectCart);
+
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!courseId && selectedCourseId) {
       dispatch(fetchCourseDetails(selectedCourseId));
     } else if (courseId) {
@@ -40,32 +42,28 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   }, [dispatch, courseId, selectedCourseId]);
 
   const handleAddToCart = () => {
-    if (courseDetails && !isCourseAdded) {
-      dispatch(
-        addToCart({
+    if (courseDetails) {
+      const existingCartItem = cart.items.find(item => item.id === courseDetails.id.toString());
+      if (!existingCartItem) {
+        dispatch(addToCart({
           id: courseDetails.id.toString(),
           name: courseDetails.title,
           count: 1,
           price: courseDetails.price,
-        })
-      );
-      dispatch(incrementTotalCount());
-      setShowPopup(true);
-      setIsCourseAdded(true);
+        }));
+        dispatch(incrementTotalCount());
+        setShowPopup(true);
 
-      setTimeout(() => {
-        setShowPopup(false);
-      }, autoCloseTimeout);
+        setTimeout(() => {
+          setShowPopup(false);
+        }, autoCloseTimeout);
+      } else {
+        setIsAlreadyAdded(true);
 
-      setTimeout(() => {
-        setIsAlreadyAdded(false);
-      }, autoCloseTimeout);
-    } else {
-      setIsAlreadyAdded(true);
-
-      setTimeout(() => {
-        setIsAlreadyAdded(false);
-      }, autoCloseTimeout);
+        setTimeout(() => {
+          setIsAlreadyAdded(false);
+        }, autoCloseTimeout);
+      }
     }
   };
 

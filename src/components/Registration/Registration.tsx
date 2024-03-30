@@ -104,11 +104,11 @@ const Registration: React.FC = () => {
         </div>
         <div className="form-footer">
           By creating an account, you agree to the{" "}
-          <a href="#" className="terms-policy">
+          <a href="https://en.wikipedia.org/wiki/Terms_of_service" className="terms-policy" target="blank_">
             Terms of use
           </a>{" "}
           and{" "}
-          <a href="#" className="terms-policy">
+          <a href="https://en.wikipedia.org/wiki/Privacy_policy" className="terms-policy"  target="blank_">
             Privacy Policy
           </a>
           .

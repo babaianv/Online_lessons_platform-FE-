@@ -11,12 +11,12 @@
   align-items: center;
   margin-bottom: 20px;
   justify-content: space-between;
-  max-width: 1250px;
+  max-width: 1200px;
   width: 100%;
 }
 
-.benefitsPhoto1 {
-  width: 550px;
+.benefitsPhoto {
+  width: 450px;
   border-radius: 10px;
 }
 
@@ -39,9 +39,8 @@
 
 .benefitsTitleStudent {
   font-size: 40px;
-  margin-bottom: 50px;
   text-align: left;
-  margin-left: 50px;
+  margin: 20px 0 50px 30px;
 }
 
 .benefitDetails {
@@ -82,3 +81,4 @@
   gap: 10px;
   margin-left: 50px;
 }
+
