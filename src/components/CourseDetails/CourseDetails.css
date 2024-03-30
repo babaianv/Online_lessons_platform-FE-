@@ -63,7 +63,6 @@
   font-size: 15px;
   letter-spacing: 0.5px;
   line-height: 25px;
-  
 }
 
 .demoBtn,
@@ -92,22 +91,24 @@
   max-width: 800px;
 }
 
-.popup {
+.popupDone,
+.popupReject {
   position: fixed;
-  bottom: 20px; 
-  right: 20px; 
+  bottom: 20px;
+  right: 20px;
   background-color: #6255a5;
-  padding: 20px; 
+  padding: 20px;
   border: 1px solid #ccc;
   color: #ffffff;
   z-index: 9999;
-  max-width: 300px; 
+  max-width: 300px;
   border-radius: 50%;
 }
 
-.popup-content {
-  text-align: center;
+.popupReject {
+  background-color: #eb2a0c;
 }
 
-
-
+.popupText {
+  text-align: center;
+}

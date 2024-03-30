@@ -1,3 +1,8 @@
+.mainContainerCourses {
+  text-align: center;
+}
+
+
 .coursesTitle {
   padding: 40px 0 10px 0;
   display: flex;
@@ -62,4 +67,24 @@
   align-items: center;
   gap: 40px;
   margin-bottom: 50px;
+}
+
+.moreButton {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 15px;
+  background-color: #6255A5;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  margin-bottom: 50px;
+}
+
+.moreButton:hover {
+  transform: scale(1.05);
 }
