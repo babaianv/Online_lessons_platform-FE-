@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../store/store";
-import { fetchCourseDetails } from "../../slices/courseDetailsSlice";
+import { fetchCourseDetails } from "../../Slices/courseDetailsSlice";
 import { Course } from "../../types/types";
 import { Link } from "react-router-dom";
-import { addToCart } from "../../slices/cartSlice";
-import { incrementTotalCount } from "../../slices/totalCountSlice";
+import { addToCart } from "../../Slices/cartSlice";
+import { incrementTotalCount } from "../../Slices/totalCountSlice";
 
 import "./CourseDetails.css";
 
@@ -17,7 +17,7 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   const dispatch: AppDispatch = useDispatch();
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const autoCloseTimeout = 1800;
-  const [isCourseAdded, setIsCourseAdded] = useState<boolean>(false); 
+  const [isCourseAdded, setIsCourseAdded] = useState<boolean>(false);
   const selectedCourseId = useSelector<RootState, number | null>(
     (state) => state.coursesDetails.selectedCourseId
   );
@@ -38,7 +38,7 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   }, [dispatch, courseId, selectedCourseId]);
 
   const handleAddToCart = () => {
-    if (courseDetails && !isCourseAdded) { 
+    if (courseDetails && !isCourseAdded) {
       dispatch(
         addToCart({
           id: courseDetails.id.toString(),
@@ -49,7 +49,7 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
       );
       dispatch(incrementTotalCount());
       setShowPopup(true);
-      setIsCourseAdded(true); 
+      setIsCourseAdded(true);
 
       setTimeout(() => {
         setShowPopup(false);
@@ -93,7 +93,7 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
       {showPopup && (
         <div className="popup">
           <div className="popup-content">
-            <p>The course has been successfully added to your cart!</p>
+            <p>Done!</p>
           </div>
         </div>
       )}

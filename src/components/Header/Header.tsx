@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import NavItem from "../NavItem/NavItem";
 import { Link } from "react-router-dom";
-import headerLogo from "../../../public/icons/logo.svg";
-import cartIcon from "../../../public/icons/cartIcon.svg";
+import headerLogo from "/icons/logo.svg";
+import cartIcon from "/icons/cartIcon.svg";
 import "./Header.css";
 import { useSelector } from "react-redux";
-import { selectCart } from "../../slices/cartSlice";
+import { selectCart } from "../../Slices/cartSlice";
 
 const Header = () => {
   const { items } = useSelector(selectCart);

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectCart } from "../../slices/cartSlice";
+import { selectCart } from "../../Slices/cartSlice";
 import "./HeaderCart.css";
 
 const HeaderCart = () => {
@@ -10,16 +10,9 @@ const HeaderCart = () => {
     0
   );
 
-  useEffect(() => {
-  }, [totalCount]);
+  useEffect(() => {}, [totalCount]);
 
-
-  return (
-    <>
-
-
-    </>
-  );
+  return <></>;
 };
 
 export default HeaderCart;
