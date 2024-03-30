@@ -18,14 +18,13 @@ const Header: React.FC = () => {
 
   return (
     <div className="header">
-      <div className="logoContainer">
+      <Link to="/" className="logoContainer"> 
         <img className="headerLogo" src={headerLogo} alt="logo" />
         <p className="logoText">Learn.</p>
-      </div>
+      </Link>
       <div className="navContainer">
-        <NavItem to="/" textContent="Home"></NavItem>
+        <NavItem to="/" textContent="Home"></NavItem> 
         <NavItem to="/courses" textContent="Courses"></NavItem>
-        <NavItem to="/contact" textContent="Contact"></NavItem>
       </div>
 
       <div className="headerBtnContainer">

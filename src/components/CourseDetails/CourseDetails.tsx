@@ -16,8 +16,10 @@ interface Props {
 const CourseDetails: React.FC<Props> = ({ courseId }) => {
   const dispatch: AppDispatch = useDispatch();
   const [showPopup, setShowPopup] = useState<boolean>(false);
+  const [isCourseAdded, setIsCourseAdded] = useState<boolean>(false);
+  const [isAlreadyAdded, setIsAlreadyAdded] = useState<boolean>(false);
   const autoCloseTimeout = 1800;
-  const [isCourseAdded, setIsCourseAdded] = useState<boolean>(false); 
+
   const selectedCourseId = useSelector<RootState, number | null>(
     (state) => state.coursesDetails.selectedCourseId
   );
@@ -38,7 +40,7 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   }, [dispatch, courseId, selectedCourseId]);
 
   const handleAddToCart = () => {
-    if (courseDetails && !isCourseAdded) { 
+    if (courseDetails && !isCourseAdded) {
       dispatch(
         addToCart({
           id: courseDetails.id.toString(),
@@ -49,10 +51,20 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
       );
       dispatch(incrementTotalCount());
       setShowPopup(true);
-      setIsCourseAdded(true); 
+      setIsCourseAdded(true);
 
       setTimeout(() => {
         setShowPopup(false);
+      }, autoCloseTimeout);
+
+      setTimeout(() => {
+        setIsAlreadyAdded(false);
+      }, autoCloseTimeout);
+    } else {
+      setIsAlreadyAdded(true);
+
+      setTimeout(() => {
+        setIsAlreadyAdded(false);
       }, autoCloseTimeout);
     }
   };
@@ -91,9 +103,17 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
         </div>
       )}
       {showPopup && (
-        <div className="popup">
-          <div className="popup-content">
+        <div className="popupDone">
+          <div className="popupText">
             <p>Done!</p>
+          </div>
+        </div>
+      )}
+
+      {isAlreadyAdded && (
+        <div className="popupReject">
+          <div className="popupText">
+            <p>Course is already added to cart!</p>
           </div>
         </div>
       )}

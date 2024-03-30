@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCourses } from "../../Slices/coursesSlice";
 import { RootState, AppDispatch } from "../../store/store";
 import { Course } from "../../types/types";
-import "./CoursesCards.css";
+import "./AllCourses.css";
 import { Link } from "react-router-dom";
 import { setSelectedCourseId } from "../../Slices/courseDetailsSlice";
 
-const CoursesCards: React.FC = () => {
+const AllCourses: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const coursesData = useSelector<RootState, Course[] | null>(
     (state) => state.courses.coursesData
@@ -25,8 +25,6 @@ const CoursesCards: React.FC = () => {
     dispatch(setSelectedCourseId(courseId));
   };
 
-  const firstThreeCourses = coursesData ? coursesData.slice(0, 3) : [];
-
   return (
     <div id="courses" className="mainContainerCourses">
       <div>
@@ -35,31 +33,29 @@ const CoursesCards: React.FC = () => {
       </div>
       <div className="cardsWrapper">
         {error && <p>Error: {error}</p>}
-        {firstThreeCourses.map((course) => (
-          <div className="productCardWrapper" key={course.id}>
-            <Link
-              to={`/courses/${course.id}`}
-              className="linkStyle"
-              onClick={() => handleCourseClick(course.id)}
-            >
-              <div>
-                <img
-                  className="productCardImg"
-                  src={course.photoPath}
-                  alt="imgCover"
-                />
-              </div>
-              <h2 className="productCardTitle">{course.title}</h2>
-              <p className="productCardPrice">€{course.price}</p>
-            </Link>
-          </div>
-        ))}
+        {coursesData &&
+          coursesData.map((course) => (
+            <div className="productCardWrapper" key={course.id}>
+              <Link
+                to={`/courses/${course.id}`}
+                className="linkStyle"
+                onClick={() => handleCourseClick(course.id)}
+              >
+                <div>
+                  <img
+                    className="productCardImg"
+                    src={course.photoPath}
+                    alt="imgCover"
+                  />
+                </div>
+                <h2 className="productCardTitle">{course.title}</h2>
+                <p className="productCardPrice">€{course.price}</p>
+              </Link>
+            </div>
+          ))}
       </div>
-      <Link to="/courses">
-        <button className="moreButton">View More Courses</button>
-      </Link>
     </div>
   );
 };
 
-export default CoursesCards;
+export default AllCourses;
