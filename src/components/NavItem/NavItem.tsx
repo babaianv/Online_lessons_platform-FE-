@@ -1,27 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink, NavLinkProps } from "react-router-dom";
 
-interface INavItemProps {
-  to: string;
+
+interface INavItemProps extends NavLinkProps {
   textContent: string;
 }
 
-const NavItem: React.FC<INavItemProps> = ({ to, textContent }) => {
-  const scrollToSection = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
-  ) => {
-    event.preventDefault();
-    const target = document.getElementById(to.substring(1));
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
+const NavItem: React.FC<INavItemProps> = ({ textContent, ...rest }) => {
   return (
     <div className="navItem">
-      <Link to={to} onClick={scrollToSection}>
-        {textContent}
-      </Link>
+      <NavLink {...rest}>{textContent}</NavLink>
     </div>
   );
 };

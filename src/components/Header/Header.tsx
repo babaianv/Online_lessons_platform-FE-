@@ -5,7 +5,7 @@ import headerLogo from "/icons/logo.svg";
 import cartIcon from "/icons/cartIcon.svg";
 import "./Header.css";
 import { useSelector } from "react-redux";
-import { selectCart } from "../../slices/cartSlice";
+import { selectCart } from "../../Slices/cartSlice";
 
 const Header: React.FC = () => {
   const { items } = useSelector(selectCart);
@@ -18,14 +18,13 @@ const Header: React.FC = () => {
 
   return (
     <div className="header">
-      <div className="logoContainer">
+      <Link to="/" className="logoContainer"> 
         <img className="headerLogo" src={headerLogo} alt="logo" />
         <p className="logoText">Learn.</p>
-      </div>
+      </Link>
       <div className="navContainer">
-        <NavItem to="/" textContent="Home"></NavItem>
+        <NavItem to="/" textContent="Home"></NavItem> 
         <NavItem to="/courses" textContent="Courses"></NavItem>
-        <NavItem to="/contact" textContent="Contact"></NavItem>
       </div>
 
       <div className="headerBtnContainer">

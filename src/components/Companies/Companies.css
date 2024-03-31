@@ -1,15 +1,20 @@
-.companiesСontainer {
+.companiesContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 30px 0 0, 0;
+  margin: 30px auto 0;
+  max-width: 1000px;
   
 }
 
 .divider {
   height: 2px;
   background-color: #d6dada;
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   margin-bottom: 40px;
+}
+
+.companyImage{
+  width: 205px;
 }

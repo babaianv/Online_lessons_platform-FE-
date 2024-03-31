@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import { RootState } from "../../store/store";
-import { selectCart, removeItem } from "../../slices/cartSlice";
+import { selectCart, removeItem } from "../../Slices/cartSlice";
 import trashIcon from "/icons/trashIcon.svg";
 import emojiIcon from "/img/iconSadCart.png";
 import "./ShoppingCart.css";
@@ -51,7 +51,7 @@ const ShoppingCart: React.FC = () => {
       {showPopup && (
         <div className="popupDelete">
           <div className="popupInfo">
-            <p>The course has been successfully deleted!</p>
+            <p>Done!</p>
           </div>
         </div>
       )}

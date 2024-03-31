@@ -6,7 +6,7 @@ const BenefitsTeacher: React.FC = () => (
   <div className="benefitWrapper">
     <div className="benefitContainerTeacher">
       <img
-        className="benefitsPhoto1"
+        className="benefitsPhoto"
         src="./img/imgBenefitsCourse.png"
         alt="imgBenefitLearning"
       />

@@ -5,13 +5,13 @@ const BenefitsStudent: React.FC = () => (
   <div className="benefitWrapper">
     <div className="benefitContainer">
       <img
-        className="benefitsPhoto1"
+        className="benefitsPhoto"
         src="./img/imgBenefitLearning.png"
         alt="imgBenefitLearning"
       />
       <div className="benefitContent">
         <h2 className="benefitsTitleStudent">
-          Benefit from our online Learning Expert
+          Benefit from our online Learning 
         </h2>
         <div className="benefitDetailsWrapperStudent">
           <div className="benefitDetails">

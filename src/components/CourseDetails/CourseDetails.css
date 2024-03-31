@@ -63,7 +63,6 @@
   font-size: 15px;
   letter-spacing: 0.5px;
   line-height: 25px;
-  
 }
 
 .demoBtn,
@@ -80,7 +79,7 @@
   color: #ffffff;
   border: none;
   transition: background-color 0.3s ease;
-  margin-right: 40px;
+  margin-right: 10px;
 }
 
 .demoBtn:hover,
@@ -92,22 +91,29 @@
   max-width: 800px;
 }
 
-.popup {
+.popupDone {
   position: fixed;
-  bottom: 20px; 
-  right: 20px; 
+  bottom: 20px;
+  right: 20px;
   background-color: #6255a5;
-  padding: 20px; 
+  padding: 20px;
   border: 1px solid #ccc;
   color: #ffffff;
   z-index: 9999;
-  max-width: 300px; 
+  max-width: 300px;
   border-radius: 50%;
 }
 
-.popup-content {
-  text-align: center;
+.popupReject {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: #eb2a0c;
+  padding: 20px;
+  z-index: 9999;
+  max-width: 300px;
 }
 
-
-
+.popupText {
+  text-align: center;
+}
