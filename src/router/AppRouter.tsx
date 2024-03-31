@@ -7,6 +7,7 @@ import Home from "../pages/Home/Home";
 import RegistrationPage from "../pages/Registration/RegistrationPage";
 import CourseDetailsP from "../pages/CoursesDetails/CoursesDetailsP";
 import ShoppingCartP from "../pages/ShoppingCart/ShoppingCartP";
+import CreateCoursePage from "../pages/CreateCourse/CreateCoursePage";
 
 const AppRouter: React.FC = () => {
   return (
@@ -17,6 +18,7 @@ const AppRouter: React.FC = () => {
         <Route path="/reg" element={<RegistrationPage />} />
         <Route path="/courses/:courseId" element={<CourseDetailsP />} />
         <Route path="/shopping_cart" element={<ShoppingCartP />} />
+        <Route path="/create_course" element={<CreateCoursePage />} />
       </Route>
     </Routes>
   );

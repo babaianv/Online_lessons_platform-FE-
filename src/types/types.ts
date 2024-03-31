@@ -4,13 +4,20 @@ export interface UserResponse {
   password: string;
 }
 
-export interface Course {
-  id: number;
-  title: string;
-  photoPath: string;
-  price: number;
-  description: string;
-  authorId: number;
+export interface FileUploadResponse {
+  message: string; // Предполагается, что ответ содержит URL файла.
 }
+
+export interface Course {
+  id?: number;
+  title: string;
+  price: number;
+  photoPath: string;
+  presentationPath?: string;
+  description: string;
+  // authorId: number;
+}
+
+
 
 
