@@ -32,7 +32,7 @@
   padding: 25px;
   box-shadow: 1px 3px 10px lightgray;
   transition: transform 0.3s ease;
-  max-width: 1300px;
+  max-width: 1200px;
 }
 
 .productCardWrapper:hover {

@@ -18,6 +18,7 @@ const AllCourses: React.FC = () => {
   );
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(fetchCourses());
   }, [dispatch]);
 
