@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 import "./CreateCourse.css";
 import { useAppDispatch } from "../../hooks/hooks";
-import { createCourse, uploadFile } from "../../slices/coursesSlice";
+import { createCourse, uploadFile } from "../../Slices/coursesSlice";
 import { useNavigate } from "react-router-dom";
 
 interface CourseData {
