@@ -85,7 +85,7 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
               <div className="dividerCourseM"></div>
               <div className="coursePreviewWrapperBtnWrapper">
                 <Link to="/demo_lessons">
-                  <button className="demoBtn">View lessons</button>
+                  <button className="demoBtn">View demo lessons</button>
                 </Link>
                 <button className="addToCartBtn" onClick={handleAddToCart}>
                   Add to Cart
