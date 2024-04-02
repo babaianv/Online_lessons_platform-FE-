@@ -55,9 +55,7 @@ export const loginUser = createAsyncThunk<
   }
 >("user/login", async (credentials, { rejectWithValue }) => {
   try {
-    const response = await instance.post("/users/login", credentials);
-    // Сохраняем полученный токен
-    localStorage.setItem("token", response.data.accessToken);
+    const response = await instance.post("/auth/login", credentials);
     return response.data;
   } catch (err) {
     const error: AxiosError<string> = err as AxiosError<string>;
@@ -69,15 +67,27 @@ export const loginUser = createAsyncThunk<
   }
 });
 
+// Thunk action для выхода пользователя
+export const logoutUser = createAsyncThunk(
+  "user/logout",
+  async (_, { rejectWithValue }) => {
+    try {
+      await instance.post("/auth/logout", {}, { withCredentials: true });
+    } catch (err) {
+      const error: AxiosError<string> = err as AxiosError<string>;
+      if (error.response) {
+        return rejectWithValue(error.response.data);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    logout(state) {
-      state.userInfo = null;
-      state.status = "idle";
-      localStorage.removeItem("token");
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -110,6 +120,11 @@ export const userSlice = createSlice({
         state.status = "failed";
         // Сохраняем сообщение об ошибке
         state.error = action.payload;
+      })
+      .addCase(logoutUser.fulfilled, (state) => {
+        // Обновление состояния после успешного выхода
+        state.userInfo = null;
+        state.status = "idle";
       });
   },
 });

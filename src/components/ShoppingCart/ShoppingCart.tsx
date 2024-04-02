@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { selectCart, removeAllItems, removeItem } from "../../Slices/cartSlice";
+
+// import { RootState } from "../../store/store";
+
 import trashIcon from "/icons/trashIcon.svg";
 import emojiIcon from "/img/iconSadCart.png";
 import paypalIcon from "/icons/payPal.svg";
