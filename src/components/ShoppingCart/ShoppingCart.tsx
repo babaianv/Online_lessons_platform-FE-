@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import { RootState } from "../../store/store";
-import { selectCart, removeItem } from "../../Slices/cartSlice";
+import { selectCart, removeItem } from "../../slices/cartSlice";
 import trashIcon from "/icons/trashIcon.svg";
 import emojiIcon from "/img/iconSadCart.png";
 import "./ShoppingCart.css";
