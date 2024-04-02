@@ -33,6 +33,7 @@
   box-shadow: 1px 3px 10px lightgray;
   transition: transform 0.3s ease;
   max-width: 1200px;
+
 }
 
 .productCardWrapper:hover {
@@ -57,16 +58,6 @@
 }
 .linkStyle {
   text-decoration: none;
-}
-.cardsWrapper {
-  display: flex;
-  max-width: 1200px;
-  margin: 0 auto;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  margin-bottom: 50px;
 }
 
 .moreButton {
