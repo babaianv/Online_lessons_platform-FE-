@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
-import { selectCart } from "../../Slices/cartSlice";
+import { selectCart } from "../../slices/cartSlice";
 import "./HeaderCart.css";
 
 const HeaderCart: React.FC = () => {

@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCourses } from "../../Slices/coursesSlice";
+import { fetchCourses } from "../../slices/coursesSlice";
 import { RootState, AppDispatch } from "../../store/store";
 import { Course } from "../../types/types";
 import "./CoursesCards.css";
 import { Link } from "react-router-dom";
-import { setSelectedCourseId } from "../../Slices/courseDetailsSlice";
+import { setSelectedCourseId } from "../../slices/courseDetailsSlice";
 
 const CoursesCards: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
