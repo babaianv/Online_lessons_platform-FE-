@@ -33,14 +33,18 @@ const CoursesCards: React.FC = () => {
         <h4 className="coursesTitle">Our Explore Course</h4>
         <p className="subtitleCourses">Choose the course of your dreams</p>
       </div>
-      <div className="cardsWrapper">
+      <div className="cardsWrapperSmall">
         {error && <p>Error: {error}</p>}
         {firstThreeCourses.map((course) => (
           <div className="productCardWrapper" key={course.id}>
             <Link
               to={`/courses/${course.id}`}
               className="linkStyle"
-              onClick={() => handleCourseClick(course.id)}
+              onClick={() => {
+                if (course.id !== undefined) {
+                  handleCourseClick(course.id);
+                }
+              }}
             >
               <div>
                 <img

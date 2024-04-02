@@ -1,6 +1,6 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-// import { RootState } from '../store';
+import { createSlice, createAsyncThunk, createAction, PayloadAction } from "@reduxjs/toolkit";
 import { UserResponse } from "../types/types";
+import { RootState } from '../store/store';
 import { AxiosError } from "axios";
 import instance from "../api/axios";
 
@@ -56,6 +56,8 @@ export const loginUser = createAsyncThunk<
 >("user/login", async (credentials, { rejectWithValue }) => {
   try {
     const response = await instance.post("/auth/login", credentials);
+   
+    localStorage.setItem("token", response.data.accessToken);
     return response.data;
   } catch (err) {
     const error: AxiosError<string> = err as AxiosError<string>;
@@ -67,28 +69,13 @@ export const loginUser = createAsyncThunk<
   }
 });
 
-// Thunk action для выхода пользователя
-export const logoutUser = createAsyncThunk(
-  "user/logout",
-  async (_, { rejectWithValue }) => {
-    try {
-      await instance.post("/auth/logout", {}, { withCredentials: true });
-    } catch (err) {
-      const error: AxiosError<string> = err as AxiosError<string>;
-      if (error.response) {
-        return rejectWithValue(error.response.data);
-      } else {
-        return rejectWithValue(error.message);
-      }
-    }
-  }
-);
+////////
+export const logout = createAction("user/logout");
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
@@ -112,21 +99,20 @@ export const userSlice = createSlice({
         loginUser.fulfilled,
         (state, action: PayloadAction<UserResponse>) => {
           state.status = "succeeded";
-          // Сохраняем информацию о пользователе из action.payload
           state.userInfo = action.payload;
         }
       )
       .addCase(loginUser.rejected, (state, action) => {
         state.status = "failed";
-        // Сохраняем сообщение об ошибке
         state.error = action.payload;
       })
-      .addCase(logoutUser.fulfilled, (state) => {
-        // Обновление состояния после успешного выхода
+      .addCase(logout, (state) => {
         state.userInfo = null;
         state.status = "idle";
+        localStorage.removeItem("token");
       });
   },
 });
 
+export const selectUser = (state: RootState) => state.user;
 export default userSlice.reducer;
