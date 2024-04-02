@@ -3,7 +3,8 @@ import coursesReducer from "../Slices/coursesSlice";
 import userReducer from "../Slices/userSlice";
 import courseDetailsReducer from "../Slices/courseDetailsSlice";
 import cartReducer from "../Slices/cartSlice";
-import totalCountReducer from "../Slices/totalCountSlice"; 
+import totalCountReducer from "../Slices/totalCountSlice";
+
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     coursesDetails: courseDetailsReducer,
     cart: cartReducer,
     totalCount: totalCountReducer, 
+    
   },
 });
 

@@ -21,11 +21,10 @@
 .emptyCart {
   color: #555;
   font-size: 40px;
-  display: flex; 
+  display: flex;
   align-items: center;
   justify-content: center;
 }
-
 
 .coursesList {
   list-style: none;
@@ -59,7 +58,7 @@
 }
 
 .totalPrice {
-  margin-top: 15px;
+  margin-top: 85px;
   font-weight: bold;
   color: #6255a5;
 }
@@ -90,4 +89,73 @@
 
 .popupInfo {
   text-align: center;
+}
+
+.removeAllBtn {
+  background-color: #c84e41;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin: 20px 0 50px 0;
+  float: right;
+  height: 30px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeAllBtn:hover {
+  transform: scale(1.05);
+}
+
+.paypalCheckout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-right: 10px;
+}
+
+.paypalIcon {
+  width: 70px;
+  margin-right: 10px;
+}
+
+.payNowBtn {
+  background-color: #29a354;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  height: 30px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payNowBtn:hover {
+  background-color: #45a049;
+}
+
+.payNowBtn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.paypalContainer {
+  display: flex;
+  align-items: center;
+}
+
+.payNowBtn {
+  margin-left: 10px;
+}
+
+.popupPayment{
+
 }
