@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import { RootState } from "../../store/store";
-import { selectCart,removeAllItems, removeItem } from "../../slices/cartSlice";
+import { selectCart, removeAllItems, removeItem } from "../../slices/cartSlice";
 import trashIcon from "/icons/trashIcon.svg";
 import emojiIcon from "/img/iconSadCart.png";
 import paypalIcon from "/icons/payPal.svg";
@@ -43,7 +42,7 @@ const ShoppingCart: React.FC = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({}),
+          body: JSON.stringify(cart.items),
         });
 
         if (response.ok) {

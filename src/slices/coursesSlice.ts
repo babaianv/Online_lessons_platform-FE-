@@ -41,7 +41,7 @@ export const uploadFile = createAsyncThunk(
       const response = await instance.post("/files", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      return response.data.message; // Предполагается, что ответ содержит URL файла.
+      return response.data.message; 
     } catch (err) {
       const error: AxiosError<string> = err as AxiosError<string>;
       if (error.response) {
@@ -60,7 +60,7 @@ export const createCourse = createAsyncThunk(
       const response = await instance.post(`/courses/${username}`, courseData, {
         headers: { "Content-Type": "application/json" },
       });
-      return response.data; // Предполагается, что ответ содержит данные созданного курса.
+      return response.data;
     } catch (err) {
       const error: AxiosError<{ message: string }> = err as AxiosError<{
         message: string;
@@ -96,7 +96,7 @@ const coursesSlice = createSlice({
         state.loading = false;
         state.error = action.payload || null;
       })
-      // Обработка состояний для uploadFile
+      
       .addCase(uploadFile.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -110,10 +110,10 @@ const coursesSlice = createSlice({
         }
       )
       .addCase(uploadFile.rejected, (state, action) => {
-        state.loading = false; // Загрузка завершена
+        state.loading = false; 
         state.error = action.error?.message || "Error uploading file";
       })
-      // Обработка состояний для createCourse
+      
       .addCase(createCourse.pending, (state) => {
         state.loading = true;
       })
@@ -122,7 +122,7 @@ const coursesSlice = createSlice({
         (state, action: PayloadAction<Course>) => {
           state.loading = false;
           state.error = null;
-          // Добавить новый курс в массив coursesData
+         
           if (state.coursesData) {
             state.coursesData = [...state.coursesData, action.payload];
           } else {
