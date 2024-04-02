@@ -11,15 +11,15 @@
   align-items: start; /* Выровнять элементы по верхнему краю */
 }
 
-.form-group textarea {
+.create-course-form-group textarea {
   height: 150px; /* Установить высоту textarea */
 }
 
-.form-group {
+.create-course-form-group {
   margin-bottom: 20px; /* Отступ между группами форм */
 }
 
-.form-group label {
+.create-course-form-group label {
   font-weight: bold; /* Сделать текст label полужирным */
 }
 textarea {

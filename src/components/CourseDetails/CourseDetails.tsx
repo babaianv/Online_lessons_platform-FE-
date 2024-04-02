@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../store/store";
-import { fetchCourseDetails } from "../../Slices/courseDetailsSlice";
+import { fetchCourseDetails } from "../../slices/courseDetailsSlice";
 import { Course } from "../../types/types";
 import { Link } from "react-router-dom";
-import { addToCart, selectCart } from "../../Slices/cartSlice";
-import { incrementTotalCount } from "../../Slices/totalCountSlice";
+import { addToCart, selectCart } from "../../slices/cartSlice";
+import { incrementTotalCount } from "../../slices/totalCountSlice";
 
 import "./CourseDetails.css";
 

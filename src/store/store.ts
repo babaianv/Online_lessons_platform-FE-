@@ -2,9 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import coursesReducer from "../Slices/coursesSlice";
 import userReducer from "../Slices/userSlice";
 import courseDetailsReducer from "../Slices/courseDetailsSlice";
-import cartReducer from "../Slices/cartSlice";
-import totalCountReducer from "../Slices/totalCountSlice";
-
+import cartReducer from "../slices/cartSlice";
+import totalCountReducer from "../Slices/totalCountSlice"; 
 
 export const store = configureStore({
   reducer: {

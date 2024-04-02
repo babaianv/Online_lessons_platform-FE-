@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useState } from "react";
 import "./CreateCourse.css";
 import { useAppDispatch } from "../../hooks/hooks";
-import { createCourse, uploadFile } from "../../Slices/coursesSlice";
+import { createCourse, uploadFile } from "../../slices/coursesSlice";
 import { useNavigate } from "react-router-dom";
 
 interface CourseData {
@@ -73,7 +73,7 @@ const CreateCourse: React.FC = () => {
       <form onSubmit={handleSubmit} className="create-course-form">
         <div className="main-container">
           <div className="files-container">
-            <div className="form-group">
+            <div className="create-course-form-group">
               <label htmlFor="coverPhoto">Cover Photo</label>
               <input
                 type="file"
@@ -82,7 +82,7 @@ const CreateCourse: React.FC = () => {
                 onChange={handleFileChange(setCoverPhoto)}
               />
             </div>
-            <div className="form-group">
+            <div className="create-course-form-group">
               <label htmlFor="presentation">Presentation</label>
               <input
                 type="file"
@@ -93,7 +93,7 @@ const CreateCourse: React.FC = () => {
             </div>
           </div>
           <div className="fields-container">
-            <div className="form-group">
+            <div className="create-course-form-group">
               <label htmlFor="title">Title</label>
               <input
                 type="text"
@@ -103,7 +103,7 @@ const CreateCourse: React.FC = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="form-group">
+            <div className="create-course-form-group">
               <label htmlFor="price">Price</label>
               <input
                 type="text"
@@ -113,7 +113,7 @@ const CreateCourse: React.FC = () => {
                 onChange={handleInputChange}
               />
             </div>
-            <div className="form-group">
+            <div className="create-course-form-group">
               <label htmlFor="description">Description</label>
               <textarea
                 id="description"

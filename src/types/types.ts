@@ -9,7 +9,7 @@ export interface FileUploadResponse {
 }
 
 export interface Course {
-  id: number;
+  id?: number;
   title: string;
   price: number;
   photoPath: string;
