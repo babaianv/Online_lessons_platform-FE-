@@ -4,18 +4,49 @@ const instance = axios.create({
     baseURL: 'http://localhost:8069/api',
     withCredentials: true,
   });
-  
-  export default instance;
 
-  // instance.interceptors.request.use(
-  //   (config) => {
-  //     const token = localStorage.getItem("token");
-  //     if (token) {
-  //       config.headers["Authorization"] = `Bearer ${token}`;
-  //     }
-  //     return config;
-  //   },
-  //   (error) => {
-  //     return Promise.reject(error);
-  //   }
-  // );
+
+  // Добавление интерцептора запроса
+   instance.interceptors.request.use(
+    (config) => {
+      const token = localStorage.getItem("token");
+      if (token) {
+        config.headers["Authorization"] = `Bearer ${token}`;
+      }
+      return config;
+    },
+    (error) => {
+      return Promise.reject(error);
+    }
+  );
+
+
+// Добавление интерцептора ответа
+instance.interceptors.response.use(
+  response => response,
+  async error => {
+    const originalRequest = error.config;
+    // Проверяем код ошибки и наличие флага повтора запроса
+    if (error.response.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true; // Помечаем запрос как пытающийся повториться
+      try {
+        // Отправляем запрос на обновление токена без явной отправки refresh токена
+        const response = await instance.post('/auth/access');
+        // Сохраняем новый access токен
+        localStorage.setItem("accessToken", response.data.accessToken);
+        // Устанавливаем новый access токен в заголовки и повторяем исходный запрос
+        originalRequest.headers['Authorization'] = `Bearer ${response.data.accessToken}`;
+        return instance(originalRequest);
+      } catch (refreshError) {
+        console.error("Unable to refresh token", refreshError);
+        
+        return Promise.reject(refreshError);
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+  
+ 
+
+  export default instance;
