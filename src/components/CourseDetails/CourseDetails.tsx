@@ -42,11 +42,14 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   }, [dispatch, courseId, selectedCourseId]);
 
   const handleAddToCart = () => {
-    if (courseDetails) {
-      const existingCartItem = cart.items.find(item => item.id === courseDetails.id.toString());
+    if (courseDetails && courseDetails.id !== undefined) {
+      // Принудительно утверждаем, что id есть, используя "!"
+      const id = courseDetails.id!;
+      const existingCartItem = cart.items.find(item => item.id === id.toString());
+    
       if (!existingCartItem) {
         dispatch(addToCart({
-          id: courseDetails.id.toString(),
+          id: courseDetails.id.toString(), // TypeScript понимает, что id здесь есть
           name: courseDetails.title,
           count: 1,
           price: courseDetails.price,

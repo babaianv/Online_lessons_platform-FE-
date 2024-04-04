@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const BASE_URL = "http://localhost:8069/api";
+
 const instance = axios.create({
-    baseURL: 'http://localhost:8069/api',
+    baseURL: BASE_URL,
     withCredentials: true,
   });
 
@@ -30,8 +32,9 @@ instance.interceptors.response.use(
     if (error.response.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true; // Помечаем запрос как пытающийся повториться
       try {
-        // Отправляем запрос на обновление токена без явной отправки refresh токена
-        const response = await instance.post('/auth/access');
+        const refreshToken = localStorage.getItem("refreshToken");
+        // Отправляем запрос на обновление токена
+        const response = await instance.post('/auth/access', { refreshToken });
         // Сохраняем новый access токен
         localStorage.setItem("accessToken", response.data.accessToken);
         // Устанавливаем новый access токен в заголовки и повторяем исходный запрос
@@ -39,7 +42,6 @@ instance.interceptors.response.use(
         return instance(originalRequest);
       } catch (refreshError) {
         console.error("Unable to refresh token", refreshError);
-        
         return Promise.reject(refreshError);
       }
     }
