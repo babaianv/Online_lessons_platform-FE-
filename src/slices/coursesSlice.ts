@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { Course, FileUploadResponse } from "../types/types";
 import instance from "../api/axios";
 import { AxiosError } from "axios";
+import { RootState } from "../store/store";
 
 interface CoursesState {
   coursesData: Course[] | null;
@@ -15,8 +16,6 @@ const initialState: CoursesState = {
   loading: false,
   error: null,
 };
-
-const username = "user123"; //затычка, пока не реализована авторизация
 
 export const fetchCourses = createAsyncThunk<
   Course[],
@@ -55,7 +54,13 @@ export const uploadFile = createAsyncThunk(
 
 export const createCourse = createAsyncThunk(
   "courses/createCourse",
-  async (courseData: Course, { rejectWithValue }) => {
+  async (courseData: Course, { rejectWithValue, getState }) => {
+
+       // Получаем текущее состояние хранилища
+       const state = getState() as RootState;
+       // Извлекаем username из состояния пользователя
+       const username = state.user.userInfo?.name;
+
     try {
       const response = await instance.post(`/courses/${username}`, courseData, {
         headers: { "Content-Type": "application/json" },
