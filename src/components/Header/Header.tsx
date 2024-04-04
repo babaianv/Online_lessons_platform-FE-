@@ -21,7 +21,7 @@ const Header: React.FC = () => {
     0
   );
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     dispatch(logout());
   };
 

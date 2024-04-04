@@ -1,7 +1,20 @@
-export interface UserResponse {
-  nickname: string;
-  email: string;
-  password: string;
+export interface UserInfo {
+  name: string; // Имя пользователя
+  roles: string[]; // Роли пользователя
+}
+
+export interface RegisterResponse {
+  id: number,
+  nickname:string,
+  email: string,
+  password: string,
+  roles: string[];
+}
+
+export interface AuthResponse {
+  accessToken: string;
+  refreshToken: string;
+  message: string;
 }
 
 export interface FileUploadResponse {
@@ -9,13 +22,12 @@ export interface FileUploadResponse {
 }
 
 export interface Course {
-  id: number;
+  id?: number;
   title: string;
   price: number;
   photoPath: string;
   presentationPath?: string;
   description: string;
-  // authorId: number;
 }
 
 
