@@ -22,7 +22,7 @@ export interface FileUploadResponse {
 }
 
 export interface Course {
-  id?: number; //вот здесь id?: number;
+  id?: number;
   title: string;
   price: number;
   photoPath: string;

@@ -3,9 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../store/store";
 import { fetchCourseDetails } from "../../slices/courseDetailsSlice";
 import { Course } from "../../types/types";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { addToCart, selectCart } from "../../slices/cartSlice";
 import { incrementTotalCount } from "../../slices/totalCountSlice";
+import { selectUser } from "../../slices/userSlice";
 
 import "./CourseDetails.css";
 
@@ -18,18 +19,18 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [isAlreadyAdded, setIsAlreadyAdded] = useState<boolean>(false);
   const autoCloseTimeout = 1800;
+  const navigate = useNavigate(); 
 
+  const user = useSelector(selectUser);
   const selectedCourseId = useSelector<RootState, number | null>(
     (state) => state.coursesDetails.selectedCourseId
   );
   const courseDetails = useSelector<RootState, Course | null>(
     (state) => state.coursesDetails.courseDetails
   );
-
   const error = useSelector<RootState, string | null>(
     (state) => state.coursesDetails.error
   );
-
   const cart = useSelector(selectCart);
 
   useEffect(() => {
@@ -42,6 +43,10 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   }, [dispatch, courseId, selectedCourseId]);
 
   const handleAddToCart = () => {
+    if (!user.userInfo) {
+      navigate("/reg"); 
+      return;
+    }
     if (courseDetails && courseDetails.id !== undefined) {
       // Принудительно утверждаем, что id есть, используя "!"
       const id = courseDetails.id!;
@@ -77,7 +82,11 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
         <div className="courseContainer">
           <div className="coursePreviewWrapper">
             <div className="coverPhoto">
-              <img className="" src={courseDetails.photoPath} alt="imgCover" />
+              <img
+                className=""
+                src={courseDetails.photoPath}
+                alt="imgCover"
+              />
             </div>
             <div className="coursePreviewWrapperContent">
               <div className="courseDet">
