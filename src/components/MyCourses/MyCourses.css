@@ -40,5 +40,5 @@
 .my-course-content {
     display: flex;
     flex-direction: column;
-    /* margin-top: auto; */
+    margin-top: 5px;
 }   

@@ -32,7 +32,7 @@ const MyCourses: React.FC = () => {
           <div className="my-course-content">
             <div className="my-course-title">{course.title}</div>
             <div className="my-course-description">
-              {course.description.length > 100
+              {course.description.length > 300
                 ? `${course.description.substring(0, 300)}...`
                 : course.description}
             </div>
