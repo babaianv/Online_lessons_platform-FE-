@@ -3,6 +3,7 @@ import "./MyCreatedCourses.css";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import {
+  deleteCreatedCourse,
   fetchCreatedCourses,
   selectCreatedCourses,
 } from "../../slices/createdCoursesSlice";
@@ -31,7 +32,7 @@ const MyCreatedCourses: React.FC = () => {
 
   const handleDelete = (courseId: number) => {
     console.log("Deleting course with id:", courseId);
-    // Здесь будет логика для удаления курса
+    dispatch(deleteCreatedCourse(courseId));
   };
 
   const handleCreateCourse = () => {

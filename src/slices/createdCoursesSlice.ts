@@ -1,4 +1,8 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  PayloadAction,
+  createAsyncThunk,
+  createSlice,
+} from "@reduxjs/toolkit";
 import { Course } from "../types/types";
 import { AxiosError } from "axios";
 import instance from "../api/axios";
@@ -38,10 +42,33 @@ export const fetchCreatedCourses = createAsyncThunk<
   }
 );
 
+export const deleteCreatedCourse = createAsyncThunk<
+  void,
+  number, // тип аргумента: ID курса
+  { rejectValue: string }
+>(
+  "createdCourses/deleteCreatedCourse",
+  async (courseId, { rejectWithValue }) => {
+    try {
+      await instance.delete(`/courses/${courseId}`);
+    } catch (error) {
+      const axiosError = error as AxiosError;
+      return rejectWithValue(axiosError.message || axiosError.message);
+    }
+  }
+);
+
 const createdCoursesSlice = createSlice({
   name: "createdCourses",
   initialState,
-  reducers: {},
+  reducers: {
+    removeCreatedCourse(state, action: PayloadAction<number>) {
+      state.createdCourses =
+        state.createdCourses?.filter(
+          (course) => course.id !== action.payload
+        ) || null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCreatedCourses.pending, (state) => {
@@ -60,7 +87,11 @@ const createdCoursesSlice = createSlice({
           state.loading = false;
           state.error = action.payload ?? "Failed to fetch created courses";
         }
-      );
+      )
+      .addCase(deleteCreatedCourse.fulfilled, (state, action) => {
+        // Поскольку action.payload здесь undefined, используйте action.meta.arg как ID курса для удаления
+        state.createdCourses = state.createdCourses?.filter(course => course.id !== action.meta.arg) || null;
+      });
   },
 });
 
