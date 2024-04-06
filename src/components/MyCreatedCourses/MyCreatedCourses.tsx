@@ -1,15 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./MyCreatedCourses.css";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import {
+  fetchCreatedCourses,
+  selectCreatedCourses,
+} from "../../slices/createdCoursesSlice";
+import { selectUser } from "../../slices/userSlice";
 
 const MyCreatedCourses: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const { createdCourses, loading, error } =
+    useAppSelector(selectCreatedCourses);
+  const user = useAppSelector(selectUser);
   const navigate = useNavigate();
 
-  const courses = [
-    { id: 1, title: "Course 1", description: "Description of Course 1" },
-    { id: 2, title: "Course 2", description: "Description of Course 2" },
-    { id: 3, title: "Course 3", description: "Description of Course 3" },
-  ];
+  useEffect(() => {
+    if (user.userInfo?.name) {
+      dispatch(fetchCreatedCourses());
+    }
+  }, [dispatch, user.userInfo?.name]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading courses: {error}</p>;
 
   const handleEdit = (courseId: number) => {
     console.log("Editing course with id:", courseId);
@@ -28,27 +41,30 @@ const MyCreatedCourses: React.FC = () => {
   return (
     <div className="my-created-courses-container">
       <div className="create-new-course-button-container">
-      <button onClick={handleCreateCourse} className="create-course-button">
-        Create New Course
-      </button>
+        <button onClick={handleCreateCourse} className="create-course-button">
+          Create New Course
+        </button>
       </div>
       <h1 className="my-created-courses">MY CREATED COURSES</h1>
-      {courses.map((course) => (
+      {createdCourses?.map((course) => (
         <div className="created-course-item" key={course.id}>
-          <img
-            src="/path-to-your-icon.svg"
-            alt="Course"
-            className="course-icon"
-          />
+          <img src={course.photoPath} alt="Course" className="course-icon" />
           <div className="course-content">
             <div className="course-title">{course.title}</div>
-            <div className="course-description">{course.description}</div>
+            <div className="course-description">
+              {course.description.length > 300
+                ? `${course.description.substring(0, 300)}...`
+                : course.description}
+            </div>
           </div>
-          <button onClick={() => handleEdit(course.id)} className="edit-button">
-            Edit
-          </button> 
           <button
-            onClick={() => handleDelete(course.id)}
+            onClick={() => handleEdit(course.id!)}
+            className="edit-button"
+          >
+            Edit
+          </button>
+          <button
+            onClick={() => handleDelete(course.id!)}
             className="delete-button"
           >
             Delete

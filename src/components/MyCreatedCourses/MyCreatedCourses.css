@@ -17,7 +17,10 @@
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-    padding: 1rem 0;
+    padding: 20px;
+    border: #333 1px solid; /* Border around each item */
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
   }
   
   .course-content {
@@ -53,8 +56,8 @@
 
   .course-icon {
     margin-right: 16px;
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
   }
 
   .create-course-button {

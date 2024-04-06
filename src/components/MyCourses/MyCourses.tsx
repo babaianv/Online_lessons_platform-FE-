@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./MyCourses.css";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { RootState } from "../../store/store";
-import { fetchAvailableCourses } from "../../slices/availableCourses";
+import { fetchAvailableCourses } from "../../slices/availableCoursesSlice";
 import { selectUser } from "../../slices/userSlice";
 
 const MyCourses: React.FC = () => {

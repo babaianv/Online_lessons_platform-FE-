@@ -4,7 +4,8 @@ import userReducer from "../slices/userSlice";
 import courseDetailsReducer from "../slices/courseDetailsSlice";
 import cartReducer from "../slices/cartSlice";
 import totalCountReducer from "../slices/totalCountSlice"; 
-import availableCoursesReducer from "../slices/availableCourses";
+import availableCoursesReducer from "../slices/availableCoursesSlice";
+import createdCoursesReducer from "../slices/createdCoursesSlice";
 
 
 export const store = configureStore({
@@ -15,6 +16,7 @@ export const store = configureStore({
     cart: cartReducer,
     totalCount: totalCountReducer, 
     availableCourses: availableCoursesReducer,
+    createdCourses: createdCoursesReducer,
   },
 });
 
