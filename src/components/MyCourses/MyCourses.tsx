@@ -1,35 +1,41 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./MyCourses.css";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { RootState } from "../../store/store";
+import { fetchAvailableCourses } from "../../slices/availableCourses";
+import { selectUser } from "../../slices/userSlice";
 
 const MyCourses: React.FC = () => {
-  interface Course {
-    id: number;
-    title: string;
-    description: string;
-  }
+  const dispatch = useAppDispatch();
+  const { enrollments, loading, error } = useAppSelector(
+    (state: RootState) => state.availableCourses
+  );
+  const user = useAppSelector(selectUser);
 
-  // Example courses data
-  const courses: Course[] = [
-    { id: 1, title: "Course 1", description: "Course 1 description" },
-    { id: 2, title: "Course 2", description: "Course 2 description" },
-    { id: 3, title: "Course 3", description: "Course 3 description" },
-    // More courses...
-  ];
+  useEffect(() => {
+    // Проверяем, загружены ли данные пользователя и только после этого запрашиваем курсы
+    if (user.userInfo?.name) {
+      dispatch(fetchAvailableCourses());
+    }
+  }, [dispatch, user.userInfo?.name]);
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error loading courses: {error}</p>;
 
   return (
     <div className="my-courses-container">
       <h1 className="my-courses-header">MY COURSES</h1>
 
-      {courses.map((course) => (
-        <div className="course-item" key={course.id}>
-          <img
-            src="/path-to-your-icon.svg"
-            alt="Course"
-            className="course-icon"
-          />
-          <div className="course-content">
-            <div className="course-title">{course.title}</div>
-            <div className="course-description">{course.description}</div>
+      {enrollments?.map(({ course }) => (
+        <div className="my-course-item" key={course.id}>
+          <img src={course.photoPath} alt="Course" className="my-course-icon" />
+          <div className="my-course-content">
+            <div className="my-course-title">{course.title}</div>
+            <div className="my-course-description">
+              {course.description.length > 100
+                ? `${course.description.substring(0, 300)}...`
+                : course.description}
+            </div>
           </div>
         </div>
       ))}

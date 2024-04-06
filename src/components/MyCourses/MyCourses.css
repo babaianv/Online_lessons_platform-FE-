@@ -1,5 +1,5 @@
 .my-courses-container {
-  width: 80%; /* Or your preferred width */
+  width: 50%; /* Or your preferred width */
   margin: 0 auto; /* Center the container */
   padding: 2rem;
   background-color: #fff; /* White background */
@@ -13,32 +13,32 @@
   font-size: 32px;
 }
 
-.course-item {
+.my-course-item {
   display: flex;
   align-items: flex-start;
   margin-bottom: 20px;
   padding: 1rem 0; /* Padding top and bottom */
 }
 
-.course-icon {
+.my-course-icon {
   margin-right: 16px;
-  width: 50px;
-  height: 50px;
+  width: 100px;
+  height: 100px;
 }
 
-.course-title {
+.my-course-title {
   font-weight: bold;
   flex-grow: 1; /* Title takes up remaining space */
   color: #333; /* Text color */
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
-.course-description {
+.my-course-description {
   font-size: 0.9em;
 }
 
-.course-content {
+.my-course-content {
     display: flex;
     flex-direction: column;
-    margin-top: auto;
+    /* margin-top: auto; */
 }   

@@ -27,9 +27,11 @@ const MyCreatedCourses: React.FC = () => {
 
   return (
     <div className="my-created-courses-container">
+      <div className="create-new-course-button-container">
       <button onClick={handleCreateCourse} className="create-course-button">
         Create New Course
       </button>
+      </div>
       <h1 className="my-created-courses">MY CREATED COURSES</h1>
       {courses.map((course) => (
         <div className="created-course-item" key={course.id}>

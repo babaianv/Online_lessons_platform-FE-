@@ -1,5 +1,5 @@
 .my-created-courses-container {
-    width: 80%;
+    width: 50%;
     margin: 0 auto;
     padding: 2rem;
     background-color: #fff;
@@ -58,6 +58,15 @@
   }
 
   .create-course-button {
-    display: flex;
-    align-items: flex-end;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50; 
+    color: white;
+  }
+
+  .create-new-course-button-container {
+    text-align: right;
+    margin-bottom: 20px;
   }

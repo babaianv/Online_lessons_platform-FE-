@@ -1,12 +1,14 @@
 .course-panel-container {
     display: flex;
     min-height: 100vh;
+    
   }
   
   .course-panel-nav {
     flex-basis: 250px; /* Sidebar width */
     padding: 20px;
     border-right: #e7e7e7 2px solid;
+    min-width: 250px;
   }
   
   .course-panel-nav ul {
