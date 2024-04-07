@@ -1,0 +1,68 @@
+.main-container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  width: fit-content;
+  max-width: 800px;
+  margin: 0px 350px;
+  padding: 70px;
+  gap: 50px;
+}
+
+h1 {
+  font-size: 26px;
+}
+
+.input-label-container {
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+}
+
+.label-container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.input {
+  border: 1px solid black;
+  border-radius: 7px;
+  padding: 7px;
+  width: 240px;
+}
+
+.label {
+  display: flex;
+  height: 31px;
+  align-items: center;
+}
+
+#error {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 30px;
+  color: red;
+}
+
+.btn-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#delete-btn {
+  width: 130px;
+  height: 40px;
+  color: white;
+  background-color: rgb(182, 55, 55);
+  border-radius: 14px;
+}

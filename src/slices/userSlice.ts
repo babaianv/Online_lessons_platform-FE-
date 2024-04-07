@@ -70,6 +70,23 @@ export const loginUser = createAsyncThunk<
   }
 });
 
+export const deleteUser = createAsyncThunk(
+  "user/deleteUser",
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState() as RootState;
+    const username = state.user.userInfo?.name;
+    console.log(state.user.userInfo);
+
+    try {
+      const response = await instance.delete(`/users/delete/${username}`);
+      return response.data;
+    } catch (err) {
+      const error = err as AxiosError;
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
 export const fetchCurrentUser = createAsyncThunk(
   "user/fetchCurrentUser",
   async (_, { rejectWithValue }) => {
@@ -87,7 +104,7 @@ export const fetchCurrentUser = createAsyncThunk(
   }
 );
 
-export const logout = createAction('user/logout');
+export const logout = createAction("user/logout");
 
 export const userSlice = createSlice({
   name: "user",
@@ -121,10 +138,10 @@ export const userSlice = createSlice({
       .addCase(logout, (state) => {
         // Очистка состояния пользователя
         state.userInfo = null;
-        state.status = 'idle';
+        state.status = "idle";
         // Очистка данных из localStorage
-        localStorage.removeItem('accessToken');
-        localStorage.removeItem('refreshToken');
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
       });
   },
 });
