@@ -3,30 +3,28 @@ import axios from "axios";
 const BASE_URL = "http://localhost:8069/api";
 
 const instance = axios.create({
-    baseURL: BASE_URL,
-    withCredentials: true,
-  });
+  baseURL: BASE_URL,
+  withCredentials: true,
+});
 
-
-  // Добавление интерцептора запроса
-   instance.interceptors.request.use(
-    (config) => {
-      const token = localStorage.getItem("token");
-      if (token) {
-        config.headers["Authorization"] = `Bearer ${token}`;
-      }
-      return config;
-    },
-    (error) => {
-      return Promise.reject(error);
+// Добавление интерцептора запроса
+instance.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
     }
-  );
-
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 // Добавление интерцептора ответа
 instance.interceptors.response.use(
-  response => response,
-  async error => {
+  (response) => response,
+  async (error) => {
     const originalRequest = error.config;
     // Проверяем код ошибки и наличие флага повтора запроса
     if (error.response.status === 401 && !originalRequest._retry) {
@@ -34,11 +32,13 @@ instance.interceptors.response.use(
       try {
         const refreshToken = localStorage.getItem("refreshToken");
         // Отправляем запрос на обновление токена
-        const response = await instance.post('/auth/access', { refreshToken });
+        const response = await instance.post("/auth/access", { refreshToken });
         // Сохраняем новый access токен
         localStorage.setItem("accessToken", response.data.accessToken);
         // Устанавливаем новый access токен в заголовки и повторяем исходный запрос
-        originalRequest.headers['Authorization'] = `Bearer ${response.data.accessToken}`;
+        originalRequest.headers[
+          "Authorization"
+        ] = `Bearer ${response.data.accessToken}`;
         return instance(originalRequest);
       } catch (refreshError) {
         console.error("Unable to refresh token", refreshError);
@@ -48,7 +48,5 @@ instance.interceptors.response.use(
     return Promise.reject(error);
   }
 );
-  
- 
 
-  export default instance;
+export default instance;

@@ -11,6 +11,14 @@ export interface RegisterResponse {
   roles: string[];
 }
 
+export interface RegisterResponse {
+  id: number,
+  nickname:string,
+  email: string,
+  password: string,
+  roles: string[];
+}
+
 export interface AuthResponse {
   accessToken: string;
   refreshToken: string;
