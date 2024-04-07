@@ -1,10 +1,10 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import "./ChangePassword.css";
 import { useAppDispatch } from "../../hooks/hooks";
-import { changePassword } from "../../slices/myAccountSlice";
-import { useNavigate } from "react-router-dom";
+import { changePassword, resetChangePasswordStatus } from "../../slices/myAccountSlice";
+// import { useNavigate } from "react-router-dom";
 
 interface ChangePasswordData {
   oldPassword: string;
@@ -14,7 +14,7 @@ interface ChangePasswordData {
 
 const ChangePassword: React.FC = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [changePasswordInfo, setChangePasswordInfo] =
     useState<ChangePasswordData>({
@@ -23,13 +23,8 @@ const ChangePassword: React.FC = () => {
       confirmNewPassword: "",
     });
 
-  const error = useSelector<RootState, string | null | undefined>(
-    (state) => state.accountInfo.error
-  );
-
-  const status = useSelector<RootState, string | null | undefined>(
-    (state) => state.accountInfo.status
-  );
+  const error = useSelector((state: RootState) => state.accountInfo.error);
+  const status = useSelector((state: RootState) => state.accountInfo.status);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -38,7 +33,7 @@ const ChangePassword: React.FC = () => {
       console.log("Changing password:", changePasswordInfo);
       await dispatch(changePassword(changePasswordInfo)).unwrap();
       console.log("Password changed successfully");
-      navigate("/change_password");
+      // navigate("/change_password");
     } catch (error) {
       console.error("Password changing error:", error);
     }
@@ -50,6 +45,10 @@ const ChangePassword: React.FC = () => {
     const { name, value } = e.target;
     setChangePasswordInfo({ ...changePasswordInfo, [name]: value });
   };
+
+  useEffect(() => {
+    dispatch(resetChangePasswordStatus());
+  }, [dispatch]);
 
   return (
     <div className="main-container">

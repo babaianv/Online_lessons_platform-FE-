@@ -25,6 +25,7 @@
 
   textarea {
     resize: none; /* Disable resizing */
+    font-size: 15px;
   }
   
   .edit-file-input-container {

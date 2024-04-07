@@ -71,7 +71,12 @@ export const changePassword = createAsyncThunk<
 export const myAccountSlice = createSlice({
   name: "MY_ACCOUNT",
   initialState,
-  reducers: {},
+  reducers: {
+    resetChangePasswordStatus(state) {
+      state.status = 'idle';
+      state.error = null;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchUser.pending, (state) => {
@@ -101,5 +106,6 @@ export const myAccountSlice = createSlice({
   },
 });
 
+export const { resetChangePasswordStatus } = myAccountSlice.actions;
 export const selectAccountInfo = (state: RootState) => state.accountInfo;
 export default myAccountSlice.reducer;
