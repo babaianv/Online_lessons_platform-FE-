@@ -28,6 +28,7 @@ const MyCreatedCourses: React.FC = () => {
   const handleEdit = (courseId: number) => {
     console.log("Editing course with id:", courseId);
     // Здесь будет логика для редактирования курса
+    navigate(`/edit_course/${courseId}`); //переход на страницу редактирования курса
   };
 
   const handleDelete = (courseId: number) => {

@@ -1,0 +1,79 @@
+.edit-course-container {
+    max-width: 900px; /* Установите максимальную ширину контейнера */
+    margin: auto; /* Центрировать контейнер на странице */
+    padding: 40px; /* Добавить внутренние отступы */
+  }
+  
+  .edit-main-container {
+   display: grid; /* Использовать grid для размещения элементов */
+    grid-template-columns: 1fr 2fr; /* Две колонки, вторая шире */
+    grid-gap: 20px; /* Расстояние между колонками */
+    align-items: start; /* Выровнять элементы по верхнему краю */
+  }
+  
+  .edit-course-form-group textarea {
+    height: 150px; /* Установить высоту textarea */
+  }
+  
+  .edit-course-form-group {
+    margin-bottom: 20px; /* Отступ между группами форм */
+  }
+  
+  .edit-course-form-group label {
+    font-weight: bold; /* Сделать текст label полужирным */
+  }
+
+  textarea {
+    resize: none; /* Disable resizing */
+  }
+  
+  .edit-file-input-container {
+    display: flex; /* Выровнять блоки загрузки файлов горизонтально */
+    flex-direction: column; /* Элементы в столбец */
+    gap: 20px; /* Расстояние между элементами */
+  }
+  
+  /* Отдельно стилизуем каждый блок загрузки файла */
+  .cover-photo-container,
+  .presentation-container {
+    /* Применяем общие стили, определенные выше для input[type="file"] */
+  }
+  
+  .edit-form-buttons {
+    display: flex; /* Выровнять кнопки горизонтально */
+    justify-content: flex-end; /* Выровнять кнопки по правому краю */
+    gap: 10px; /* Расстояние между кнопками */
+  }
+  
+  .edit-course-submit {
+    align-items: center;
+    width: 25%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: #29a354;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .edit-course-submit:hover {
+    background-color: #45a049;
+  }
+  
+  .edit-course-header {
+    text-align: center;
+    margin-bottom: 35px;
+    font-size: 32px;
+    font-weight: 500;
+    letter-spacing: -3px;
+  }
+  
+  .edit-course-button-container {
+    display: flex;
+    justify-content: center; /* Выравнивание по горизонтали */
+    align-items: center;
+  }
+  
+  

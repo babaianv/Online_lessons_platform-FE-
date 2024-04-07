@@ -79,6 +79,26 @@ export const createCourse = createAsyncThunk(
   }
 );
 
+export const updateCourse = createAsyncThunk<Course, Course, { rejectValue: string }>(
+  "courses/updateCourse",
+  async (courseData, { rejectWithValue }) => {
+    const { id, ...updateData } = courseData;
+    try {
+      const response = await instance.put<Course>(`/courses/${id}`, updateData, {
+        headers: { "Content-Type": "application/json" },
+      });
+      return response.data; // Предполагается, что ответ содержит обновлённые данные курса.
+    } catch (err) {
+      const error: AxiosError<{ message: string }> = err as AxiosError<{ message: string }>;
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue("An unknown error occurred during course update");
+      }
+    }
+  }
+);
+
 const coursesSlice = createSlice({
   name: "courses",
   initialState,
@@ -138,6 +158,22 @@ const coursesSlice = createSlice({
       .addCase(createCourse.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error?.message || null;
+      })
+      .addCase(updateCourse.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateCourse.fulfilled, (state, action: PayloadAction<Course>) => {
+        state.loading = false;
+        state.error = null;
+        // Обновляем курс в состоянии, если он уже существует
+        const index = state.coursesData?.findIndex(course => course.id === action.payload.id);
+        if (index !== undefined && index !== -1) {
+          state.coursesData![index] = action.payload;
+        }
+      })
+      .addCase(updateCourse.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to update course";
       });
   },
 });
