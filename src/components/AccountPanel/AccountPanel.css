@@ -1,0 +1,45 @@
+.account-panel-container {
+    display: flex;
+    min-height: 100vh;
+    
+  }
+  
+  .account-panel-nav {
+    flex-basis: 250px; /* Sidebar width */
+    padding: 20px;
+    border-right: #e7e7e7 2px solid;
+    min-width: 250px;
+  }
+  
+  .account-panel-nav ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .account-panel-nav button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-align: left;
+  }
+  
+  .account-panel-nav button:hover,
+  .account-panel-nav button:focus {
+    background-color: #e7e7e7; /* Light grey for hover/focus */
+  }
+  
+  .account-panel-nav button.active {
+    background-color: #007bff; /* Blue for active button */
+    color: #ffffff;
+  }
+  
+  .account-panel-content {
+    flex-grow: 1;
+    padding: 20px;
+  }
