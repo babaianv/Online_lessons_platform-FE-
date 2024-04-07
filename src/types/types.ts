@@ -38,6 +38,13 @@ export interface Course {
   description: string;
 }
 
+export interface Enrollment {
+  id: number;
+  enrollmentDate: string;
+  status: string;
+  course: Course;
+}
+
 
 
 
