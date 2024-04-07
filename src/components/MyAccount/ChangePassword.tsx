@@ -13,7 +13,6 @@ interface ChangePasswordData {
 }
 
 const ChangePassword: React.FC = () => {
-  // const user = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -51,12 +50,6 @@ const ChangePassword: React.FC = () => {
     const { name, value } = e.target;
     setChangePasswordInfo({ ...changePasswordInfo, [name]: value });
   };
-
-  // useEffect(() => {
-  //   if (user.userInfo?.name) {
-  //     dispatch(fetchUser());
-  //   }
-  // }, [dispatch, user.userInfo?.name]);
 
   return (
     <div className="main-container">
