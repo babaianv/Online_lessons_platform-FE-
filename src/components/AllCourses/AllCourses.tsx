@@ -40,7 +40,7 @@ const AllCourses: React.FC = () => {
               <Link
                 to={`/courses/${course.id}`}
                 className="linkStyle"
-                onClick={() => handleCourseClick(course.id)}
+                onClick={() => handleCourseClick(course.id!)}
               >
                 <div>
                   <img

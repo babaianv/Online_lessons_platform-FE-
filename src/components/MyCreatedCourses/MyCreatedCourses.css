@@ -1,0 +1,75 @@
+.my-created-courses-container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff;
+  }
+
+  .my-created-courses {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+    font-weight: bold;
+    font-size: 32px;
+  }
+  
+  .created-course-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: #333 1px solid; /* Border around each item */
+    border-radius: 10px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+  }
+  
+  .course-content {
+    flex-grow: 1;
+  }
+  
+  .course-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .course-description {
+    font-size: 0.9em;
+  }
+  
+  .edit-button, .delete-button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .edit-button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+  }
+  
+  .delete-button {
+    background-color: #f44336; /* Red */
+    color: white;
+  }
+
+  .course-icon {
+    margin-right: 16px;
+    width: 100px;
+    height: 100px;
+  }
+
+  .create-course-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50; 
+    color: white;
+  }
+
+  .create-new-course-button-container {
+    text-align: right;
+    margin-bottom: 20px;
+  }

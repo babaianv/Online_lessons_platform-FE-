@@ -11,6 +11,7 @@ import CreateCoursePage from "../pages/CreateCourse/CreateCoursePage";
 import AllCoursesPage from "../pages/AllCourses/AllCoursesPage";
 import MyAccountInfoPage from "../pages/MyAccount/MyAccountInfoPage";
 import ChangePassowrdPage from "../pages/MyAccount/ChangePasswordPage";
+import MyCoursesPage from "../pages/MyCoursesAndCreatedCourses/MyCoursesPage";
 
 const AppRouter: React.FC = () => {
   return (
@@ -25,6 +26,7 @@ const AppRouter: React.FC = () => {
         <Route path="/create_course" element={<CreateCoursePage />} />
         <Route path="/account_info" element={<MyAccountInfoPage />} />
         <Route path="/change_password" element={<ChangePassowrdPage />} />
+        <Route path="/my_courses" element={<MyCoursesPage/>} />
       </Route>
     </Routes>
   );
