@@ -4,7 +4,7 @@
   padding: 40px; /* Добавить внутренние отступы */
 }
 
-.main-container {
+.create-main-container {
  display: grid; /* Использовать grid для размещения элементов */
   grid-template-columns: 1fr 2fr; /* Две колонки, вторая шире */
   grid-gap: 20px; /* Расстояние между колонками */
@@ -43,7 +43,7 @@ input[type="file"] {
   cursor: pointer; /* Курсор в виде указателя */
 }
 
-.file-input-container {
+.create-file-input-container {
   display: flex; /* Выровнять блоки загрузки файлов горизонтально */
   flex-direction: column; /* Элементы в столбец */
   gap: 20px; /* Расстояние между элементами */
@@ -55,7 +55,7 @@ input[type="file"] {
   /* Применяем общие стили, определенные выше для input[type="file"] */
 }
 
-.form-buttons {
+.create-form-buttons {
   display: flex; /* Выровнять кнопки горизонтально */
   justify-content: flex-end; /* Выровнять кнопки по правому краю */
   gap: 10px; /* Расстояние между кнопками */

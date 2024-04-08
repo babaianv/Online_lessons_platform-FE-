@@ -71,8 +71,8 @@ const CreateCourse: React.FC = () => {
         <h2>Create Course</h2>
       </div>
       <form onSubmit={handleSubmit} className="create-course-form">
-        <div className="main-container">
-          <div className="files-container">
+        <div className="create-main-container">
+          <div className="create-files-container">
             <div className="create-course-form-group">
               <label htmlFor="coverPhoto">Cover Photo</label>
               <input
@@ -92,7 +92,7 @@ const CreateCourse: React.FC = () => {
               />
             </div>
           </div>
-          <div className="fields-container">
+          <div className="create-fields-container">
             <div className="create-course-form-group">
               <label htmlFor="title">Title</label>
               <input
