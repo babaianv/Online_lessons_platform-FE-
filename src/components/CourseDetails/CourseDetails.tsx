@@ -17,9 +17,10 @@ interface Props {
 const CourseDetails: React.FC<Props> = ({ courseId }) => {
   const dispatch: AppDispatch = useDispatch();
   const [showPopup, setShowPopup] = useState<boolean>(false);
-  const [isAlreadyAdded, setIsAlreadyAdded] = useState<boolean>(false);
+  // const [isAlreadyAdded, setIsAlreadyAdded] = useState<boolean>(false);
   const autoCloseTimeout = 1800;
   const navigate = useNavigate();
+  const { userInfo } = useSelector(selectUser);
 
   const user = useSelector(selectUser);
   const selectedCourseId = useSelector<RootState, number | null>(
@@ -36,6 +37,7 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   );
 
   useEffect(() => {
+    console.log(courseDetails)
     window.scrollTo(0, 0);
     if (!courseId && selectedCourseId) {
       dispatch(fetchCourseDetails(selectedCourseId));
@@ -45,15 +47,22 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   }, [dispatch, courseId, selectedCourseId]);
 
   const handleAddToCart = async () => {
+    console.log(1)
     if (!user.userInfo) {
+      console.log(2)
       navigate("/reg");
+
       return;
     }
-
-    if (courseDetails && cartId !== null) {
+    console.log(courseDetails,"courseDetails")
+    console.log(userInfo?.cartId,"cartId")
+    console.log(courseDetails?.id, "courseId")
+    if (courseDetails?.id && userInfo?.cartId !== null) {
+      console.log(3)
       try {
+        console.log(4)
         const response = await fetch(
-          `/api/cart/add/${cartId}/${courseId}`,
+          `/api/cart/add/${userInfo?.cartId}/${courseDetails?.id}`,
           {
             method: "PUT",
             headers: {
@@ -63,12 +72,14 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
             body: JSON.stringify({}),
           }
         );
-
+        console.log(5)
+        console.log('Request Data:', JSON.stringify({}), 'Request URL:', response.url);
 
         if (response.ok) {
+          console.log(6)
           dispatch(
             addToCart({
-              id: courseDetails.id,
+              id: courseDetails?.id,
               name: courseDetails.title,
               count: 1,
               price: courseDetails.price,
@@ -80,14 +91,16 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
           setTimeout(() => {
             setShowPopup(false);
           }, autoCloseTimeout);
-        } else {
-          setIsAlreadyAdded(true);
+        // } else {
+          // console.log(7)
+          // setIsAlreadyAdded(true);
 
-          setTimeout(() => {
-            setIsAlreadyAdded(false);
-          }, autoCloseTimeout);
+          // setTimeout(() => {
+          //   setIsAlreadyAdded(false);
+          // }, autoCloseTimeout);
         }
       } catch (error) {
+        console.log(8)
         console.error("Error adding to cart:", error);
       }
     }
@@ -133,14 +146,14 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
           </div>
         </div>
       )}
-
+{/* 
       {isAlreadyAdded && (
         <div className="popupReject">
           <div className="popupText">
             <p>Course is already added to cart!</p>
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };

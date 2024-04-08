@@ -2,26 +2,21 @@ export interface UserResponse {
   nickname: string;
   email: string;
   password: string;
-  token: string
+  token: string;
+}
 
 export interface UserInfo {
   name: string; 
   roles: string[]; 
+  token: string;
+  cartId: number
 }
 
 export interface RegisterResponse {
-  id: number,
-  nickname:string,
-  email: string,
-  password: string,
-  roles: string[];
-}
-
-export interface RegisterResponse {
-  id: number,
-  nickname:string,
-  email: string,
-  password: string,
+  id: number;
+  nickname: string;
+  email: string;
+  password: string;
   roles: string[];
 }
 
@@ -29,11 +24,10 @@ export interface AuthResponse {
   accessToken: string;
   refreshToken: string;
   message: string;
-
 }
 
 export interface FileUploadResponse {
-  message: string; // Предполагается, что ответ содержит URL файла.
+  message: string;
 }
 
 export interface Course {
@@ -52,10 +46,8 @@ export interface Enrollment {
   course: Course;
 }
 
-
-export interface Cart{
+export interface Cart {
   id: number;
-  courses:[] ;
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  courses: any[]; // Определите тип массива courses
 }
-

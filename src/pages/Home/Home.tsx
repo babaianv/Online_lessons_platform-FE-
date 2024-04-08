@@ -7,7 +7,9 @@ import BenefitsStudent from '../../components/Benefits/BenefitsStudent';
 import Footer from '../../components/Footer/Footer';
 import CoursesCards from '../../components/CoursesCards/CoursesCards';
 
+
 const Home: React.FC = () => {
+
   return (
     <>
       <Header/>
