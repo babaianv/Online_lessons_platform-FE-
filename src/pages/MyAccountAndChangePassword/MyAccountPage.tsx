@@ -1,16 +1,16 @@
 import React from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import MyAccountInfo from "../../components/MyAccount/MyAccountInfo";
+import AccountPanel from "../../components/AccountPanel/AccountPanel";
 
-const MyAccountInfoPage: React.FC = () => {
+const MyAccountPage: React.FC = () => {
   return (
     <>
       <Header />
-      <MyAccountInfo />
+      <AccountPanel />
       <Footer />
     </>
   );
 };
 
-export default MyAccountInfoPage;
+export default MyAccountPage;
