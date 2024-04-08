@@ -2,6 +2,7 @@ export interface UserResponse {
   nickname: string;
   email: string;
   password: string;
+  token: string
 }
 
 export interface FileUploadResponse {
@@ -19,5 +20,9 @@ export interface Course {
 }
 
 
+export interface Cart{
+  id: number;
+  courses:[] ;
 
+}
 

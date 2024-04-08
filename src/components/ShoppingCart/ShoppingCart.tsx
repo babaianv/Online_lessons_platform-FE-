@@ -15,7 +15,7 @@ const ShoppingCart: React.FC = () => {
   const [paypalChecked, setPaypalChecked] = useState<boolean>(false);
   const autoCloseTimeout = 1800;
 
-  const handleRemoveFromCart = (itemId: string) => {
+  const handleRemoveFromCart = (itemId: number) => {
     dispatch(removeItem(itemId));
 
     setShowRemovePopup(true);
@@ -43,7 +43,7 @@ const ShoppingCart: React.FC = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({}),
+          body: JSON.stringify({cart}),
         });
 
         if (response.ok) {

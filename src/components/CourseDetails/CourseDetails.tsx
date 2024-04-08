@@ -4,7 +4,7 @@ import { RootState, AppDispatch } from "../../store/store";
 import { fetchCourseDetails } from "../../slices/courseDetailsSlice";
 import { Course } from "../../types/types";
 import { Link, useNavigate } from "react-router-dom";
-import { addToCart, selectCart } from "../../slices/cartSlice";
+import { addToCart } from "../../slices/cartSlice";
 import { incrementTotalCount } from "../../slices/totalCountSlice";
 import { selectUser } from "../../slices/userSlice";
 
@@ -19,7 +19,7 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [isAlreadyAdded, setIsAlreadyAdded] = useState<boolean>(false);
   const autoCloseTimeout = 1800;
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const user = useSelector(selectUser);
   const selectedCourseId = useSelector<RootState, number | null>(
@@ -31,7 +31,9 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   const error = useSelector<RootState, string | null>(
     (state) => state.coursesDetails.error
   );
-  const cart = useSelector(selectCart);
+  const cartId = useSelector<RootState, number | null>(
+    (state) => state.cart.id 
+  );
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -42,36 +44,50 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
     }
   }, [dispatch, courseId, selectedCourseId]);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     if (!user.userInfo) {
-      navigate("/reg"); 
+      navigate("/reg");
       return;
     }
-    if (courseDetails) {
-      const existingCartItem = cart.items.find(
-        (item) => item.id === courseDetails.id.toString()
-      );
-      if (!existingCartItem) {
-        dispatch(
-          addToCart({
-            id: courseDetails.id.toString(),
-            name: courseDetails.title,
-            count: 1,
-            price: courseDetails.price,
-          })
+
+    if (courseDetails && cartId !== null) {
+      try {
+        const response = await fetch(
+          `/api/cart/add/${cartId}/${courseId}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${user.userInfo.token}`,
+            },
+            body: JSON.stringify({}),
+          }
         );
-        dispatch(incrementTotalCount());
-        setShowPopup(true);
 
-        setTimeout(() => {
-          setShowPopup(false);
-        }, autoCloseTimeout);
-      } else {
-        setIsAlreadyAdded(true);
+        if (response.ok) {
+          dispatch(
+            addToCart({
+              id: courseDetails.id,
+              name: courseDetails.title,
+              count: 1,
+              price: courseDetails.price,
+            })
+          );
+          dispatch(incrementTotalCount());
+          setShowPopup(true);
 
-        setTimeout(() => {
-          setIsAlreadyAdded(false);
-        }, autoCloseTimeout);
+          setTimeout(() => {
+            setShowPopup(false);
+          }, autoCloseTimeout);
+        } else {
+          setIsAlreadyAdded(true);
+
+          setTimeout(() => {
+            setIsAlreadyAdded(false);
+          }, autoCloseTimeout);
+        }
+      } catch (error) {
+        console.error("Error adding to cart:", error);
       }
     }
   };
@@ -83,11 +99,7 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
         <div className="courseContainer">
           <div className="coursePreviewWrapper">
             <div className="coverPhoto">
-              <img
-                className=""
-                src={courseDetails.photoPath}
-                alt="imgCover"
-              />
+              <img className="" src={courseDetails.photoPath} alt="imgCover" />
             </div>
             <div className="coursePreviewWrapperContent">
               <div className="courseDet">
