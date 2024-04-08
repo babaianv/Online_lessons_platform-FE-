@@ -70,32 +70,37 @@ button {
 
 .create-course-submit {
   align-items: center;
-  width: 25%;
-  padding: 15px;
+  width: 15%; 
+  height: 40px; 
+  padding: 5px 10px; 
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   background-color: #29a354;
   color: white;
-  font-size: 16px;
+  font-size: 14px; 
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
+
 .create-course-submit:hover {
-  background-color: #45a049;
+  transform: scale(1.05);
 }
 
 .create-course-header {
   text-align: center;
-  margin-bottom: 35px;
+  margin-bottom: 45px;
   font-size: 32px;
   font-weight: 500;
   letter-spacing: -3px;
+  color: #6255A5;
+
 }
 
 .create-course-button-container {
   display: flex;
   justify-content: center; /* Выравнивание по горизонтали */
   align-items: center;
+  /* margin-left: 15px; */
 }
 
