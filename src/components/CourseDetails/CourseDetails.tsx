@@ -17,7 +17,7 @@ interface Props {
 const CourseDetails: React.FC<Props> = ({ courseId }) => {
   const dispatch: AppDispatch = useDispatch();
   const [showPopup, setShowPopup] = useState<boolean>(false);
-  // const [isAlreadyAdded, setIsAlreadyAdded] = useState<boolean>(false);
+  const [isAlreadyAdded, setIsAlreadyAdded] = useState<boolean>(false);
   const autoCloseTimeout = 1800;
   const navigate = useNavigate();
   const { userInfo } = useSelector(selectUser);
@@ -32,9 +32,7 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   const error = useSelector<RootState, string | null>(
     (state) => state.coursesDetails.error
   );
-  const cartId = useSelector<RootState, number | null>(
-    (state) => state.cart.id 
-  );
+  
 
   useEffect(() => {
     console.log(courseDetails)
@@ -91,13 +89,13 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
           setTimeout(() => {
             setShowPopup(false);
           }, autoCloseTimeout);
-        // } else {
-          // console.log(7)
-          // setIsAlreadyAdded(true);
+        } else {
+          console.log(7)
+          setIsAlreadyAdded(true);
 
-          // setTimeout(() => {
-          //   setIsAlreadyAdded(false);
-          // }, autoCloseTimeout);
+          setTimeout(() => {
+            setIsAlreadyAdded(false);
+          }, autoCloseTimeout);
         }
       } catch (error) {
         console.log(8)
@@ -146,14 +144,14 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
           </div>
         </div>
       )}
-{/* 
+
       {isAlreadyAdded && (
         <div className="popupReject">
           <div className="popupText">
             <p>Course is already added to cart!</p>
           </div>
         </div>
-      )} */}
+      )}
     </>
   );
 };
