@@ -12,6 +12,7 @@ import AllCoursesPage from "../pages/AllCourses/AllCoursesPage";
 import MyCoursesPage from "../pages/MyCoursesAndCreatedCourses/MyCoursesPage";
 import EditCoursePage from "../pages/EditCourse/EditCoursePage";
 import MyAccountPage from "../pages/MyAccountAndChangePassword/MyAccountPage";
+import ProtectedRoute from "./ProtectedRoute";
 
 const AppRouter: React.FC = () => {
   return (
@@ -23,10 +24,38 @@ const AppRouter: React.FC = () => {
         <Route path="/courses" element={<AllCoursesPage />} />
         <Route path="/courses/:courseId" element={<CourseDetailsP />} />
         <Route path="/shopping_cart" element={<ShoppingCartP />} />
-        <Route path="/create_course" element={<CreateCoursePage />} />
-        <Route path="/edit_course/:courseId" element={<EditCoursePage />} />
-        <Route path="/my_account" element={<MyAccountPage />} />
-        <Route path="/my_courses" element={<MyCoursesPage/>} />
+        <Route
+          path="/create_course"
+          element={
+            <ProtectedRoute>
+              <CreateCoursePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/edit_course/:courseId"
+          element={
+            <ProtectedRoute>
+              <EditCoursePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/my_account"
+          element={
+            <ProtectedRoute>
+              <MyAccountPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/my_courses"
+          element={
+            <ProtectedRoute>
+              <MyCoursesPage />
+            </ProtectedRoute>
+          }
+        />
       </Route>
     </Routes>
   );
