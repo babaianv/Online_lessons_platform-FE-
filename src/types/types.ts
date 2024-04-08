@@ -1,6 +1,12 @@
+export interface UserResponse {
+  nickname: string;
+  email: string;
+  password: string;
+  token: string
+
 export interface UserInfo {
-  name: string; // Имя пользователя
-  roles: string[]; // Роли пользователя
+  name: string; 
+  roles: string[]; 
 }
 
 export interface RegisterResponse {
@@ -23,6 +29,7 @@ export interface AuthResponse {
   accessToken: string;
   refreshToken: string;
   message: string;
+
 }
 
 export interface FileUploadResponse {
@@ -46,5 +53,9 @@ export interface Enrollment {
 }
 
 
+export interface Cart{
+  id: number;
+  courses:[] ;
 
+}
 
