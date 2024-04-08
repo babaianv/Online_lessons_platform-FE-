@@ -27,7 +27,7 @@ instance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
     // Проверяем код ошибки и наличие флага повтора запроса
-    if (error.response.status === 401 && !originalRequest._retry) {
+    if (error.response.status === 403 && !originalRequest._retry) {
       originalRequest._retry = true; // Помечаем запрос как пытающийся повториться
       try {
         const refreshToken = localStorage.getItem("refreshToken");
@@ -41,7 +41,10 @@ instance.interceptors.response.use(
         ] = `Bearer ${response.data.accessToken}`;
         return instance(originalRequest);
       } catch (refreshError) {
-        console.error("Unable to refresh token", refreshError);
+        console.error("Unable to refresh token, please log in again", refreshError);
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        window.location.href = "/login";
         return Promise.reject(refreshError);
       }
     }
