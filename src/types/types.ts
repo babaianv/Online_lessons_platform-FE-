@@ -3,6 +3,33 @@ export interface UserResponse {
   email: string;
   password: string;
   token: string
+
+export interface UserInfo {
+  name: string; 
+  roles: string[]; 
+}
+
+export interface RegisterResponse {
+  id: number,
+  nickname:string,
+  email: string,
+  password: string,
+  roles: string[];
+}
+
+export interface RegisterResponse {
+  id: number,
+  nickname:string,
+  email: string,
+  password: string,
+  roles: string[];
+}
+
+export interface AuthResponse {
+  accessToken: string;
+  refreshToken: string;
+  message: string;
+
 }
 
 export interface FileUploadResponse {
@@ -10,13 +37,19 @@ export interface FileUploadResponse {
 }
 
 export interface Course {
-  id: number;
+  id?: number;
   title: string;
   price: number;
   photoPath: string;
   presentationPath?: string;
   description: string;
-  // authorId: number;
+}
+
+export interface Enrollment {
+  id: number;
+  enrollmentDate: string;
+  status: string;
+  course: Course;
 }
 
 

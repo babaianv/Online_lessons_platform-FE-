@@ -64,6 +64,7 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
           }
         );
 
+
         if (response.ok) {
           dispatch(
             addToCart({
