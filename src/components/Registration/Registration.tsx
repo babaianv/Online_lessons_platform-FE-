@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "../../hooks/hooks";
-import { registerUser } from "../../slices/userSlice";
+import {
+  registerUser,
+  loginUser,
+  fetchCurrentUser,
+} from "../../slices/userSlice";
 import { useNavigate } from "react-router-dom";
 import "./Registration.css";
 import { BiHide, BiShow } from "react-icons/bi";
@@ -83,14 +87,26 @@ const Registration: React.FC = () => {
         email: emailError,
         password: passwordError,
       });
-      return; // Прекратить дальнейшую отправку формы
+      return;
     }
 
     dispatch(registerUser(formData))
       .unwrap()
       .then(() => {
-        navigate("/");
-        toast.success("Account has been created.");
+        dispatch(
+          loginUser({ email: formData.email, password: formData.password })
+        )
+          .unwrap()
+          .then(() => {
+            dispatch(fetchCurrentUser())
+              .unwrap()
+              .then(() => {
+                navigate("/");
+                toast.success(
+                  "Account has been created and you are logged in."
+                );
+              });
+          });
       })
       .catch((error) =>
         toast.error(error.message || "An unexpected error occurred")
