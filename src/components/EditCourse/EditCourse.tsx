@@ -4,12 +4,19 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { fetchCourseDetails } from "../../slices/courseDetailsSlice";
 import { updateCourse } from "../../slices/coursesSlice";
 import "./EditCourse.css";
+import { toast } from "react-toastify";
 
 interface CourseData {
   title: string;
-  price: string; 
+  price: number;
   description: string;
   photoPath: string;
+}
+
+interface CourseErrors {
+  title?: string;
+  price?: string;
+  description?: string;
 }
 
 const EditCourse: React.FC = () => {
@@ -24,10 +31,12 @@ const EditCourse: React.FC = () => {
 
   const [course, setCourse] = useState<CourseData>({
     title: "",
-    price: "",
+    price: 0,
     description: "",
     photoPath: "",
   });
+
+  const [errors, setErrors] = useState<CourseErrors>({});
 
   // const [coverPhoto, setCoverPhoto] = useState<File | null>(null);
   // const [presentation, setPresentation] = useState<File | null>(null);
@@ -36,8 +45,21 @@ const EditCourse: React.FC = () => {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
-    // Теперь price обрабатывается как строка без преобразования в число
-    setCourse({ ...course, [name]: value });
+  
+    // Если поле является ценой, обрабатываем ввод как число
+    if (name === "price") {
+      const numericValue = value === "" ? 0 : parseInt(value, 10);
+      setCourse((prevCourse) => ({
+        ...prevCourse,
+        [name]: numericValue,
+      }));
+    } else {
+      // Для всех остальных полей сохраняем ввод как есть
+      setCourse((prevCourse) => ({
+        ...prevCourse,
+        [name]: value,
+      }));
+    }
   };
 
   // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>, setFile: React.Dispatch<React.SetStateAction<File | null>>) => {
@@ -48,7 +70,7 @@ const EditCourse: React.FC = () => {
 
   useEffect(() => {
     if (courseId) {
-      dispatch(fetchCourseDetails(parseInt(courseId)));
+      dispatch(fetchCourseDetails(parseInt(courseId, 10)));
     }
   }, [dispatch, courseId]);
 
@@ -56,23 +78,40 @@ const EditCourse: React.FC = () => {
     if (courseDetails) {
       setCourse({
         title: courseDetails.title,
-        price: courseDetails.price.toString(), // преобразование в строку для input
+        price: courseDetails.price, 
         description: courseDetails.description,
         photoPath: courseDetails.photoPath,
       });
-      // Добавьте также значения для coverPhoto и presentation, если они есть
     }
   }, [courseDetails]);
 
+  const validate = (): boolean => {
+    const newErrors: CourseErrors = {};
+    if (!course.title || course.title.length < 5) {
+      newErrors.title = "The title must be at least 5 characters long.";
+    }
+    if (course.price <= 0 || course.price > 9999) {
+      newErrors.price = "The price must be between 0 and 9999.";
+    }
+    if (!course.description || course.description.length < 300) {
+      newErrors.description = "The description must be at least 300 characters long.";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Обработка отправки данных формы, включая загрузку файлов и обновление курса
-    // Преобразуйте price обратно в число, если потребуется
+
+    if (!validate()) {
+      toast.error("Please correct the errors before submitting.");
+      return;
+    }
+
     const updatedCourseData = {
       id: courseIdNumber, 
       ...course,
       photoPath: course.photoPath,
-      price: course.price === "" ? 0 : parseFloat(course.price), // Задайте значение по умолчанию, если price пустая строка
     };
     dispatch(updateCourse(updatedCourseData)).then(() => {
       navigate("/my_courses");
@@ -111,6 +150,7 @@ const EditCourse: React.FC = () => {
           <div className="edit-fields-container">
             <div className="edit-course-form-group">
               <label htmlFor="title">Title</label>
+              {errors.title && <p className="create-course-error">{errors.title}</p>}
               <input
                 type="text"
                 id="title"
@@ -121,6 +161,7 @@ const EditCourse: React.FC = () => {
             </div>
             <div className="edit-course-form-group">
               <label htmlFor="price">Price</label>
+              {errors.price && <p className="create-course-error">{errors.price}</p>}
               <input
                 type="text"
                 id="price"
@@ -131,6 +172,7 @@ const EditCourse: React.FC = () => {
             </div>
             <div className="edit-course-form-group">
               <label htmlFor="description">Description</label>
+              {errors.description && <p className="create-course-error">{errors.description}</p>}
               <textarea
                 id="description"
                 name="description"

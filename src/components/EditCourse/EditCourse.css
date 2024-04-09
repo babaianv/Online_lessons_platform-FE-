@@ -27,6 +27,24 @@
     resize: none; /* Disable resizing */
     font-size: 15px;
   }
+
+  .edit-course-form-group input[type="text"],
+textarea {
+  width: 100%; /* Ширина поля на всю доступную ширину */
+  padding: 10px; /* Внутренний отступ в полях */
+  border: 1px solid #ddd; /* Тонкая граница для полей */
+  border-radius: 4px; /* Скругление углов полей ввода */
+  resize: none; /* Запретить изменение размера */;
+}
+
+.edit-course-form-group input[type="file"] {
+  border: 2px dashed #ddd; /* Пунктирная граница для полей файлов */
+  text-align: center; /* Текст в центре */
+  padding: 20px; /* Внутренний отступ */
+  border-radius: 4px; /* Скругление углов */
+  background: #fafafa; /* Цвет фона */
+  cursor: pointer; /* Курсор в виде указателя */
+}
   
   .edit-file-input-container {
     display: flex; /* Выровнять блоки загрузки файлов горизонтально */
@@ -75,6 +93,11 @@
     display: flex;
     justify-content: center; /* Выравнивание по горизонтали */
     align-items: center;
+  }
+
+  .create-course-error {
+    color: red;
+    font-size: 14px;
   }
   
   

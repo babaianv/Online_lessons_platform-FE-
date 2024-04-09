@@ -27,15 +27,17 @@ const MyAccountInfo: React.FC = () => {
   );
 
   const deleteUserOnClick = async () => {
-    const username = accountInfoData?.nickname;
-    try {
-      console.log("Deleting user with username ", username);
-      await dispatch(deleteUser());
-      await dispatch(logout());
-      console.log("User deleted");
-      navigate("/");
-    } catch (error) {
-      console.error("User deleting error:", error);
+    if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+      const username = accountInfoData?.nickname;
+      try {
+        console.log("Deleting user with username ", username);
+        await dispatch(deleteUser());
+        await dispatch(logout());
+        console.log("User deleted");
+        navigate("/");
+      } catch (error) {
+        console.error("User deleting error:", error);
+      }
     }
   };
 
