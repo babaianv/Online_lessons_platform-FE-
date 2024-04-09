@@ -8,6 +8,7 @@ import {
   selectCreatedCourses,
 } from "../../slices/createdCoursesSlice";
 import { selectUser } from "../../slices/userSlice";
+import { toast } from "react-toastify";
 
 const MyCreatedCourses: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -32,8 +33,19 @@ const MyCreatedCourses: React.FC = () => {
   };
 
   const handleDelete = (courseId: number) => {
-    console.log("Deleting course with id:", courseId);
-    dispatch(deleteCreatedCourse(courseId));
+    if (window.confirm("Are you sure you want to delete this course? This action cannot be undone.")) {
+      console.log("Deleting course with id:", courseId);
+      dispatch(deleteCreatedCourse(courseId))
+        .then(() => {
+          // После успешного удаления можно обновить список курсов или показать уведомление
+          toast.success("Course deleted successfully.");
+          dispatch(fetchCreatedCourses()); // Перезагружаем список курсов, если нужно
+        })
+        .catch((error) => {
+          console.error("Error deleting course:", error);
+          toast.error("Failed to delete the course.");
+        });
+    }
   };
 
   const handleCreateCourse = () => {
