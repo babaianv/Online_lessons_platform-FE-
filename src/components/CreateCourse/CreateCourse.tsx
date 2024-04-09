@@ -3,6 +3,7 @@ import "./CreateCourse.css";
 import { useAppDispatch } from "../../hooks/hooks";
 import { createCourse, uploadFile } from "../../slices/coursesSlice";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 interface CourseData {
   title: string;
@@ -10,11 +11,12 @@ interface CourseData {
   description: string;
 }
 
-// interface CourseErrors {
-//   title?: string;
-//   price?: string;
-//   description?: string;
-// }
+interface CourseErrors {
+  title?: string;
+  price?: string;
+  description?: string;
+  photo?: string; 
+}
 
 const CreateCourse: React.FC = () => {
   const [course, setCourse] = useState<CourseData>({
@@ -22,11 +24,30 @@ const CreateCourse: React.FC = () => {
     price: 0,
     description: "",
   });
-  // const [errors, setErrors] = useState<CourseErrors>({});
+  const [errors, setErrors] = useState<CourseErrors>({});
   const [coverPhoto, setCoverPhoto] = useState<File | null>(null);
   const [presentation, setPresentation] = useState<File | null>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const validate = () => {
+    const newErrors: CourseErrors = {};
+    if (!course.title || course.title.length < 5) {
+      newErrors.title = "The title must be at least 5 characters long.";
+    }
+    if (course.price < 0 || course.price > 9999) {
+      newErrors.price = "The price must be between 0 and 9999.";
+    }
+    if (!course.description || course.description.length < 300) {
+      newErrors.description = "The description must be at least 300 characters long.";
+    }
+    if (!coverPhoto) {
+      newErrors.photo = "Cover photo is required.";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
 
   // Обработчики изменения полей формы и файлов
   const handleFileChange =
@@ -47,12 +68,22 @@ const CreateCourse: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!validate()) {
+      toast.error("Please correct the errors before submitting.");
+      return;
+    }
+
     let photoPath = "";
     let presentationPath = "";
 
     // Загрузка фото
     if (coverPhoto) {
-      photoPath = await dispatch(uploadFile(coverPhoto)).unwrap();
+      try {
+        photoPath = await dispatch(uploadFile(coverPhoto)).unwrap();
+      } catch (error) {
+        toast.error("Failed to upload cover photo.");
+        return;
+      }
     }
 
     // Загрузка презентации
@@ -65,10 +96,10 @@ const CreateCourse: React.FC = () => {
     try {
       console.log("Отправка данных курса на сервер:", finalCourseData);
       await dispatch(createCourse(finalCourseData)).unwrap();
-      console.log("Course created successfully!");
+      toast.success("Course created successfully");
       navigate("/");
     } catch (error) {
-      console.error("Course creation error:", error);
+      toast.error("Failed to create the course.");
     }
   };
 
@@ -82,6 +113,7 @@ const CreateCourse: React.FC = () => {
           <div className="create-files-container">
             <div className="create-course-form-group">
               <label htmlFor="coverPhoto">Cover Photo</label>
+              {errors.photo && <p className="create-course-error">{errors.photo}</p>}
               <input
                 type="file"
                 id="coverPhoto"
@@ -95,6 +127,7 @@ const CreateCourse: React.FC = () => {
                 type="file"
                 id="presentation"
                 name="presentation"
+                disabled
                 onChange={handleFileChange(setPresentation)}
               />
             </div>
@@ -102,6 +135,7 @@ const CreateCourse: React.FC = () => {
           <div className="create-fields-container">
             <div className="create-course-form-group">
               <label htmlFor="title">Title</label>
+              {errors.title && <p className="create-course-error">{errors.title}</p>}
               <input
                 type="text"
                 id="title"
@@ -112,6 +146,7 @@ const CreateCourse: React.FC = () => {
             </div>
             <div className="create-course-form-group">
               <label htmlFor="price">Price</label>
+              {errors.price && <p className="create-course-error">{errors.price}</p>}
               <input
                 type="text"
                 id="price"
@@ -122,6 +157,7 @@ const CreateCourse: React.FC = () => {
             </div>
             <div className="create-course-form-group">
               <label htmlFor="description">Description</label>
+              {errors.description && <p className="create-course-error">{errors.description}</p>}
               <textarea
                 id="description"
                 name="description"

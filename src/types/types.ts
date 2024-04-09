@@ -2,7 +2,8 @@ export interface UserResponse {
   nickname: string;
   email: string;
   password: string;
-  token: string
+  token: string;
+}
 
 export interface UserInfo {
   name: string; 

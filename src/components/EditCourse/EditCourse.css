@@ -94,5 +94,10 @@ textarea {
     justify-content: center; /* Выравнивание по горизонтали */
     align-items: center;
   }
+
+  .create-course-error {
+    color: red;
+    font-size: 14px;
+  }
   
   
