@@ -50,8 +50,20 @@ const AllCourses: React.FC = () => {
                   />
                 </div>
                 <h2 className="productCardTitle">{course.title}</h2>
-                <p className="productCardPrice">€{course.price}</p>
+                <div className="price-containter">
+                  <p className="productCardPrice">€{course.price}</p>
+                  <p className="productCardOldPrice">€{course.oldPrice}</p>
+                </div>
               </Link>
+              <div className="dividerCourseM"></div>
+              <div className="counter-container">
+                <img
+                  className="icon"
+                  src="./icons/studentIcon.svg"
+                  alt="studentIcon"
+                />
+                <p className="counter">{course.counter} Students</p>
+              </div>
             </div>
           ))}
       </div>

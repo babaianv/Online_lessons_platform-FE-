@@ -1,66 +1,99 @@
 .coursesTitle {
-    padding: 40px 0 10px 0;
-    display: flex;
-    justify-content: center;
-    font-size: 40px;
-    color: #6255A5;
-  }
-  
-  .subtitleCourses {
-    display: flex;
-    justify-content: center;
-    font-size: 15px;
-    font-weight: 200;
-    margin-bottom: 50px;
-    color: #827A7A;
-  }
-  
-  .productCardWrapper {
-    width: 350px;
-    border: 2px lightgray solid;
-    border-radius: 20px;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    padding: 25px;
-    box-shadow: 1px 3px 10px lightgray;
-    transition: transform 0.3s ease;
-    max-width: 1200px;
-  }
-  
-  .productCardWrapper:hover {
-    transform: scale(1.05); 
-  }
-  
-  .productCardImg {
-    width: 250px;
-    height: 200px;
-    border-radius: 20px;
-    display: flex;
-    margin: 0 auto 30px;
-  }
-  .productCardTitle {
-    text-decoration: none;
-    color: black;
-    margin-bottom: 20px;
-  }
-  .productCardPrice {
-    color: #FF6F06;
-    text-decoration: none;
-  }
-  .linkStyle {
-    text-decoration: none;
-  }
-  .cardsWrapper {
-    display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-    margin-bottom: 100px;
-  }
-  
+  padding: 40px 0 10px 0;
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  color: #6255a5;
+}
+
+.subtitleCourses {
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 200;
+  margin-bottom: 50px;
+  color: #827a7a;
+}
+
+.productCardWrapper {
+  width: 350px;
+  border: 2px lightgray solid;
+  border-radius: 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  padding: 25px;
+  box-shadow: 1px 3px 10px lightgray;
+  transition: transform 0.3s ease;
+  max-width: 1200px;
+}
+
+.productCardWrapper:hover {
+  transform: scale(1.05);
+}
+
+.productCardImg {
+  width: 250px;
+  height: 200px;
+  border-radius: 20px;
+  display: flex;
+  margin: 0 auto 30px;
+}
+
+.productCardTitle {
+  text-decoration: none;
+  color: black;
+  margin-bottom: 20px;
+  font-size: 30px;
+  overflow-wrap: break-word;
+}
+
+.productCardPrice {
+  color: #ff6f06;
+  text-decoration: none;
+  font-size: 26px;
+}
+
+.productCardOldPrice {
+  color: gray;
+  text-decoration: line-through;
+  font-size: 20px;
+}
+
+.linkStyle {
+  text-decoration: none;
+}
+
+.cardsWrapper {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 100px;
+}
+
+.counter-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.counter {
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+  color: gray;
+}
+
+.price-containter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 14px 0px;
+  gap: 20px;
+}
