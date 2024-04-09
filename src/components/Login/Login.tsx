@@ -43,6 +43,7 @@ const Login: React.FC = () => {
       .then(() => {
         dispatch(fetchCurrentUser());
         navigate("/");
+        toast.success("You logged in.");
       })
       .catch((error) =>
         toast.error(error.message || "An unexpected error occurred")

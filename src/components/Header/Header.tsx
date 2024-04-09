@@ -8,6 +8,7 @@ import { selectCart } from "../../slices/cartSlice";
 import { selectUser, logout } from "../../slices/userSlice";
 import { useDispatch } from "react-redux";
 import "./Header.css";
+import { toast } from "react-toastify";
 
 const Header: React.FC = () => {
   const { items } = useSelector(selectCart);
@@ -23,6 +24,7 @@ const Header: React.FC = () => {
 
   const handleLogout = async () => {
     dispatch(logout());
+    toast.success("You logged out.");
   };
 
   const handleClickOutside = (event: MouseEvent) => {

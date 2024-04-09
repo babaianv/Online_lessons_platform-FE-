@@ -10,12 +10,19 @@ interface CourseData {
   description: string;
 }
 
+// interface CourseErrors {
+//   title?: string;
+//   price?: string;
+//   description?: string;
+// }
+
 const CreateCourse: React.FC = () => {
   const [course, setCourse] = useState<CourseData>({
     title: "",
     price: 0,
     description: "",
   });
+  // const [errors, setErrors] = useState<CourseErrors>({});
   const [coverPhoto, setCoverPhoto] = useState<File | null>(null);
   const [presentation, setPresentation] = useState<File | null>(null);
   const dispatch = useAppDispatch();
@@ -45,12 +52,12 @@ const CreateCourse: React.FC = () => {
 
     // Загрузка фото
     if (coverPhoto) {
-        photoPath = await dispatch(uploadFile(coverPhoto)).unwrap();
+      photoPath = await dispatch(uploadFile(coverPhoto)).unwrap();
     }
 
     // Загрузка презентации
     if (presentation) {
-        presentationPath = await dispatch(uploadFile(presentation)).unwrap();
+      presentationPath = await dispatch(uploadFile(presentation)).unwrap();
     }
 
     const finalCourseData = { ...course, photoPath, presentationPath };

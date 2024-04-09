@@ -88,9 +88,13 @@ const Registration: React.FC = () => {
 
     dispatch(registerUser(formData))
       .unwrap()
-      .then(() => navigate("/"))
-      .catch((error) => toast.error(error.message || "An unexpected error occurred"));
-      
+      .then(() => {
+        navigate("/");
+        toast.success("Account has been created.");
+      })
+      .catch((error) =>
+        toast.error(error.message || "An unexpected error occurred")
+      );
   };
 
   return (
@@ -101,7 +105,9 @@ const Registration: React.FC = () => {
           <label htmlFor="nickname" className="registration-form-label">
             Nickname
           </label>
-          {errors.nickname && <div className="registration-error-message">{errors.nickname}</div>}
+          {errors.nickname && (
+            <div className="registration-error-message">{errors.nickname}</div>
+          )}
           <input
             type="text"
             id="nickname"
@@ -116,7 +122,9 @@ const Registration: React.FC = () => {
           <label htmlFor="email" className="registration-form-label">
             Email
           </label>
-          {errors.email && <div className="registration-error-message">{errors.email}</div>}
+          {errors.email && (
+            <div className="registration-error-message">{errors.email}</div>
+          )}
           <input
             type="email"
             id="email"
@@ -146,7 +154,9 @@ const Registration: React.FC = () => {
               {isPasswordVisible ? "Hide" : "Show"}
             </button>
           </div>
-          {errors.password && <div className="registration-error-message">{errors.password}</div>}
+          {errors.password && (
+            <div className="registration-error-message">{errors.password}</div>
+          )}
           <input
             type={isPasswordVisible ? "text" : "password"}
             id="password"
