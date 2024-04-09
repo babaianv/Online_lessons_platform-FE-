@@ -33,12 +33,12 @@ export interface FileUploadResponse {
 export interface Course {
   id?: number;
   title: string;
-  oldPrice: string;
+  oldPrice?: string;
   price: number;
   photoPath: string;
   presentationPath?: string;
   description: string;
-  counter: number;
+  counter?: number;
 }
 
 export interface Enrollment {
