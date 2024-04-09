@@ -44,7 +44,7 @@ instance.interceptors.response.use(
         console.error("Unable to refresh token, please log in again", refreshError);
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
-        window.location.href = "/login";
+        window.location.href = "/log";
         return Promise.reject(refreshError);
       }
     }
