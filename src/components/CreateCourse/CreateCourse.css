@@ -22,10 +22,12 @@
 .create-course-form-group label {
   font-weight: bold; /* Сделать текст label полужирным */
 }
-textarea {
+
+.create-course-form-group textarea {
   resize: none; /* Disable resizing */
 }
-input[type="text"],
+
+.create-course-form-group input[type="text"],
 textarea {
   width: 100%; /* Ширина поля на всю доступную ширину */
   padding: 10px; /* Внутренний отступ в полях */
@@ -34,7 +36,7 @@ textarea {
   resize: none; /* Запретить изменение размера */;
 }
 
-input[type="file"] {
+.create-course-form-group input[type="file"] {
   border: 2px dashed #ddd; /* Пунктирная граница для полей файлов */
   text-align: center; /* Текст в центре */
   padding: 20px; /* Внутренний отступ */
@@ -61,7 +63,7 @@ input[type="file"] {
   gap: 10px; /* Расстояние между кнопками */
 }
 
-button {
+.create-course-button-container button {
   padding: 10px 20px; /* Внутренний отступ кнопок */
   border: none; /* Убрать границу */
   border-radius: 4px; /* Скругление углов */

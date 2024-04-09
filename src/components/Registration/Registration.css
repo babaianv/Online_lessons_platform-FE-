@@ -9,7 +9,7 @@
   }
 
 /* Container for the form, centering it in the page */
-.form-container {
+.registration-form-container {
     font-family: "Lexend", sans-serif;
     width: 560px;
     padding: 40px;
@@ -17,7 +17,7 @@
 }
 
 /* Styles for the form title */
-.form-title {
+.registration-form-title {
     text-align: center;
     margin-bottom: 35px;
     font-size: 32px;
@@ -25,7 +25,7 @@
 }
 
 /* General styles for form elements */
-.form-field {
+.registration-form-field {
     width: 100%;
     padding: 15px;
     margin-bottom: 20px;
@@ -36,12 +36,12 @@
     background-color: #fff;
 }
 
-.form-field::placeholder {
+.registration-form-field::placeholder {
   color: #c7c7c7;
 }
 
 /* Label styling */
-.form-label {
+.registration-form-label {
     display: block;
     margin-bottom: 8px;
     color: #333;
@@ -65,7 +65,7 @@
 }
 
 /* Style for the form footer text */
-.form-footer {
+.registration-form-footer {
     text-align: left;
     margin-top: 30px;
     margin-bottom: 30px;
@@ -74,29 +74,29 @@
 }
 
 /* Style for the 'Log in' link in the form footer */
-.form-footer a {
+.registration-form-footer a {
     color: #666;
 }
 
 
-.password-label-container {
+.registration-password-label-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.toggle-password {
+.registration-toggle-password {
   display: flex;
   align-items: center;
   font-family: inherit;
-  margin-bottom: 8px;
   color: #333;
   background: transparent;
   border: none;
   cursor: pointer;
+  padding: 0px;
 }
 
-.toggle-password .icon {
+.registration-toggle-password .icon {
   margin-right: 1px; 
 }
 
@@ -105,7 +105,7 @@
 }
 
 /* Helper text under the password input */
-.password-helper {
+.registration-password-helper {
     font-size: 12px;
     color: #666;
     margin-bottom: 20px;
@@ -122,3 +122,8 @@
   color: #666;
 }
 
+
+.registration-error-message {
+  font-size: 14px;
+  color: red
+}
