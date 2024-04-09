@@ -12,6 +12,7 @@
 
 h1 {
   font-size: 26px;
+  color: #6255A5;
 }
 
 .input-label-container {
@@ -60,9 +61,15 @@ h1 {
 }
 
 #delete-btn {
-  width: 130px;
+  width: 120px;
   height: 40px;
   color: white;
   background-color: rgb(182, 55, 55);
   border-radius: 14px;
+  transition: transform 0.2s;
+  margin-left: 75px;
+}
+
+#delete-btn:hover {
+  transform: scale(1.05); 
 }

@@ -6,6 +6,8 @@ import trashIcon from "/icons/trashIcon.svg";
 import emojiIcon from "/img/iconSadCart.png";
 import paypalIcon from "/icons/payPal.svg";
 import "./ShoppingCart.css";
+import axios from 'axios';
+import { selectUser } from "../../slices/userSlice";
 
 const ShoppingCart: React.FC = () => {
   const cart = useSelector(selectCart);
@@ -14,6 +16,30 @@ const ShoppingCart: React.FC = () => {
   const [showPaymentPopup, setShowPaymentPopup] = useState<boolean>(false);
   const [paypalChecked, setPaypalChecked] = useState<boolean>(false);
   const autoCloseTimeout = 1800;
+  const { userInfo } = useSelector(selectUser);
+  const cartId = userInfo?.cartId
+
+  const fetchCartItems = async (cartId: number) => {
+    try {
+      const response = await axios.get(`/api/cart/${cartId}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+      return null;
+    }
+  };
+
+  if (cartId !== undefined) {
+    fetchCartItems(cartId)
+      .then((a) => {
+        console.log("Cart items:", a);
+      })
+      .catch((error) => {
+        console.error("Error occurred:", error);
+      });
+  } else {
+    console.error("Cart ID is undefined");
+  }
 
   const handleRemoveFromCart = (itemId: number) => {
     dispatch(removeItem(itemId));

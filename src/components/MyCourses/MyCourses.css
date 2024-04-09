@@ -5,10 +5,12 @@
   background-color: #fff; /* White background */
 }
 
+
+
 .my-courses-header {
   text-align: center; /* Center the title */
   margin-bottom: 2rem; /* Spacing below the header */
-  color: #333; /* Dark grey color for the text */
+  color: #6255A5; /* Lila color for the text */
   font-weight: bold; /* Bold font weight */
   font-size: 32px;
 }
