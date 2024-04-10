@@ -90,30 +90,3 @@
   margin-bottom: 50px;
   max-width: 800px;
 }
-
-.popupDone {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #6255a5;
-  padding: 20px;
-  border: 1px solid #ccc;
-  color: #ffffff;
-  z-index: 9999;
-  max-width: 300px;
-  border-radius: 50%;
-}
-
-.popupReject {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  color: #eb2a0c;
-  padding: 20px;
-  z-index: 9999;
-  max-width: 300px;
-}
-
-.popupText {
-  text-align: center;
-}

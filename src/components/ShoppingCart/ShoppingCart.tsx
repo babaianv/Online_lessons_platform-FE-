@@ -17,6 +17,7 @@ import "./ShoppingCart.css";
 import { selectUser } from "../../slices/userSlice";
 import { AppDispatch } from "../../store/store";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { toast } from "react-toastify";
 
 interface DeleteCourseFromCartData {
   cartId: number | undefined;
@@ -26,10 +27,7 @@ interface DeleteCourseFromCartData {
 const ShoppingCart: React.FC = () => {
   const cart = useSelector(selectCart);
   const dispatch: AppDispatch = useAppDispatch();
-  const [showRemovePopup, setShowRemovePopup] = useState<boolean>(false);
-  const [showPaymentPopup, setShowPaymentPopup] = useState<boolean>(false);
   const [paypalChecked, setPaypalChecked] = useState<boolean>(false);
-  const autoCloseTimeout = 1800;
   const user = useAppSelector(selectUser);
   const cartId = user.userInfo?.cartId;
 
@@ -63,23 +61,15 @@ const ShoppingCart: React.FC = () => {
       courseId: itemId,
     };
     await dispatch(fetchDeleteCourseFromCart(deleteCourseData));
-
-    setShowRemovePopup(true);
-
-    setTimeout(() => {
-      setShowRemovePopup(false);
-    }, autoCloseTimeout);
+    dispatch(fetchCart(cartId));
+    toast.success("Done!");
   };
 
   const handleRemoveAllFromCart = async () => {
     dispatch(removeAllItems());
     await dispatch(fetchDeleteAllCourseFromCart(cartId));
 
-    setShowRemovePopup(true);
-
-    setTimeout(() => {
-      setShowRemovePopup(false);
-    }, autoCloseTimeout);
+    toast.success("Done!");
   };
 
   const handlePayNow = async () => {
@@ -88,10 +78,7 @@ const ShoppingCart: React.FC = () => {
         const response = await dispatch(fetchBuyAllCoursesFromCart(cartId));
 
         if (response.meta.requestStatus !== "rejected") {
-          setShowPaymentPopup(true);
-          setTimeout(() => {
-            setShowPaymentPopup(false);
-          }, autoCloseTimeout);
+          toast.success('Payment successful!');
           dispatch(fetchCart(cartId));
         } else {
           throw new Error("Payment failed!");
@@ -159,22 +146,6 @@ const ShoppingCart: React.FC = () => {
               >
                 Pay Now
               </button>
-            </div>
-          </div>
-        )}
-
-        {showRemovePopup && (
-          <div className="popupDelete">
-            <div className="popupInfo">
-              <p>Done!</p>
-            </div>
-          </div>
-        )}
-
-        {showPaymentPopup && (
-          <div className="popupPayment">
-            <div className="popupInfo">
-              <p>Payment successful!</p>
             </div>
           </div>
         )}
