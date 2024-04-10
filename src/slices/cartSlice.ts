@@ -1,5 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
+import instance from "../api/axios";
+import { AxiosError } from "axios";
 
 interface CartItem {
   id: number;
@@ -14,11 +16,105 @@ interface CartState {
   items: CartItem[];
 }
 
+interface CartCoursetPayload {
+  cartId: number | undefined;
+  courseId: number | undefined;
+}
+
 const initialState: CartState = {
   id: null,
   totalPrice: 0,
   items: [],
 };
+
+export const fetchCart = createAsyncThunk(
+  "cart/fetchCart",
+  async (cartId: number | undefined, { rejectWithValue }) => {
+    try {
+      const response = await instance.get(`/cart/${cartId}`);
+      console.log(response);
+      
+
+      return response.data;
+    } catch (err) {
+      const error = err as AxiosError;
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchAddToCart = createAsyncThunk(
+  "cart/fetchAddToCart",
+  async (addToCartData: CartCoursetPayload, { rejectWithValue }) => {
+    const cartId = addToCartData.cartId;
+    const courseId = addToCartData.courseId;
+
+    try {
+      console.log(cartId, courseId);
+
+      const response = await instance.put(`/cart/add/${cartId}/${courseId}`);
+      console.log(response);
+
+      return response.data;
+    } catch (err) {
+      const error = err as AxiosError;
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchDeleteCourseFromCart = createAsyncThunk(
+  "cart/fetchDeleteCourseFromCart",
+  async (addToCartData: CartCoursetPayload, { rejectWithValue }) => {
+    const cartId = addToCartData.cartId;
+    const courseId = addToCartData.courseId;
+
+    try {
+      const response = await instance.delete(`/cart/${cartId}/${courseId}`);
+
+      return response.data;
+    } catch (err) {
+      const error = err as AxiosError;
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchDeleteAllCourseFromCart = createAsyncThunk<
+  void,
+  number | undefined,
+  { rejectValue: string }
+>(
+  "cart/fetchDeleteAllCourseFromCart",
+  async (cartId: number | undefined, { rejectWithValue }) => {
+    try {
+      const response = await instance.delete(`/cart/clear/${cartId}`);
+
+      return response.data;
+    } catch (err) {
+      const error = err as AxiosError;
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchBuyAllCoursesFromCart = createAsyncThunk<
+  void,
+  number | undefined,
+  { rejectValue: string }
+>(
+  "cart/fetchBuyAllCoursesFromCart",
+  async (cartId: number | undefined, { rejectWithValue }) => {
+    try {
+      const response = await instance.put(`/cart/buy/${cartId}`);
+
+      return response.data;
+    } catch (err) {
+      const error = err as AxiosError;
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -31,6 +127,8 @@ export const cartSlice = createSlice({
       if (existingItemIndex !== -1) {
         state.items[existingItemIndex].count++;
       } else {
+        console.log("added");
+        
         state.items.push({ ...action.payload, count: 1 });
       }
 
@@ -67,6 +165,11 @@ export const cartSlice = createSlice({
         state.totalPrice -= removedItem.price * removedItem.count;
       }
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchCart.fulfilled, (state, action) => {
+      state.items = action.payload;
+    });
   },
 });
 

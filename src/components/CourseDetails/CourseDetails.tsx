@@ -4,7 +4,7 @@ import { RootState, AppDispatch } from "../../store/store";
 import { fetchCourseDetails } from "../../slices/courseDetailsSlice";
 import { Course } from "../../types/types";
 import { Link, useNavigate } from "react-router-dom";
-import { addToCart } from "../../slices/cartSlice";
+import { addToCart, fetchAddToCart } from "../../slices/cartSlice";
 import { incrementTotalCount } from "../../slices/totalCountSlice";
 import { selectUser } from "../../slices/userSlice";
 
@@ -12,6 +12,11 @@ import "./CourseDetails.css";
 
 interface Props {
   courseId?: number;
+}
+
+interface AddToCartData {
+  cartId: number | undefined;
+  courseId: number | undefined;
 }
 
 const CourseDetails: React.FC<Props> = ({ courseId }) => {
@@ -32,10 +37,13 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   const error = useSelector<RootState, string | null>(
     (state) => state.coursesDetails.error
   );
-  
+  const addToCartData: AddToCartData = {
+    cartId: userInfo?.cartId,
+    courseId: courseDetails?.id,
+  };
 
   useEffect(() => {
-    console.log(courseDetails)
+    console.log(courseDetails);
     window.scrollTo(0, 0);
     if (!courseId && selectedCourseId) {
       dispatch(fetchCourseDetails(selectedCourseId));
@@ -45,36 +53,23 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   }, [dispatch, courseId, selectedCourseId]);
 
   const handleAddToCart = async () => {
-    console.log(1)
+    console.log(1);
     if (!user.userInfo) {
-      console.log(2)
+      console.log(2);
       navigate("/reg");
 
       return;
     }
-    console.log(courseDetails,"courseDetails")
-    console.log(userInfo?.cartId,"cartId")
-    console.log(courseDetails?.id, "courseId")
+    console.log(courseDetails, "courseDetails");
+    console.log(userInfo?.cartId, "cartId");
+    console.log(courseDetails?.id, "courseId");
     if (courseDetails?.id && userInfo?.cartId !== null) {
-      console.log(3)
+      console.log(3);
       try {
-        console.log(4)
-        const response = await fetch(
-          `/api/cart/add/${userInfo?.cartId}/${courseDetails?.id}`,
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${user.userInfo.token}`,
-            },
-            body: JSON.stringify({}),
-          }
-        );
-        console.log(5)
-        console.log('Request Data:', JSON.stringify({}), 'Request URL:', response.url);
-
-        if (response.ok) {
-          console.log(6)
+        const response = await dispatch(fetchAddToCart(addToCartData));
+        console.log(response.meta.requestStatus);
+        if (response.meta.requestStatus !== "rejected") {
+          console.log(6);
           dispatch(
             addToCart({
               id: courseDetails?.id,
@@ -90,7 +85,7 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
             setShowPopup(false);
           }, autoCloseTimeout);
         } else {
-          console.log(7)
+          console.log(7);
           setIsAlreadyAdded(true);
 
           setTimeout(() => {
@@ -98,7 +93,6 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
           }, autoCloseTimeout);
         }
       } catch (error) {
-        console.log(8)
         console.error("Error adding to cart:", error);
       }
     }
