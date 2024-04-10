@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../store/store";
 import { fetchCourseDetails } from "../../slices/courseDetailsSlice";
@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { addToCart, fetchAddToCart } from "../../slices/cartSlice";
 import { incrementTotalCount } from "../../slices/totalCountSlice";
 import { selectUser } from "../../slices/userSlice";
+import { toast } from 'react-toastify';
 
 import "./CourseDetails.css";
 
@@ -21,9 +22,6 @@ interface AddToCartData {
 
 const CourseDetails: React.FC<Props> = ({ courseId }) => {
   const dispatch: AppDispatch = useDispatch();
-  const [showPopup, setShowPopup] = useState<boolean>(false);
-  const [isAlreadyAdded, setIsAlreadyAdded] = useState<boolean>(false);
-  const autoCloseTimeout = 1800;
   const navigate = useNavigate();
   const { userInfo } = useSelector(selectUser);
 
@@ -53,23 +51,18 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
   }, [dispatch, courseId, selectedCourseId]);
 
   const handleAddToCart = async () => {
-    console.log(1);
     if (!user.userInfo) {
-      console.log(2);
       navigate("/reg");
-
       return;
     }
-    console.log(courseDetails, "courseDetails");
-    console.log(userInfo?.cartId, "cartId");
-    console.log(courseDetails?.id, "courseId");
+    // console.log(courseDetails, "courseDetails");
+    // console.log(userInfo?.cartId, "cartId");
+    // console.log(courseDetails?.id, "courseId");
     if (courseDetails?.id && userInfo?.cartId !== null) {
-      console.log(3);
       try {
         const response = await dispatch(fetchAddToCart(addToCartData));
         console.log(response.meta.requestStatus);
         if (response.meta.requestStatus !== "rejected") {
-          console.log(6);
           dispatch(
             addToCart({
               id: courseDetails?.id,
@@ -79,21 +72,12 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
             })
           );
           dispatch(incrementTotalCount());
-          setShowPopup(true);
-
-          setTimeout(() => {
-            setShowPopup(false);
-          }, autoCloseTimeout);
+          toast.success('Done!');
         } else {
-          console.log(7);
-          setIsAlreadyAdded(true);
-
-          setTimeout(() => {
-            setIsAlreadyAdded(false);
-          }, autoCloseTimeout);
+          toast.error('Course is already added to cart!');
         }
       } catch (error) {
-        console.error("Error adding to cart:", error);
+        toast.error('Error adding course to cart.');
       }
     }
   };
@@ -128,21 +112,6 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
             <h2 className="description">Description:</h2>
             <br />
             <p className="descriptionText">{courseDetails.description}</p>
-          </div>
-        </div>
-      )}
-      {showPopup && (
-        <div className="popupDone">
-          <div className="popupText">
-            <p>Done!</p>
-          </div>
-        </div>
-      )}
-
-      {isAlreadyAdded && (
-        <div className="popupReject">
-          <div className="popupText">
-            <p>Course is already added to cart!</p>
           </div>
         </div>
       )}
