@@ -1,48 +1,68 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 // import { RootState } from "../../store/store";
-import { selectCart,removeAllItems, removeItem } from "../../slices/cartSlice";
+import {
+  selectCart,
+  fetchDeleteCourseFromCart,
+  fetchDeleteAllCourseFromCart,
+  fetchBuyAllCoursesFromCart,
+  fetchCart,
+  removeItem,
+  removeAllItems,
+} from "../../slices/cartSlice";
 import trashIcon from "/icons/trashIcon.svg";
 import emojiIcon from "/img/iconSadCart.png";
 import paypalIcon from "/icons/payPal.svg";
 import "./ShoppingCart.css";
-import axios from 'axios';
 import { selectUser } from "../../slices/userSlice";
+import { AppDispatch } from "../../store/store";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+
+interface DeleteCourseFromCartData {
+  cartId: number | undefined;
+  courseId: number | undefined;
+}
 
 const ShoppingCart: React.FC = () => {
   const cart = useSelector(selectCart);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useAppDispatch();
   const [showRemovePopup, setShowRemovePopup] = useState<boolean>(false);
   const [showPaymentPopup, setShowPaymentPopup] = useState<boolean>(false);
   const [paypalChecked, setPaypalChecked] = useState<boolean>(false);
   const autoCloseTimeout = 1800;
-  const { userInfo } = useSelector(selectUser);
-  const cartId = userInfo?.cartId
+  const user = useAppSelector(selectUser);
+  const cartId = user.userInfo?.cartId;
 
-  const fetchCartItems = async (cartId: number) => {
-    try {
-      const response = await axios.get(`/api/cart/${cartId}`);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching cart items:", error);
-      return null;
-    }
-  };
+  // const fetchCartItems = async (cartId: number) => {
+  //   try {
+  //     const response = await instance.get(`/cart/${cartId}`);
+  //     return response.data;
+  //   } catch (error) {
+  //     console.error("Error fetching cart items:", error);
+  //     return null;
+  //   }
+  // };
 
-  if (cartId !== undefined) {
-    fetchCartItems(cartId)
-      .then((a) => {
-        console.log("Cart items:", a);
-      })
-      .catch((error) => {
-        console.error("Error occurred:", error);
-      });
-  } else {
-    console.error("Cart ID is undefined");
-  }
+  // if (cartId !== undefined) {
+  //   fetchCartItems(cartId)
+  //     .then((a) => {
+  //       console.log("Cart items:", a);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error occurred:", error);
+  //     });
+  // } else {
+  //   console.log(userInfo);
+  //   console.error("Cart ID is undefined");
+  // }
 
-  const handleRemoveFromCart = (itemId: number) => {
+  const handleRemoveFromCart = async (itemId: number) => {
     dispatch(removeItem(itemId));
+    const deleteCourseData: DeleteCourseFromCartData = {
+      cartId: cartId,
+      courseId: itemId,
+    };
+    await dispatch(fetchDeleteCourseFromCart(deleteCourseData));
 
     setShowRemovePopup(true);
 
@@ -51,8 +71,9 @@ const ShoppingCart: React.FC = () => {
     }, autoCloseTimeout);
   };
 
-  const handleRemoveAllFromCart = () => {
+  const handleRemoveAllFromCart = async () => {
     dispatch(removeAllItems());
+    await dispatch(fetchDeleteAllCourseFromCart(cartId));
 
     setShowRemovePopup(true);
 
@@ -64,19 +85,14 @@ const ShoppingCart: React.FC = () => {
   const handlePayNow = async () => {
     if (paypalChecked) {
       try {
-        const response = await fetch("/api/cart/buy/{cartId}", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({cart}),
-        });
+        const response = await dispatch(fetchBuyAllCoursesFromCart(cartId));
 
-        if (response.ok) {
+        if (response.meta.requestStatus !== "rejected") {
           setShowPaymentPopup(true);
           setTimeout(() => {
             setShowPaymentPopup(false);
           }, autoCloseTimeout);
+          dispatch(fetchCart(cartId));
         } else {
           throw new Error("Payment failed!");
         }
@@ -87,6 +103,14 @@ const ShoppingCart: React.FC = () => {
       alert("Please select PayPal to proceed with the payment.");
     }
   };
+
+  useEffect(() => {
+    if (cartId) {
+      dispatch(fetchCart(cartId));
+    }
+  }, [cartId, dispatch]);
+
+  console.log(cart);
 
   return (
     <div>
