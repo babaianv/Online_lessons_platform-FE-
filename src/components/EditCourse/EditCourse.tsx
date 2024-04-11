@@ -114,6 +114,7 @@ const EditCourse: React.FC = () => {
       photoPath: course.photoPath,
     };
     dispatch(updateCourse(updatedCourseData)).then(() => {
+      toast.success("Course updated successfully");
       navigate("/my_courses");
     });
   };
