@@ -97,7 +97,7 @@ const CreateCourse: React.FC = () => {
       console.log("Отправка данных курса на сервер:", finalCourseData);
       await dispatch(createCourse(finalCourseData)).unwrap();
       toast.success("Course created successfully");
-      navigate("/");
+      navigate("/my_courses");
     } catch (error) {
       toast.error("Failed to create the course.");
     }
