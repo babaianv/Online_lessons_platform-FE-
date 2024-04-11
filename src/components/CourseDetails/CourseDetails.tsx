@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState, AppDispatch } from "../../store/store";
 import { fetchCourseDetails } from "../../slices/courseDetailsSlice";
 import { Course } from "../../types/types";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { addToCart, fetchAddToCart } from "../../slices/cartSlice";
 import { incrementTotalCount } from "../../slices/totalCountSlice";
 import { selectUser } from "../../slices/userSlice";
@@ -19,13 +19,14 @@ interface AddToCartData {
   courseId: number | undefined;
 }
 
-const CourseDetails: React.FC<Props> = ({ courseId }) => {
+const CourseDetails: React.FC<Props> = () => {
   const dispatch: AppDispatch = useDispatch();
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const [isAlreadyAdded, setIsAlreadyAdded] = useState<boolean>(false);
   const autoCloseTimeout = 1800;
   const navigate = useNavigate();
   const { userInfo } = useSelector(selectUser);
+  const { courseId } = useParams();
 
   const user = useSelector(selectUser);
   const selectedCourseId = useSelector<RootState, number | null>(
@@ -48,7 +49,7 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
     if (!courseId && selectedCourseId) {
       dispatch(fetchCourseDetails(selectedCourseId));
     } else if (courseId) {
-      dispatch(fetchCourseDetails(courseId));
+      dispatch(fetchCourseDetails(Number(courseId)));
     }
   }, [dispatch, courseId, selectedCourseId]);
 
@@ -115,7 +116,7 @@ const CourseDetails: React.FC<Props> = ({ courseId }) => {
               </div>
               <div className="dividerCourseM"></div>
               <div className="coursePreviewWrapperBtnWrapper">
-                <Link to="/demo_lessons">
+                <Link to={`/demo_lessons/${courseId}`}>
                   <button className="demoBtn">Demo lessons</button>
                 </Link>
                 <button className="addToCartBtn" onClick={handleAddToCart}>

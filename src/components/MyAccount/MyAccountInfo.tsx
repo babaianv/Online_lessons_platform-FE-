@@ -27,7 +27,11 @@ const MyAccountInfo: React.FC = () => {
   );
 
   const deleteUserOnClick = async () => {
-    if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+    if (
+      window.confirm(
+        "Are you sure you want to delete your account? This action cannot be undone."
+      )
+    ) {
       const username = accountInfoData?.nickname;
       try {
         console.log("Deleting user with username ", username);

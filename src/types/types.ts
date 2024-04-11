@@ -12,6 +12,12 @@ export interface UserInfo {
   cartId: number
 }
 
+export interface LessonResponse {
+  title: string; 
+  photoPath: string; 
+  content: string;
+}
+
 export interface RegisterResponse {
   id: number;
   nickname: string;

@@ -5,12 +5,10 @@
   background-color: #fff; /* White background */
 }
 
-
-
 .my-courses-header {
   text-align: center; /* Center the title */
   margin-bottom: 2rem; /* Spacing below the header */
-  color: #6255A5; /* Lila color for the text */
+  color: #6255a5; /* Lila color for the text */
   font-weight: bold; /* Bold font weight */
   font-size: 32px;
 }
@@ -23,6 +21,8 @@
   border: #333 1px solid; /* Border around each item */
   border-radius: 10px; /* Rounded corners */
   cursor: pointer; /* Pointer cursor on hover */
+  text-decoration: none;
+  color: #333;
 }
 
 .my-course-icon {
@@ -43,7 +43,7 @@
 }
 
 .my-course-content {
-    display: flex;
-    flex-direction: column;
-    margin-top: 5px;
-}   
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
