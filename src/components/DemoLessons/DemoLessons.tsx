@@ -2,13 +2,11 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchDemoLessons, selectLessons } from "../../slices/lessonsSlice";
-import { selectUser } from "../../slices/userSlice";
 import "./DemoLessons.css";
 import { LessonResponse } from "../../types/types";
 
 const DemoLessons: React.FC = () => {
   const lessons = useAppSelector(selectLessons);
-  const user = useAppSelector(selectUser);
   //   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { courseId } = useParams();
@@ -17,7 +15,6 @@ const DemoLessons: React.FC = () => {
     content: "",
     photoPath: "",
   });
-  console.log(lessonInfo);
 
   const handleLessonClick = (lesson: LessonResponse) => {
     setLessonInfo(lesson);
@@ -25,9 +22,11 @@ const DemoLessons: React.FC = () => {
 
   useEffect(() => {
     if (courseId) {
+      console.log(courseId);
+
       dispatch(fetchDemoLessons(Number(courseId)));
     }
-  }, [courseId, dispatch, user.userInfo?.name]);
+  }, [courseId, dispatch]);
 
   if (lessons.status === "loading") return <p id="loading">Loading...</p>;
 
@@ -39,16 +38,15 @@ const DemoLessons: React.FC = () => {
     <div id="lessons-main">
       <div id="choose-lesson-photo-container">
         <div id="lessons-container">
-          {user.userInfo?.name &&
-            lessons.lessonsResponse?.map((lesson) => (
-              <p
-                key={lesson.title + Math.random()}
-                id="choose-lesson-title"
-                onClick={() => handleLessonClick(lesson)}
-              >
-                {lesson.title}
-              </p>
-            ))}
+          {lessons.lessonsResponse?.map((lesson) => (
+            <p
+              key={lesson.title + Math.random()}
+              id="choose-lesson-title"
+              onClick={() => handleLessonClick(lesson)}
+            >
+              {lesson.title}
+            </p>
+          ))}
         </div>
         <div id="title-photo-container">
           <p id="lesson-title">{lessonInfo.title}</p>
