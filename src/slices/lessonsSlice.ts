@@ -1,13 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import instance from '../api/axios';
 import { AxiosError } from 'axios';
-
-interface Lesson {
-  id?: number;
-  title: string;
-  photoPath: string;
-  content: string;
-}
+import { Lesson } from '../types/types';
 
 interface LessonState {
   lessons: Lesson[];

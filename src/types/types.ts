@@ -53,3 +53,10 @@ export interface Cart {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   courses: any[]; // Определите тип массива courses
 }
+
+export interface Lesson {
+  id?: number;
+  title: string;
+  photoPath?: string;
+  content: string;
+}
