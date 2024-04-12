@@ -1,15 +1,33 @@
-.create-lesson-container {
-    max-width: 900px;
-    margin: auto;
-    padding: 40px;
-  }
-  
-  .create-lesson-main-container {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    grid-gap: 20px;
-    align-items: start;
-  }
+.create-lesson-page-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+}
+
+.create-lesson-main-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.create-lesson-list-container {
+  border: 1px solid #ddd;
+  padding: 20px;
+  overflow-x: hidden; /* Предотвращаем горизонтальный скролл */
+  overflow-y: auto;   /* Добавляем вертикальный скролл при необходимости */
+  max-height: 450px; 
+}
+
+.create-lesson-form-container {
+  border: 1px solid #ddd;
+  padding: 20px;
+}
+
+.create-lesson-submit-all-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
   
   .create-lesson-form-group textarea {
     height: 150px;
@@ -21,6 +39,7 @@
   
   .create-lesson-form-group label {
     font-weight: bold;
+    display: block;
   }
   
   .create-lesson-form-group textarea {
@@ -57,31 +76,6 @@
     gap: 10px;
   }
   
-  .create-lesson-button-container button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .create-lesson-submit {
-    align-items: center;
-    width: 15%;
-    height: 40px;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 15px;
-    background-color: #29a354;
-    color: white;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-  }
-  
-  .create-lesson-submit:hover {
-    transform: scale(1.05);
-  }
-  
   .create-lesson-header {
     text-align: center;
     margin-bottom: 45px;
@@ -96,9 +90,77 @@
     justify-content: center;
     align-items: center;
   }
-  
-  .create-lesson-error {
-    color: red;
-    font-size: 14px;
-  }
-  
+
+  .create-lesson-button-container button,
+.create-lesson-submit-all-container button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px; /* Унифицированный border-radius для всех кнопок */
+  background-color: #29a354;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.create-lesson-button-container button:hover,
+.create-lesson-submit-all-container button:hover {
+  transform: scale(1.05);
+}
+
+.create-lesson-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f9f9f9;
+  border: 1px solid #e1e1e1;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.create-lesson-list-title {
+  word-break: break-word;
+  font-size: 18px;
+  margin: 0 0 10px 0;
+  font-weight: bold;
+}
+
+.create-lesson-list-content {
+  word-break: break-word;
+  font-size: 14px;
+  color: #666;
+  margin: 0 0 10px 0;
+}
+
+.create-lesson-list-remove-btn {
+  padding: 5px 10px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-left: 10px;
+}
+
+.create-lesson-list-remove-btn:hover {
+  background-color: #d32f2f;
+}
+
+.create-lesson-no-lessons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: #999;
+  font-style: italic;
+  font-size: 20px;
+}
+
+.create-lesson-preview-img {
+  max-width: 60px; 
+  max-height: 60px; 
+  object-fit: cover;
+  margin-right: 10px;
+}
