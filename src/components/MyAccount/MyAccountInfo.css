@@ -1,13 +1,12 @@
-.main-container {
+.main-container-account {
   display: flex;
   flex: 1;
   flex-direction: column;
   height: 100%;
-  width: fit-content;
-  max-width: 800px;
-  margin: 0px 350px;
-  padding: 70px;
+  width: 100%;
+  margin: 0 auto 20px;
   gap: 50px;
+  max-width: 420px
 }
 
 h1 {
@@ -54,20 +53,21 @@ h1 {
   color: red;
 }
 
-.btn-container {
+.btn-containerAcc {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   width: 100%;
+  margin: 0 auto;
 }
 
 #delete-btn {
   width: 100px;
+  border-radius: 15px;
   height: 30px;
   color: white;
-  background-color: rgb(182, 55, 55);
-  border-radius: 14px;
+  background-color:#d83b30;
   transition: transform 0.2s;
-  margin-left: 75px;
+  cursor: pointer;
 }
 
 #delete-btn:hover {
