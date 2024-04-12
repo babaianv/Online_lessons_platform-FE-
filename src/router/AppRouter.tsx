@@ -13,6 +13,7 @@ import MyCoursesPage from "../pages/MyCoursesAndCreatedCourses/MyCoursesPage";
 import EditCoursePage from "../pages/EditCourse/EditCoursePage";
 import MyAccountPage from "../pages/MyAccountAndChangePassword/MyAccountPage";
 import ProtectedRoute from "./ProtectedRoute";
+import CreateLessonsPage from "../pages/CreateLessons/CreateLessonsPage";
 
 const AppRouter: React.FC = () => {
   return (
@@ -29,6 +30,14 @@ const AppRouter: React.FC = () => {
           element={
             <ProtectedRoute>
               <CreateCoursePage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/create_lesson/:courseId"
+          element={
+            <ProtectedRoute>
+              <CreateLessonsPage />
             </ProtectedRoute>
           }
         />

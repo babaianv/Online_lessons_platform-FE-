@@ -40,7 +40,7 @@ export const uploadFile = createAsyncThunk(
       const response = await instance.post("/files", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      return response.data.message; // Предполагается, что ответ содержит URL файла.
+      return response.data.message; 
     } catch (err) {
       const error: AxiosError<string> = err as AxiosError<string>;
       if (error.response) {
@@ -73,7 +73,7 @@ export const createCourse = createAsyncThunk(
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
-        return rejectWithValue("An unknown error occurred");
+        return rejectWithValue("An unknown error occurred");  
       }
     }
   }
