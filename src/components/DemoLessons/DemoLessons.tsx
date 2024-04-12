@@ -52,7 +52,7 @@ const DemoLessons: React.FC = () => {
           <p id="lesson-title">{lessonInfo.title}</p>
           {lessonInfo.photoPath && (
             <div id="lesson-photo-container">
-              <img src={lessonInfo.photoPath} alt="lessonPhoto" />
+              <img src={lessonInfo.photoPath} alt="lessonPhoto" id="demoLessonPhoto"/>
             </div>
           )}
         </div>
