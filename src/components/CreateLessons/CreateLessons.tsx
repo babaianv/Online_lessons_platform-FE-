@@ -41,10 +41,10 @@ const CreateLessons: React.FC = () => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       setLessonPhoto(file);
-  
+
       // Создаем URL для предпросмотра изображения, если нужно
       const previewUrl = URL.createObjectURL(file);
-      setLesson(prevLesson => ({
+      setLesson((prevLesson) => ({
         ...prevLesson,
         previewUrl: previewUrl,
       }));
@@ -65,6 +65,11 @@ const CreateLessons: React.FC = () => {
       return;
     }
 
+    if (!lesson.title.trim() || !lesson.content.trim()) {
+      toast.error("Please fill in all the fields.");
+      return;
+    }
+
     const newLesson = {
       ...lesson,
       photoFile: lessonPhoto,
@@ -82,6 +87,11 @@ const CreateLessons: React.FC = () => {
   };
 
   const handleSubmitAllLessons = async () => {
+    if (lessons.length === 0) {
+      toast.error("No lessons to submit. Please add at least one lesson.");
+      return;
+    }
+
     try {
       for (const lesson of lessons) {
         let photoPath = "";
