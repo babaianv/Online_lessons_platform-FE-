@@ -49,7 +49,7 @@ const AllCourses: React.FC = () => {
                     alt="imgCover"
                   />
                 </div>
-                <h2 className="productCardTitle">{course.title}</h2>
+                <p className="productCardTitle">{course.title}</p>
                 <div className="price-containter">
                   <p className="productCardPrice">€{course.price}</p>
                   <p className="productCardOldPrice">€{course.oldPrice}</p>

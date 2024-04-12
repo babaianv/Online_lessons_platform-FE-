@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { RootState } from "../../store/store";
 import { fetchAvailableCourses } from "../../slices/availableCoursesSlice";
 import { selectUser } from "../../slices/userSlice";
+import { Link } from "react-router-dom";
 
 const MyCourses: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -27,16 +28,22 @@ const MyCourses: React.FC = () => {
       <h1 className="my-courses-header">MY COURSES</h1>
 
       {enrollments?.map(({ course }) => (
-        <div className="my-course-item" key={course.id}>
-          <img src={course.photoPath} alt="Course" className="my-course-icon" />
-          <div className="my-course-content">
-            <div className="my-course-title">{course.title}</div>
-            <div className="my-course-description">
-              {course.description.length > 300
-                ? `${course.description.substring(0, 300)}...`
-                : course.description}
+        <div key={course.id}>
+          <Link to={`/lessons/${course.id}`} className="my-course-item">
+            <img
+              src={course.photoPath}
+              alt="Course"
+              className="my-course-icon"
+            />
+            <div className="my-course-content">
+              <div className="my-course-title">{course.title}</div>
+              <div className="my-course-description">
+                {course.description.length > 300
+                  ? `${course.description.substring(0, 300)}...`
+                  : course.description}
+              </div>
             </div>
-          </div>
+          </Link>
         </div>
       ))}
     </div>

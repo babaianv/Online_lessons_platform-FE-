@@ -4,9 +4,10 @@ import userReducer from "../slices/userSlice";
 import courseDetailsReducer from "../slices/courseDetailsSlice";
 import cartReducer from "../slices/cartSlice";
 import accountInfoSlice from "../slices/myAccountSlice";
-import totalCountReducer from "../slices/totalCountSlice"; 
+import totalCountReducer from "../slices/totalCountSlice";
 import availableCoursesReducer from "../slices/availableCoursesSlice";
 import createdCoursesReducer from "../slices/createdCoursesSlice";
+import lessonsSlice from "../slices/lessonsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -15,9 +16,10 @@ export const store = configureStore({
     coursesDetails: courseDetailsReducer,
     cart: cartReducer,
     accountInfo: accountInfoSlice,
-    totalCount: totalCountReducer, 
+    totalCount: totalCountReducer,
     availableCourses: availableCoursesReducer,
     createdCourses: createdCoursesReducer,
+    lessons: lessonsSlice,
   },
 });
 

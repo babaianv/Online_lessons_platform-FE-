@@ -33,7 +33,6 @@ export const fetchUser = createAsyncThunk<
     const response = await instance.get<RegisterResponse>(
       `/users/account_info/${username}`
     );
-    console.log("hello");
 
     return response.data;
   } catch (err) {
@@ -73,7 +72,7 @@ export const myAccountSlice = createSlice({
   initialState,
   reducers: {
     resetChangePasswordStatus(state) {
-      state.status = 'idle';
+      state.status = "idle";
       state.error = null;
     },
   },
