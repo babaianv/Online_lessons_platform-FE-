@@ -23,7 +23,6 @@
     cursor: pointer; /* Pointer cursor on hover */
     
   }
-
   
   .course-content {
     flex-grow: 1;
@@ -38,23 +37,38 @@
   .course-description {
     font-size: 0.9em;
   }
+
+  .buttons-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+  }
   
-  .edit-button, .delete-button {
+  .add-button, .edit-button, .delete-button {
     margin-left: 1rem;
     padding: 0.5rem 1rem;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 120px;
+    height: 30px;
   }
-  
-  .edit-button {
-    background-color: #4CAF50; /* Green */
+
+  .add-button {
+    background-color: #4CAF50; 
     color: white;
+  }
+
+  .edit-button {
+    background-color: #4CAF50; 
+    color: white;
+    margin-top: 10px;
   }
   
   .delete-button {
-    background-color: #d83b30; /* Red */
+    background-color: #d83b30;
     color: white;
+    margin-top: 10px;
   }
 
   .course-icon {

@@ -4,22 +4,24 @@ import { useEffect, useState } from "react";
 import { fetchLessons, selectLessons } from "../../slices/lessonsSlice";
 import { selectUser } from "../../slices/userSlice";
 import "./AllLessons.css";
-import { LessonResponse } from "../../types/types";
+import { Lesson  } from "../../types/types";
 
 const AllLessons: React.FC = () => {
   const lessons = useAppSelector(selectLessons);
+  const loading = useAppSelector(state => state.lessons.loading);
+  const error = useAppSelector(state => state.lessons.error);
   const user = useAppSelector(selectUser);
   //   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { courseId } = useParams();
-  const [lessonInfo, setLessonInfo] = useState<LessonResponse>({
+  const [lessonInfo, setLessonInfo] = useState<Lesson>({
     title: "",
     content: "",
     photoPath: "",
   });
   console.log(lessonInfo);
 
-  const handleLessonClick = (lesson: LessonResponse) => {
+  const handleLessonClick = (lesson: Lesson) => {
     setLessonInfo(lesson);
   };
 
@@ -29,9 +31,9 @@ const AllLessons: React.FC = () => {
     }
   }, [courseId, dispatch, user.userInfo?.name]);
 
-  if (lessons.status === "loading") return <p id="loading">Loading...</p>;
+  if (loading) return <p id="loading">Loading...</p>;
 
-  if (lessons.error) {
+  if (error) {
     return <h2 id="error">No lessons found for this course</h2>;
   }
 
@@ -40,9 +42,9 @@ const AllLessons: React.FC = () => {
       <div id="choose-lesson-photo-container">
         <div id="lessons-container">
           {user.userInfo?.name &&
-            lessons.lessonsResponse?.map((lesson) => (
+            lessons.map((lesson, index) => (
               <p
-                key={lesson.title + Math.random()}
+                key={index}
                 id="choose-lesson-title"
                 onClick={() => handleLessonClick(lesson)}
               >

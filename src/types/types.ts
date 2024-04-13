@@ -12,12 +12,6 @@ export interface UserInfo {
   cartId: number
 }
 
-export interface LessonResponse {
-  title: string; 
-  photoPath: string; 
-  content: string;
-}
-
 export interface RegisterResponse {
   id: number;
   nickname: string;
@@ -58,4 +52,11 @@ export interface Cart {
   id: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   courses: any[]; // Определите тип массива courses
+}
+
+export interface Lesson {
+  id?: number;
+  title: string;
+  photoPath?: string;
+  content: string;
 }

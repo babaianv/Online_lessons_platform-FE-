@@ -3,20 +3,22 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchDemoLessons, selectLessons } from "../../slices/lessonsSlice";
 import "./DemoLessons.css";
-import { LessonResponse } from "../../types/types";
+import { Lesson } from "../../types/types";
 
 const DemoLessons: React.FC = () => {
   const lessons = useAppSelector(selectLessons);
+  const loading = useAppSelector((state) => state.lessons.loading);
+  const error = useAppSelector((state) => state.lessons.error);
   //   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { courseId } = useParams();
-  const [lessonInfo, setLessonInfo] = useState<LessonResponse>({
+  const [lessonInfo, setLessonInfo] = useState<Lesson>({
     title: "",
     content: "",
     photoPath: "",
   });
 
-  const handleLessonClick = (lesson: LessonResponse) => {
+  const handleLessonClick = (lesson: Lesson) => {
     setLessonInfo(lesson);
   };
 
@@ -28,9 +30,9 @@ const DemoLessons: React.FC = () => {
     }
   }, [courseId, dispatch]);
 
-  if (lessons.status === "loading") return <p id="loading">Loading...</p>;
+  if (loading) return <p id="loading">Loading...</p>;
 
-  if (lessons.error) {
+  if (error) {
     return <h2 id="error">No lessons found for this course</h2>;
   }
 
@@ -38,9 +40,9 @@ const DemoLessons: React.FC = () => {
     <div id="lessons-main">
       <div id="choose-lesson-photo-container">
         <div id="lessons-container">
-          {lessons.lessonsResponse?.map((lesson) => (
+          {lessons.map((lesson, index) => (
             <p
-              key={lesson.title + Math.random()}
+              key={index}
               id="choose-lesson-title"
               onClick={() => handleLessonClick(lesson)}
             >
@@ -52,7 +54,11 @@ const DemoLessons: React.FC = () => {
           <p id="lesson-title">{lessonInfo.title}</p>
           {lessonInfo.photoPath && (
             <div id="lesson-photo-container">
-              <img src={lessonInfo.photoPath} alt="lessonPhoto" id="demoLessonPhoto"/>
+              <img
+                src={lessonInfo.photoPath}
+                alt="lessonPhoto"
+                id="demoLessonPhoto"
+              />
             </div>
           )}
         </div>

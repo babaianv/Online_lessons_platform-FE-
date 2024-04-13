@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { deleteUser, logout, selectUser } from "../../slices/userSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { fetchUser } from "../../slices/myAccountSlice";
+import { toast } from "react-toastify";
 
 const MyAccountInfo: React.FC = () => {
   const user = useAppSelector(selectUser);
@@ -37,10 +38,10 @@ const MyAccountInfo: React.FC = () => {
         console.log("Deleting user with username ", username);
         await dispatch(deleteUser());
         await dispatch(logout());
-        console.log("User deleted");
+        toast.success(`User ${username} deleted`);
         navigate("/");
       } catch (error) {
-        console.error("User deleting error:", error);
+        toast.error("User deleting error: " + String(error));
       }
     }
   };
