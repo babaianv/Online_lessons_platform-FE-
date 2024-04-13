@@ -51,7 +51,7 @@ const ChangePassword: React.FC = () => {
   }, [dispatch]);
 
   return (
-    <div className="main-container">
+    <div className="main-container-change-password">
       <form onSubmit={handleSubmit} className="change-password-form">
         <h1>Change Password</h1>
         <div className="input-label-container">
