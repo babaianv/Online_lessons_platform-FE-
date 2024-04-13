@@ -27,7 +27,11 @@ const MyAccountInfo: React.FC = () => {
   );
 
   const deleteUserOnClick = async () => {
-    if (window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+    if (
+      window.confirm(
+        "Are you sure you want to delete your account? This action cannot be undone."
+      )
+    ) {
       const username = accountInfoData?.nickname;
       try {
         console.log("Deleting user with username ", username);
@@ -56,7 +60,7 @@ const MyAccountInfo: React.FC = () => {
   }
 
   return (
-    <div className="main-container">
+    <div className="main-container-account">
       {accountInfoData && (
         <>
           <h1>Account</h1>
@@ -89,7 +93,7 @@ const MyAccountInfo: React.FC = () => {
         </>
       )}
       {accountInfoData && (
-        <div className="btn-container">
+        <div className="btn-containerAcc">
           <button id="delete-btn" type="submit" onClick={deleteUserOnClick}>
             DELETE
           </button>

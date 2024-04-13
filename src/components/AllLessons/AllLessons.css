@@ -1,0 +1,74 @@
+#loading {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin: 50px 0px;
+  font-size: 30px;
+}
+
+#lessons-main {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 30px 130px;
+}
+
+#lessons-container {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  margin: 15px;
+  width: 20%;
+  height: fit-content;
+  max-height: 200px;
+  border: 2px solid black;
+  gap: 10px;
+  overflow: scroll;
+}
+
+#choose-lesson-photo-container {
+  display: flex;
+  flex-direction: row;
+  height: fit-content;
+}
+
+#choose-lesson-title {
+  cursor: pointer;
+  width: fit-content;
+}
+
+#title-photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 30px;
+}
+
+#lesson-title {
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: bold;
+  color: #6255a5;
+}
+
+#lesson-photo-container {
+  display: flex;
+  justify-content: center;
+  width: 60%;
+  height: 70%;
+}
+
+#lessonPhoto {
+  width: 100%;
+  height: 100%;
+}
+
+#content {
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  line-height: 25px;
+}
