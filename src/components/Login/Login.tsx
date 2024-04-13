@@ -34,7 +34,7 @@ const Login: React.FC = () => {
 
     // Проверка на пустые поля
     if (!formData.email.trim() || !formData.password.trim()) {
-      toast.error("Email and password must not be empty");
+      toast.error("Email and password must not be empty", {toastId: "empty_fields"});
       return; // Прерываем выполнение, если какое-либо поле пустое
     }
 
@@ -43,10 +43,10 @@ const Login: React.FC = () => {
       .then(() => {
         dispatch(fetchCurrentUser());
         navigate("/");
-        toast.success("You logged in.");
+        toast.success("You logged in.", {toastId: "login_success"});
       })
       .catch((error) =>
-        toast.error(error.message || "An unexpected error occurred")
+        toast.error(error.message || "An unexpected error occurred", {toastId: "login_error"})
       );
   };
 

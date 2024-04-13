@@ -38,10 +38,12 @@ const MyAccountInfo: React.FC = () => {
         console.log("Deleting user with username ", username);
         await dispatch(deleteUser());
         await dispatch(logout());
-        toast.success(`User ${username} deleted`);
+        toast.success(`User ${username} deleted`, { toastId: "user_delete_success" });
         navigate("/");
       } catch (error) {
-        toast.error("User deleting error: " + String(error));
+        toast.error("User deleting error: " + String(error), {
+          toastId: "user_delete_error",
+        });
       }
     }
   };

@@ -24,7 +24,7 @@ const Header: React.FC = () => {
 
   const handleLogout = async () => {
     dispatch(logout());
-    toast.success("You logged out.");
+    toast.success("You logged out.", {toastId: "logout"});
   };
 
   const handleClickOutside = (event: MouseEvent) => {

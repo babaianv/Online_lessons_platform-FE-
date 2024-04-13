@@ -62,14 +62,14 @@ const ShoppingCart: React.FC = () => {
     };
     await dispatch(fetchDeleteCourseFromCart(deleteCourseData));
     dispatch(fetchCart(cartId));
-    toast.success("Done!");
+    toast.success("Done!", { toastId: "remove_from_cart" });
   };
 
   const handleRemoveAllFromCart = async () => {
     dispatch(removeAllItems());
     await dispatch(fetchDeleteAllCourseFromCart(cartId));
 
-    toast.success("Done!");
+    toast.success("Done!", { toastId: "remove_all_from_cart" });
   };
 
   const handlePayNow = async () => {
@@ -78,13 +78,15 @@ const ShoppingCart: React.FC = () => {
         const response = await dispatch(fetchBuyAllCoursesFromCart(cartId));
 
         if (response.meta.requestStatus !== "rejected") {
-          toast.success('Payment successful!');
+          toast.success("Payment successful!", { toastId: "payment_success" });
           dispatch(fetchCart(cartId));
         } else {
           throw new Error("Payment failed!");
         }
       } catch (error) {
-        console.error("Error occurred during payment:", error);
+        toast.error("Error occurred during payment: " + error, {
+          toastId: "payment_error",
+        });
       }
     } else {
       alert("Please select PayPal to proceed with the payment.");

@@ -7,7 +7,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { addToCart, fetchAddToCart } from "../../slices/cartSlice";
 import { incrementTotalCount } from "../../slices/totalCountSlice";
 import { selectUser } from "../../slices/userSlice";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 import "./CourseDetails.css";
 
@@ -73,12 +73,16 @@ const CourseDetails: React.FC<Props> = () => {
             })
           );
           dispatch(incrementTotalCount());
-          toast.success('Done!');
+          toast.success("Done!", { toastId: "add_to_cart_success" });
         } else {
-          toast.error('Course is already added to cart!');
+          toast.error("Course is already added to cart!", {
+            toastId: "add_to_cart_already_added",
+          });
         }
       } catch (error) {
-        toast.error('Error adding course to cart.');
+        toast.error("Error adding course to cart.", {
+          toastId: "add_to_cart_error",
+        });
       }
     }
   };

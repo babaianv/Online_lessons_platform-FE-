@@ -3,7 +3,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import "./ChangePassword.css";
 import { useAppDispatch } from "../../hooks/hooks";
-import { changePassword, resetChangePasswordStatus } from "../../slices/myAccountSlice";
+import {
+  changePassword,
+  resetChangePasswordStatus,
+} from "../../slices/myAccountSlice";
+import { toast } from "react-toastify";
 // import { useNavigate } from "react-router-dom";
 
 interface ChangePasswordData {
@@ -32,10 +36,14 @@ const ChangePassword: React.FC = () => {
     try {
       console.log("Changing password:", changePasswordInfo);
       await dispatch(changePassword(changePasswordInfo)).unwrap();
-      console.log("Password changed successfully");
+      toast.success("Password changed successfully", {
+        toastId: "change_password_success",
+      });
       // navigate("/change_password");
     } catch (error) {
-      console.error("Password changing error:", error);
+      toast.error("Password changing error: " + error, {
+        toastId: "change_password_error",
+      });
     }
   };
 

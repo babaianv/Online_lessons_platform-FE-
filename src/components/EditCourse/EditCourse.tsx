@@ -45,7 +45,7 @@ const EditCourse: React.FC = () => {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
-  
+
     // Если поле является ценой, обрабатываем ввод как число
     if (name === "price") {
       const numericValue = value === "" ? 0 : parseInt(value, 10);
@@ -78,7 +78,7 @@ const EditCourse: React.FC = () => {
     if (courseDetails) {
       setCourse({
         title: courseDetails.title,
-        price: courseDetails.price, 
+        price: courseDetails.price,
         description: courseDetails.description,
         photoPath: courseDetails.photoPath,
       });
@@ -94,7 +94,8 @@ const EditCourse: React.FC = () => {
       newErrors.price = "The price must be between 0 and 9999.";
     }
     if (!course.description || course.description.length < 300) {
-      newErrors.description = "The description must be at least 300 characters long.";
+      newErrors.description =
+        "The description must be at least 300 characters long.";
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -104,17 +105,21 @@ const EditCourse: React.FC = () => {
     event.preventDefault();
 
     if (!validate()) {
-      toast.error("Please correct the errors before submitting.");
+      toast.error("Please correct the errors before submitting.", {
+        toastId: "edit_course_error",
+      });
       return;
     }
 
     const updatedCourseData = {
-      id: courseIdNumber, 
+      id: courseIdNumber,
       ...course,
       photoPath: course.photoPath,
     };
     dispatch(updateCourse(updatedCourseData)).then(() => {
-      toast.success("Course updated successfully");
+      toast.success("Course updated successfully", {
+        toastId: "edit_course_success",
+      });
       navigate("/my_courses");
     });
   };
@@ -151,7 +156,9 @@ const EditCourse: React.FC = () => {
           <div className="edit-fields-container">
             <div className="edit-course-form-group">
               <label htmlFor="title">Title</label>
-              {errors.title && <p className="create-course-error">{errors.title}</p>}
+              {errors.title && (
+                <p className="create-course-error">{errors.title}</p>
+              )}
               <input
                 type="text"
                 id="title"
@@ -162,7 +169,9 @@ const EditCourse: React.FC = () => {
             </div>
             <div className="edit-course-form-group">
               <label htmlFor="price">Price</label>
-              {errors.price && <p className="create-course-error">{errors.price}</p>}
+              {errors.price && (
+                <p className="create-course-error">{errors.price}</p>
+              )}
               <input
                 type="text"
                 id="price"
@@ -173,7 +182,9 @@ const EditCourse: React.FC = () => {
             </div>
             <div className="edit-course-form-group">
               <label htmlFor="description">Description</label>
-              {errors.description && <p className="create-course-error">{errors.description}</p>}
+              {errors.description && (
+                <p className="create-course-error">{errors.description}</p>
+              )}
               <textarea
                 id="description"
                 name="description"
