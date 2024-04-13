@@ -15,7 +15,7 @@ interface CourseErrors {
   title?: string;
   price?: string;
   description?: string;
-  photo?: string; 
+  photo?: string;
 }
 
 const CreateCourse: React.FC = () => {
@@ -39,7 +39,8 @@ const CreateCourse: React.FC = () => {
       newErrors.price = "The price must be between 0 and 9999.";
     }
     if (!course.description || course.description.length < 300) {
-      newErrors.description = "The description must be at least 300 characters long.";
+      newErrors.description =
+        "The description must be at least 300 characters long.";
     }
     if (!coverPhoto) {
       newErrors.photo = "Cover photo is required.";
@@ -47,7 +48,6 @@ const CreateCourse: React.FC = () => {
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
-
 
   // Обработчики изменения полей формы и файлов
   const handleFileChange =
@@ -96,10 +96,14 @@ const CreateCourse: React.FC = () => {
     try {
       console.log("Отправка данных курса на сервер:", finalCourseData);
       await dispatch(createCourse(finalCourseData)).unwrap();
-      toast.success("Course created successfully");
+      toast.success("Course created successfully", {
+        toastId: "create_course_success",
+      });
       navigate("/my_courses");
     } catch (error) {
-      toast.error("Failed to create the course.");
+      toast.error("Failed to create the course.", {
+        toastId: "create_course_error",
+      });
     }
   };
 
@@ -113,7 +117,9 @@ const CreateCourse: React.FC = () => {
           <div className="create-files-container">
             <div className="create-course-form-group">
               <label htmlFor="coverPhoto">Cover Photo</label>
-              {errors.photo && <p className="create-course-error">{errors.photo}</p>}
+              {errors.photo && (
+                <p className="create-course-error">{errors.photo}</p>
+              )}
               <input
                 type="file"
                 id="coverPhoto"
@@ -135,7 +141,9 @@ const CreateCourse: React.FC = () => {
           <div className="create-fields-container">
             <div className="create-course-form-group">
               <label htmlFor="title">Title</label>
-              {errors.title && <p className="create-course-error">{errors.title}</p>}
+              {errors.title && (
+                <p className="create-course-error">{errors.title}</p>
+              )}
               <input
                 type="text"
                 id="title"
@@ -146,7 +154,9 @@ const CreateCourse: React.FC = () => {
             </div>
             <div className="create-course-form-group">
               <label htmlFor="price">Price</label>
-              {errors.price && <p className="create-course-error">{errors.price}</p>}
+              {errors.price && (
+                <p className="create-course-error">{errors.price}</p>
+              )}
               <input
                 type="text"
                 id="price"
@@ -157,7 +167,9 @@ const CreateCourse: React.FC = () => {
             </div>
             <div className="create-course-form-group">
               <label htmlFor="description">Description</label>
-              {errors.description && <p className="create-course-error">{errors.description}</p>}
+              {errors.description && (
+                <p className="create-course-error">{errors.description}</p>
+              )}
               <textarea
                 id="description"
                 name="description"

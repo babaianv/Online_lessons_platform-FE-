@@ -60,12 +60,16 @@ const CreateLessons: React.FC = () => {
 
     // Проверка выбран ли файл для загрузки
     if (!lessonPhoto) {
-      toast.error("Please select a photo for the lesson.");
+      toast.error("Please select a photo for the lesson.", {
+        toastId: "lesson_photo_required",
+      });
       return;
     }
 
     if (!lesson.title.trim() || !lesson.content.trim()) {
-      toast.error("Please fill in all the fields.");
+      toast.error("Please fill in all the fields.", {
+        toastId: "lesson_fields_required",
+      });
       return;
     }
 
@@ -82,12 +86,14 @@ const CreateLessons: React.FC = () => {
     }
 
     setLessonPhoto(null); // Reset file input
-    toast.success("Lesson added to list");
+    toast.success("Lesson added to list", { toastId: "lesson_added" });
   };
 
   const handleSubmitAllLessons = async () => {
     if (lessons.length === 0) {
-      toast.error("No lessons to submit. Please add at least one lesson.");
+      toast.error("No lessons to submit. Please add at least one lesson.", {
+        toastId: "no_lessons_to_submit",
+      });
       return;
     }
 
@@ -106,17 +112,22 @@ const CreateLessons: React.FC = () => {
         await dispatch(createLesson({ courseId, lessonData: lessonToSave }));
       }
       setLessons([]); // Clear lessons after submission
-      toast.success("All lessons created successfully");
+      toast.success("All lessons created successfully", {
+        toastId: "lessons_created",
+      });
       navigate("/my_courses");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         // Обработка ошибки Axios
         const message =
           error.response?.data.message || "An unknown error occurred";
-        toast.error("Error submitting lessons: " + message);
+        toast.error("Error submitting lessons: " + message, {
+          toastId: "lesson_submit_error",
+        });
       } else {
-        // Обработка стандартной ошибки JavaScript
-        toast.error("Error submitting lessons: " + (error as Error).message);
+        toast.error("Error submitting lessons: " + (error as Error).message, {
+          toastId: "lesson_submit_diff_error",
+        });
       }
     }
   };

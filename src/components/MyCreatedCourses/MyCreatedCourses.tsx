@@ -32,7 +32,6 @@ const MyCreatedCourses: React.FC = () => {
 
   const handleEdit = (courseId: number) => {
     console.log("Editing course with id:", courseId);
-    // Здесь будет логика для редактирования курса
     navigate(`/edit_course/${courseId}`); //переход на страницу редактирования курса
   };
 
@@ -46,12 +45,16 @@ const MyCreatedCourses: React.FC = () => {
       dispatch(deleteCreatedCourse(courseId))
         .then(() => {
           // После успешного удаления можно обновить список курсов или показать уведомление
-          toast.success("Course deleted successfully.");
+          toast.success("Course deleted successfully.", {
+            toastId: "course_delete_success",
+          });
           dispatch(fetchCreatedCourses()); // Перезагружаем список курсов, если нужно
         })
         .catch((error) => {
           console.error("Error deleting course:", error);
-          toast.error("Failed to delete the course.");
+          toast.error("Failed to delete the course.", {
+            toastId: "course_delete_error",
+          });
         });
     }
   };
