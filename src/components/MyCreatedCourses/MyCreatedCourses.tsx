@@ -26,6 +26,10 @@ const MyCreatedCourses: React.FC = () => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error loading courses: {error}</p>;
 
+  const handleAddLesson = (courseId: number) => {
+    navigate(`/create_lesson/${courseId}`); //переход на страницу создания урока
+  };
+
   const handleEdit = (courseId: number) => {
     console.log("Editing course with id:", courseId);
     // Здесь будет логика для редактирования курса
@@ -33,7 +37,11 @@ const MyCreatedCourses: React.FC = () => {
   };
 
   const handleDelete = (courseId: number) => {
-    if (window.confirm("Are you sure you want to delete this course? This action cannot be undone.")) {
+    if (
+      window.confirm(
+        "Are you sure you want to delete this course? This action cannot be undone."
+      )
+    ) {
       console.log("Deleting course with id:", courseId);
       dispatch(deleteCreatedCourse(courseId))
         .then(() => {
@@ -71,18 +79,26 @@ const MyCreatedCourses: React.FC = () => {
                 : course.description}
             </div>
           </div>
-          <button
-            onClick={() => handleEdit(course.id!)}
-            className="edit-button"
-          >
-            Edit
-          </button>
-          <button
-            onClick={() => handleDelete(course.id!)}
-            className="delete-button"
-          >
-            Delete
-          </button>
+          <div className="course-buttons-container">
+            <button
+              onClick={() => handleAddLesson(course.id!)}
+              className="add-button"
+            >
+              Add Lesson
+            </button>
+            <button
+              onClick={() => handleEdit(course.id!)}
+              className="edit-button"
+            >
+              Edit
+            </button>
+            <button
+              onClick={() => handleDelete(course.id!)}
+              className="delete-button"
+            >
+              Delete
+            </button>
+          </div>
         </div>
       ))}
     </div>

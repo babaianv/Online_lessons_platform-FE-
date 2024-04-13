@@ -1,7 +1,7 @@
 import React, { ChangeEvent, useRef, useState } from "react";
 import "./CreateLessons.css";
 import { useAppDispatch } from "../../hooks/hooks";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { uploadFile } from "../../slices/coursesSlice";
 import { createLesson } from "../../slices/lessonsSlice";
@@ -22,8 +22,7 @@ const CreateLessons: React.FC = () => {
   const [lessons, setLessons] = useState<LessonData[]>([]);
   const [lessonPhoto, setLessonPhoto] = useState<File | null>(null);
   const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
-  // const [previewUrls, setPreviewUrls] = useState({});
+  const navigate = useNavigate();
   const { courseId } = useParams<{ courseId: string }>() as {
     courseId: string;
   };
@@ -108,6 +107,7 @@ const CreateLessons: React.FC = () => {
       }
       setLessons([]); // Clear lessons after submission
       toast.success("All lessons created successfully");
+      navigate("/my_courses");
     } catch (error) {
       if (axios.isAxiosError(error)) {
         // Обработка ошибки Axios
