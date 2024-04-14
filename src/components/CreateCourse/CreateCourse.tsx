@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 interface CourseData {
   title: string;
-  price: number;
+  price: number | null;
   description: string;
 }
 
@@ -21,7 +21,7 @@ interface CourseErrors {
 const CreateCourse: React.FC = () => {
   const [course, setCourse] = useState<CourseData>({
     title: "",
-    price: 0,
+    price: null,
     description: "",
   });
   const [errors, setErrors] = useState<CourseErrors>({});
@@ -35,7 +35,12 @@ const CreateCourse: React.FC = () => {
     if (!course.title || course.title.length < 5) {
       newErrors.title = "The title must be at least 5 characters long.";
     }
-    if (course.price < 0 || course.price > 9999) {
+    if (
+      course.price === null ||
+      isNaN(course.price) ||
+      course.price < 0 ||
+      course.price > 9999
+    ) {
       newErrors.price = "The price must be between 0 and 9999.";
     }
     if (!course.description || course.description.length < 300) {
@@ -59,10 +64,32 @@ const CreateCourse: React.FC = () => {
     };
 
   const handleInputChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    const { name, value } = e.target;
-    setCourse({ ...course, [name]: parseFloat(value) || value });
+    const { name, value } = event.target;
+
+    if (name === "price") {
+      if (value === "") {
+        setCourse((prevCourse) => ({
+          ...prevCourse,
+          [name]: null,
+        }));
+      } else {
+        const numericValue = parseInt(value, 10);
+        // Проверяем, что значение является числом и не отрицательным
+        if (!isNaN(numericValue) && numericValue >= 0) {
+          setCourse((prevCourse) => ({
+            ...prevCourse,
+            [name]: numericValue,
+          }));
+        }
+      }
+    } else {
+      setCourse((prevCourse) => ({
+        ...prevCourse,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -95,7 +122,12 @@ const CreateCourse: React.FC = () => {
 
     try {
       console.log("Отправка данных курса на сервер:", finalCourseData);
-      await dispatch(createCourse(finalCourseData)).unwrap();
+      await dispatch(
+        createCourse({
+          ...finalCourseData,
+          price: finalCourseData.price as number,
+        })
+      ).unwrap();
       toast.success("Course created successfully", {
         toastId: "create_course_success",
       });
@@ -161,7 +193,7 @@ const CreateCourse: React.FC = () => {
                 type="text"
                 id="price"
                 name="price"
-                value={course.price}
+                value={course.price !== null ? course.price.toString() : ""}
                 onChange={handleInputChange}
               />
             </div>

@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 interface CourseData {
   title: string;
-  price: number;
+  price: number | null;
   description: string;
   photoPath: string;
 }
@@ -31,7 +31,7 @@ const EditCourse: React.FC = () => {
 
   const [course, setCourse] = useState<CourseData>({
     title: "",
-    price: 0,
+    price: null,
     description: "",
     photoPath: "",
   });
@@ -46,15 +46,23 @@ const EditCourse: React.FC = () => {
   ) => {
     const { name, value } = event.target;
 
-    // Если поле является ценой, обрабатываем ввод как число
     if (name === "price") {
-      const numericValue = value === "" ? 0 : parseInt(value, 10);
-      setCourse((prevCourse) => ({
-        ...prevCourse,
-        [name]: numericValue,
-      }));
+      if (value === "") {
+        setCourse((prevCourse) => ({
+          ...prevCourse,
+          [name]: null,
+        }));
+      } else {
+        const numericValue = parseInt(value, 10);
+        // Проверяем, что значение является числом и не отрицательным
+        if (!isNaN(numericValue) && numericValue >= 0) {
+          setCourse((prevCourse) => ({
+            ...prevCourse,
+            [name]: numericValue,
+          }));
+        }
+      }
     } else {
-      // Для всех остальных полей сохраняем ввод как есть
       setCourse((prevCourse) => ({
         ...prevCourse,
         [name]: value,
@@ -90,7 +98,7 @@ const EditCourse: React.FC = () => {
     if (!course.title || course.title.length < 5) {
       newErrors.title = "The title must be at least 5 characters long.";
     }
-    if (course.price <= 0 || course.price > 9999) {
+    if (course.price == null || course.price < 0 || course.price > 9999) {
       newErrors.price = "The price must be between 0 and 9999.";
     }
     if (!course.description || course.description.length < 300) {
@@ -116,7 +124,12 @@ const EditCourse: React.FC = () => {
       ...course,
       photoPath: course.photoPath,
     };
-    dispatch(updateCourse(updatedCourseData)).then(() => {
+    dispatch(
+      updateCourse({
+        ...updatedCourseData,
+        price: updatedCourseData.price as number, 
+      })
+    ).then(() => {
       toast.success("Course updated successfully", {
         toastId: "edit_course_success",
       });
@@ -176,7 +189,7 @@ const EditCourse: React.FC = () => {
                 type="text"
                 id="price"
                 name="price"
-                value={course.price}
+                value={course.price === null ? "" : course.price.toString()}
                 onChange={handleInputChange}
               />
             </div>
