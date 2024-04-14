@@ -41,6 +41,8 @@ const EditCourse: React.FC = () => {
   // const [coverPhoto, setCoverPhoto] = useState<File | null>(null);
   // const [presentation, setPresentation] = useState<File | null>(null);
 
+  const [initialCourse, setInitialCourse] = useState<CourseData>();
+
   const handleInputChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -84,12 +86,14 @@ const EditCourse: React.FC = () => {
 
   useEffect(() => {
     if (courseDetails) {
-      setCourse({
+      const loadedCourse = {
         title: courseDetails.title,
         price: courseDetails.price,
         description: courseDetails.description,
         photoPath: courseDetails.photoPath,
-      });
+      };
+      setCourse(loadedCourse);
+      setInitialCourse(loadedCourse);
     }
   }, [courseDetails]);
 
@@ -111,6 +115,14 @@ const EditCourse: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+        
+    // Сравнение текущих данных с начальными
+    if (JSON.stringify(course) === JSON.stringify(initialCourse)) {
+      toast.info("No changes were made.");
+      navigate("/my_courses");
+      return;
+    }
 
     if (!validate()) {
       toast.error("Please correct the errors before submitting.", {
@@ -134,6 +146,11 @@ const EditCourse: React.FC = () => {
         toastId: "edit_course_success",
       });
       navigate("/my_courses");
+    })
+    .catch(() => {
+      toast.error("An error occurred while updating the course.", {
+        toastId: "edit_course_error",
+      });
     });
   };
 
