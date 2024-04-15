@@ -44,6 +44,13 @@
     align-items: flex-start; 
   }
   
+  .course-link {
+    all: unset; /* Сбрасывает все стандартные стили */
+    display: flex; /* Или 'flex', в зависимости от нужного поведения */
+    color: inherit; /* Убедитесь, что цвет текста соответствует ожидаемому */
+    text-decoration: none; /* Убирает подчёркивание ссылки */
+  }
+
   .add-button, .edit-button, .delete-button {
     margin-left: 1rem;
     padding: 0.5rem 1rem;
