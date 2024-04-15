@@ -6,12 +6,11 @@ import { selectUser } from "../../slices/userSlice";
 import "./AllLessons.css";
 import { Lesson } from "../../types/types";
 
-const AllLessons: React.FC = () => {
+const AllLessons: React.FC<{ isDemo?: boolean }> = ({ isDemo }) => {
   const lessons = useAppSelector(selectLessons);
   const loading = useAppSelector((state) => state.lessons.loading);
   const error = useAppSelector((state) => state.lessons.error);
   const user = useAppSelector(selectUser);
-  //   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { courseId } = useParams();
   const [lessonInfo, setLessonInfo] = useState<Lesson>({
@@ -21,8 +20,11 @@ const AllLessons: React.FC = () => {
   });
   console.log(lessonInfo);
 
-  const handleLessonClick = (lesson: Lesson) => {
-    setLessonInfo(lesson);
+  const handleLessonClick = (lesson: Lesson, index: number) => {
+    if (!isDemo || index < 2) {
+      // Позволяет взаимодействие только с первыми двумя уроками в демо-режиме
+      setLessonInfo(lesson);
+    }
   };
 
   useEffect(() => {
@@ -34,23 +36,37 @@ const AllLessons: React.FC = () => {
   if (loading) return <p className="lessons-loading">Loading...</p>;
 
   if (error) {
-    return <h2 id="error">No lessons found for this course</h2>;
+    return <h2 className="lessons-error">Error loading courses: {error}</h2>;
+  }
+
+  if (lessons.length === 0) {
+    // Проверяем, есть ли уроки в массиве
+    return (
+      <div className="lessons-main">
+        <p className="no-lessons">
+          There are currently no lessons for this course
+        </p>
+      </div>
+    );
   }
 
   return (
     <div className="lessons-main">
-      <ul className="lessons-container"> {/* Контейнер с уроками */}
-        {user.userInfo?.name && lessons.map((lesson) => (
-          <li
-            key={lesson.id}
-            className={`lesson-title ${lessonInfo.id === lesson.id ? "active" : ""}`}
-            onClick={() => handleLessonClick(lesson)}
-          >
-            {lesson.title}
-          </li>
-        ))}
+      <ul className="lessons-container">
+        {user.userInfo?.name &&
+            lessons.map((lesson, index) => (
+              <li
+                key={lesson.id}
+                className={`lesson-title ${lessonInfo.id === lesson.id ? "active" : ""} ${isDemo && index >= 2 ? "disabled" : ""}`}
+                onClick={() => handleLessonClick(lesson, index)}
+              >
+                {lesson.title}
+              </li>
+            ))}
       </ul>
-      <div className="title-photo-content-container"> {/* Контейнер для деталей урока */}
+      <div className="title-photo-content-container">
+        {" "}
+        {/* Контейнер для деталей урока */}
         <div className="title-photo-container">
           <p className="lesson-title-main">{lessonInfo.title}</p>
           {lessonInfo.photoPath && (

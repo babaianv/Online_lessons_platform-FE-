@@ -1,9 +1,32 @@
+.lessons-error {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin: 50px 0;
+  font-size: 30px;
+  color: red;
+}
+
 .lessons-loading {
   display: flex;
   width: 100%;
   justify-content: center;
   margin: 50px 0;
   font-size: 30px;
+}
+
+.lesson-title.disabled {
+  color: #ccc; /* Серый цвет для заблокированных уроков */
+  cursor: not-allowed; /* Курсор указывает на запрет взаимодействия */
+}
+
+.no-lessons {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin: 50px 0;
+  font-size: 30px;
+  color: #666;
 }
 
 .lessons-main {
@@ -42,7 +65,7 @@
   background: #fff;
   padding: 20px;
   border-radius: 8px;
-  overflow: hidden; /* Обрезаем содержимое, выходящее за рамки */
+  overflow-y: auto; /* Добавляем прокрутку, если контент не помещается */ 
 }
 
 .lesson-title {
@@ -68,6 +91,7 @@
 .lesson-title-main {
   width: 100%;
   margin-bottom: 15px;
+  font-size: 24px;
 }
 
 .lesson-photo-container {

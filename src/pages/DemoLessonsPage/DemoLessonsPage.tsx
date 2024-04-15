@@ -1,13 +1,13 @@
 import React from "react";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import DemoLessons from "../../components/DemoLessons/DemoLessons";
+import AllLessons from "../../components/AllLessons/AllLessons";
 
 const DemoLessonsPage: React.FC = () => {
   return (
     <>
       <Header />
-      <DemoLessons />
+      <AllLessons isDemo={true} />
       <Footer />
     </>
   );
