@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { fetchLessons, selectLessons } from "../../slices/lessonsSlice";
 import { selectUser } from "../../slices/userSlice";
 import "./AllLessons.css";
-import { Lesson  } from "../../types/types";
+import { Lesson } from "../../types/types";
 
 const AllLessons: React.FC = () => {
   const lessons = useAppSelector(selectLessons);
-  const loading = useAppSelector(state => state.lessons.loading);
-  const error = useAppSelector(state => state.lessons.error);
+  const loading = useAppSelector((state) => state.lessons.loading);
+  const error = useAppSelector((state) => state.lessons.error);
   const user = useAppSelector(selectUser);
   //   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -31,37 +31,40 @@ const AllLessons: React.FC = () => {
     }
   }, [courseId, dispatch, user.userInfo?.name]);
 
-  if (loading) return <p id="loading">Loading...</p>;
+  if (loading) return <p className="lessons-loading">Loading...</p>;
 
   if (error) {
     return <h2 id="error">No lessons found for this course</h2>;
   }
 
   return (
-    <div id="lessons-main">
-      <div id="choose-lesson-photo-container">
-        <div id="lessons-container">
-          {user.userInfo?.name &&
-            lessons.map((lesson, index) => (
-              <p
-                key={index}
-                id="choose-lesson-title"
-                onClick={() => handleLessonClick(lesson)}
-              >
-                {lesson.title}
-              </p>
-            ))}
-        </div>
-        <div id="title-photo-container">
-          <p id="lesson-title">{lessonInfo.title}</p>
+    <div className="lessons-main">
+      <ul className="lessons-container"> {/* Контейнер с уроками */}
+        {user.userInfo?.name && lessons.map((lesson) => (
+          <li
+            key={lesson.id}
+            className={`lesson-title ${lessonInfo.id === lesson.id ? "active" : ""}`}
+            onClick={() => handleLessonClick(lesson)}
+          >
+            {lesson.title}
+          </li>
+        ))}
+      </ul>
+      <div className="title-photo-content-container"> {/* Контейнер для деталей урока */}
+        <div className="title-photo-container">
+          <p className="lesson-title-main">{lessonInfo.title}</p>
           {lessonInfo.photoPath && (
-            <div id="lesson-photo-container">
-              <img src={lessonInfo.photoPath} alt="lessonPhoto" id="lessonPhoto"/>
+            <div className="lesson-photo-container">
+              <img
+                src={lessonInfo.photoPath}
+                alt="lessonPhoto"
+                className="lesson-photo"
+              />
             </div>
           )}
         </div>
+        <p className="lesson-content">{lessonInfo.content}</p>
       </div>
-      <p id="content">{lessonInfo.content}</p>
     </div>
   );
 };

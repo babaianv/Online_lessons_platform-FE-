@@ -1,74 +1,106 @@
-#loading {
+.lessons-loading {
   display: flex;
   width: 100%;
   justify-content: center;
-  margin: 50px 0px;
+  margin: 50px 0;
   font-size: 30px;
 }
 
-#lessons-main {
+.lessons-main {
   display: flex;
-  flex: 1;
-  flex-direction: column;
-  height: 100%;
+  flex-direction: row; /* Элементы теперь будут в строке */
+  align-items: flex-start; /* Элементы выравниваются по верхнему краю */
   width: 100%;
-  padding: 30px 130px;
+  padding: 20px;
+  gap: 20px; /* Добавляем промежуток между контейнерами */
+  min-height: 70vh;
 }
 
-#lessons-container {
+.lessons-container {
   display: flex;
   flex-direction: column;
-  padding: 15px;
-  margin: 15px;
-  width: 20%;
-  height: fit-content;
-  max-height: 200px;
-  border: 2px solid black;
-  gap: 10px;
-  overflow: scroll;
+  max-height: 70vh;
+  min-height: 70vh;
+  overflow-y: auto;
+  width: 20%; 
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  background: #fff;
+  padding: 0;
+  list-style: none;
+  margin: 0; /* Убираем внешний отступ, если он есть */
 }
 
-#choose-lesson-photo-container {
+.title-photo-content-container { /* Новый класс для обертки содержимого урока */
+  flex-grow: 1; /* Занимает оставшееся пространство */
   display: flex;
-  flex-direction: row;
-  height: fit-content;
+  min-height: 70vh;
+  flex-direction: column;
+  align-items: center; /* Выравниваем содержимое по центру обертки */
+  width: 100%;
+  max-width: 80%; /* Максимальная ширина, чтобы контент не растягивался на всю ширину */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  overflow: hidden; /* Обрезаем содержимое, выходящее за рамки */
 }
 
-#choose-lesson-title {
+.lesson-title {
   cursor: pointer;
-  width: fit-content;
+  padding: 10px 20px;
+  border-bottom: 1px solid #ccc; /* Добавляем границу между элементами списка */
 }
 
-#title-photo-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.lesson-title.active {
+  background-color: #6255a5;
+  color: #fff;
+  border-radius: 0; /* Убираем скругление, так как теперь это элемент списка */
+}
+
+.title-photo-container {
+  width: 80%;
+  text-align: center;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.lesson-title-main {
   width: 100%;
-  gap: 30px;
+  margin-bottom: 15px;
 }
 
-#lesson-title {
-  display: flex;
-  justify-content: center;
-  font-size: 25px;
-  font-weight: bold;
-  color: #6255a5;
-}
-
-#lesson-photo-container {
-  display: flex;
-  justify-content: center;
-  width: 60%;
-  height: 70%;
-}
-
-#lessonPhoto {
+.lesson-photo-container {
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 
-#content {
-  font-size: 15px;
-  letter-spacing: 0.5px;
-  line-height: 25px;
+.lesson-photo {
+  width: 30%; /* Занимаем всю доступную ширину */
+  justify-content: center; /* Центрируем фото по оси X */
+}
+
+.lesson-content {
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: left;
+  padding: 0 20px;
+  width: 100%;
+}
+
+/* Адаптивность */
+/* @media (max-width: 768px) {
+  .lessons-container {
+    flex-direction: column;
+  }
+
+  .title-photo-container {
+    width: 95%;
+  }
+} */
+
+.lesson-title, .lesson-content {
+  word-wrap: break-word; /* Переносит длинные слова на новую строку */
+  overflow-wrap: break-word; /* Обеспечивает перенос на новую строку внутри блока */
+  word-break: break-word; /* Дополнительно обеспечивает перенос слов на новую строку */
 }
