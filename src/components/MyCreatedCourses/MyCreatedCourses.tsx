@@ -95,13 +95,13 @@ const MyCreatedCourses: React.FC = () => {
               onClick={() => handleEdit(course.id!)}
               className="edit-button"
             >
-              Edit
+              Edit Course
             </button>
             <button
               onClick={() => handleDelete(course.id!)}
               className="delete-button"
             >
-              Delete
+              Delete Course
             </button>
           </div>
         </div>
