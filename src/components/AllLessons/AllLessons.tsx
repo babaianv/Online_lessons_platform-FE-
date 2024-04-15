@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { fetchLessons, selectLessons } from "../../slices/lessonsSlice";
 import { selectUser } from "../../slices/userSlice";
 import "./AllLessons.css";
@@ -8,6 +8,7 @@ import { Lesson } from "../../types/types";
 
 const AllLessons: React.FC<{ isDemo?: boolean }> = ({ isDemo }) => {
   const lessons = useAppSelector(selectLessons);
+  const sortedLessons = useMemo(() => lessons.slice().sort((a, b) => a.number - b.number), [lessons]);
   const loading = useAppSelector((state) => state.lessons.loading);
   const error = useAppSelector((state) => state.lessons.error);
   const user = useAppSelector(selectUser);
@@ -17,8 +18,9 @@ const AllLessons: React.FC<{ isDemo?: boolean }> = ({ isDemo }) => {
     title: "",
     content: "",
     photoPath: "",
+    number: 0,
   });
-  console.log(lessonInfo);
+  // console.log(lessonInfo);
 
   const handleLessonClick = (lesson: Lesson, index: number) => {
     if (!isDemo || index < 2) {
@@ -54,7 +56,7 @@ const AllLessons: React.FC<{ isDemo?: boolean }> = ({ isDemo }) => {
     <div className="lessons-main">
       <ul className="lessons-container">
         {user.userInfo?.name &&
-            lessons.map((lesson, index) => (
+            sortedLessons.map((lesson, index) => (
               <li
                 key={lesson.id}
                 className={`lesson-title ${lessonInfo.id === lesson.id ? "active" : ""} ${isDemo && index >= 2 ? "disabled" : ""}`}
