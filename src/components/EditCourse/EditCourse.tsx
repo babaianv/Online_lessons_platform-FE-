@@ -172,16 +172,6 @@ const EditCourse: React.FC = () => {
                 // onChange={handleFileChange(setCoverPhoto)}
               />
             </div>
-            <div className="edit-course-form-group">
-              <label htmlFor="presentation">Presentation</label>
-              <input
-                type="file"
-                id="presentation"
-                name="presentation"
-                disabled={true}
-                // onChange={handleFileChange(setPresentation)}
-              />
-            </div>
           </div>
           <div className="edit-fields-container">
             <div className="edit-course-form-group">

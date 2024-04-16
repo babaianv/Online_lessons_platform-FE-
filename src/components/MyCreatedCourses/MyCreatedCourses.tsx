@@ -71,43 +71,48 @@ const MyCreatedCourses: React.FC = () => {
         </button>
       </div>
       <h1 className="my-created-courses">MY CREATED COURSES</h1>
-      {createdCourses?.map((course) => (
-        <div className="created-course-item" key={course.id}>
-           <Link to={`/lessons/${course.id}`} className="course-link">
-          <img src={course.photoPath} alt="Course" className="course-icon" />
-          <div className="course-content">
-            <div className="course-title">{course.title}</div>
-            <div className="course-description">
-              {course.description.length > 300
-                ? `${course.description.substring(0, 300)}...`
-                : course.description}
+      {(createdCourses?.length ?? 0) > 0 ? (
+        createdCourses?.map((course) => (
+          <div className="created-course-item" key={course.id}>
+            <Link to={`/lessons/${course.id}`} className="course-link">
+              <img src={course.photoPath} alt="Course" className="course-icon" />
+              <div className="course-content">
+                <div className="course-title">{course.title}</div>
+                <div className="course-description">
+                  {course.description.length > 300
+                    ? `${course.description.substring(0, 300)}...`
+                    : course.description}
+                </div>
+              </div>
+            </Link>
+            <div className="course-buttons-container">
+              <button
+                onClick={() => handleAddLesson(course.id!)}
+                className="add-button"
+              >
+                Add Lesson
+              </button>
+              <button
+                onClick={() => handleEdit(course.id!)}
+                className="edit-button"
+              >
+                Edit Course
+              </button>
+              <button
+                onClick={() => handleDelete(course.id!)}
+                className="delete-button"
+              >
+                Delete Course
+              </button>
             </div>
           </div>
-          </Link>
-          <div className="course-buttons-container">
-            <button
-              onClick={() => handleAddLesson(course.id!)}
-              className="add-button"
-            >
-              Add Lesson
-            </button>
-            <button
-              onClick={() => handleEdit(course.id!)}
-              className="edit-button"
-            >
-              Edit Course
-            </button>
-            <button
-              onClick={() => handleDelete(course.id!)}
-              className="delete-button"
-            >
-              Delete Course
-            </button>
-          </div>
-        </div>
-      ))}
+        ))
+      ) : (
+        <p className="no-created-courses-message">No courses created yet.</p>
+      )}
     </div>
   );
+  
 };
 
 export default MyCreatedCourses;

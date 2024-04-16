@@ -139,4 +139,12 @@
     }
   }
 
+
+  .no-created-courses-message {
+    color: #6255A5; /* Цвет текста, совпадающий с заголовком */
+    text-align: center; /* Выравнивание текста по центру */
+    font-size: 28px; /* Размер шрифта */
+    margin-top: 100px; /* Отступ сверху */
+    font-weight: bold; /* Жирное начертание */
+  }
   
