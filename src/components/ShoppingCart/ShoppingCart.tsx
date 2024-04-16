@@ -18,6 +18,7 @@ import { selectUser } from "../../slices/userSlice";
 import { AppDispatch } from "../../store/store";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 interface DeleteCourseFromCartData {
   cartId: number | undefined;
@@ -119,7 +120,9 @@ const ShoppingCart: React.FC = () => {
             <ul className="coursesList">
               {cart.items.map((item) => (
                 <li className="addedCourse" key={item.id}>
-                  <span className="itemName">{item.title}</span>
+                  <span className="itemName">
+                    <Link to={`/courses/${2}`} className="linkStyle">{item.title}</Link>
+                  </span>
                   <span className="itemCount">1</span>
                   <span className="itemPrice">€{item.price}</span>
                   <img

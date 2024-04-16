@@ -118,7 +118,12 @@ const CreateCourse: React.FC = () => {
       presentationPath = await dispatch(uploadFile(presentation)).unwrap();
     }
 
-    const finalCourseData = { ...course, photoPath, presentationPath };
+    const finalCourseData = {
+      ...course,
+      photoPath,
+      presentationPath,
+      title: course.title.trim(),
+    };
 
     try {
       console.log("Отправка данных курса на сервер:", finalCourseData);
