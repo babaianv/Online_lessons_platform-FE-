@@ -152,7 +152,11 @@ const CreateLessons: React.FC = () => {
           photoPath = uploadResponse; // URL файла после загрузки
         }
 
-        const lessonToSave = { ...lesson, photoPath: photoPath };
+        const lessonToSave = {
+          ...lesson,
+          photoPath: photoPath,
+          title: lesson.title.trim(),
+        };
         await dispatch(createLesson({ courseId, lessonData: lessonToSave }));
       }
       setLessons([]); // Clear lessons after submission
