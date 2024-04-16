@@ -85,7 +85,7 @@ const ShoppingCart: React.FC = () => {
           toast.success("Payment successful!", { toastId: "payment_success" });
           dispatch(fetchCart(cartId));
         } else {
-          throw new Error("Payment failed!");
+          throw new Error("The course has already been purchased!");
         }
       } catch (error) {
         toast.error("Error occurred during payment: " + error, {
