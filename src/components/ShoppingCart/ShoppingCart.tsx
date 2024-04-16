@@ -30,6 +30,10 @@ const ShoppingCart: React.FC = () => {
   const [paypalChecked, setPaypalChecked] = useState<boolean>(false);
   const user = useAppSelector(selectUser);
   const cartId = user.userInfo?.cartId;
+  const totalPrice = cart.items.reduce(
+    (acc: number, item: { price: number }) => acc + item.price,
+    0
+  );
 
   // const fetchCartItems = async (cartId: number) => {
   //   try {
@@ -115,8 +119,8 @@ const ShoppingCart: React.FC = () => {
             <ul className="coursesList">
               {cart.items.map((item) => (
                 <li className="addedCourse" key={item.id}>
-                  <span className="itemName">{item.name}</span>
-                  <span className="itemCount">{item.count}</span>
+                  <span className="itemName">{item.title}</span>
+                  <span className="itemCount">1</span>
                   <span className="itemPrice">€{item.price}</span>
                   <img
                     src={trashIcon}
@@ -130,7 +134,7 @@ const ShoppingCart: React.FC = () => {
             <button className="removeAllBtn" onClick={handleRemoveAllFromCart}>
               Remove All
             </button>
-            <p className="totalPrice">Total Price: €{cart.totalPrice}</p>
+            <p className="totalPrice">Total Price: €{totalPrice}</p>
             <div className="paypalCheckout">
               <input
                 type="checkbox"

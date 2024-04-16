@@ -70,6 +70,10 @@
   color: #161515;
 }
 
+.itemCount {
+  text-align: center;
+}
+
 .itemPrice {
   color: #6255a5;
 }

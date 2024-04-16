@@ -4,23 +4,24 @@ import { Link } from "react-router-dom";
 import headerLogo from "/icons/logo.svg";
 import cartIcon from "/icons/cartIcon.svg";
 import { useSelector } from "react-redux";
-import { selectCart } from "../../slices/cartSlice";
+import { fetchCart, selectCart } from "../../slices/cartSlice";
 import { selectUser, logout } from "../../slices/userSlice";
-import { useDispatch } from "react-redux";
 import "./Header.css";
 import { toast } from "react-toastify";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+import { AppDispatch } from "../../store/store";
 
 const Header: React.FC = () => {
   const { items } = useSelector(selectCart);
   const { userInfo } = useSelector(selectUser);
-  const dispatch = useDispatch();
+  const dispatch: AppDispatch = useAppDispatch();
   const [burgerMenuOpen, setBurgerMenuOpen] = useState(false);
   const burgerMenuRef = useRef<HTMLDivElement>(null);
+  const user = useAppSelector(selectUser);
+  const cartId = user.userInfo?.cartId;
 
-  const totalCount = items.reduce(
-    (acc: number, item: { count: number }) => acc + item.count,
-    0
-  );
+  console.log(items.length);
+  
 
   const handleLogout = async () => {
     dispatch(logout());
@@ -43,6 +44,15 @@ const Header: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (cartId) {
+      dispatch(fetchCart(cartId));
+    }
+  }, [cartId, dispatch]);
+
+
+  
+
   return (
     <div className="header">
       <Link to="/" className="logoContainer">
@@ -58,7 +68,7 @@ const Header: React.FC = () => {
         {userInfo ? (
           <>
             <Link to="/shopping_cart" className="cartLink">
-              <span className="count">{totalCount}</span>
+              <span className="count">{items.length}</span>
               <img className="cartIcon" src={cartIcon} alt="cartIcon" />
             </Link>
             <div

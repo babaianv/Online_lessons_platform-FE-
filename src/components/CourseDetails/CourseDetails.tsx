@@ -67,7 +67,7 @@ const CourseDetails: React.FC<Props> = () => {
           dispatch(
             addToCart({
               id: courseDetails?.id,
-              name: courseDetails.title,
+              title: courseDetails.title,
               count: 1,
               price: courseDetails.price,
             })
