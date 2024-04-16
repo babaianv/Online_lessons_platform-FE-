@@ -26,26 +26,29 @@ const MyCourses: React.FC = () => {
   return (
     <div className="my-courses-container">
       <h1 className="my-courses-header">MY COURSES</h1>
-
-      {enrollments?.map(({ course }) => (
-        <div key={course.id}>
-          <Link to={`/lessons/${course.id}`} className="my-course-item">
-            <img
-              src={course.photoPath}
-              alt="Course"
-              className="my-course-icon"
-            />
-            <div className="my-course-content">
-              <div className="my-course-title">{course.title}</div>
-              <div className="my-course-description">
-                {course.description.length > 300
-                  ? `${course.description.substring(0, 300)}...`
-                  : course.description}
+      {enrollments?.length ?? 0 ? (
+        enrollments?.map(({ course }) => (
+          <div key={course.id}>
+            <Link to={`/lessons/${course.id}`} className="my-course-item">
+              <img
+                src={course.photoPath}
+                alt="Course"
+                className="my-course-icon"
+              />
+              <div className="my-course-content">
+                <div className="my-course-title">{course.title}</div>
+                <div className="my-course-description">
+                  {course.description.length > 300
+                    ? `${course.description.substring(0, 300)}...`
+                    : course.description}
+                </div>
               </div>
-            </div>
-          </Link>
-        </div>
-      ))}
+            </Link>
+          </div>
+        ))
+      ) : (
+        <p className="no-courses-message">No courses available.</p>
+      )}
     </div>
   );
 };

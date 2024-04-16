@@ -26,7 +26,7 @@ const CreateCourse: React.FC = () => {
   });
   const [errors, setErrors] = useState<CourseErrors>({});
   const [coverPhoto, setCoverPhoto] = useState<File | null>(null);
-  const [presentation, setPresentation] = useState<File | null>(null);
+  // const [presentation, setPresentation] = useState<File | null>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -101,7 +101,7 @@ const CreateCourse: React.FC = () => {
     }
 
     let photoPath = "";
-    let presentationPath = "";
+    const presentationPath = "";
 
     // Загрузка фото
     if (coverPhoto) {
@@ -114,9 +114,9 @@ const CreateCourse: React.FC = () => {
     }
 
     // Загрузка презентации
-    if (presentation) {
-      presentationPath = await dispatch(uploadFile(presentation)).unwrap();
-    }
+    // if (presentation) {
+    //   presentationPath = await dispatch(uploadFile(presentation)).unwrap();
+    // }
 
     const finalCourseData = {
       ...course,
@@ -162,16 +162,6 @@ const CreateCourse: React.FC = () => {
                 id="coverPhoto"
                 name="coverPhoto"
                 onChange={handleFileChange(setCoverPhoto)}
-              />
-            </div>
-            <div className="create-course-form-group">
-              <label htmlFor="presentation">Presentation</label>
-              <input
-                type="file"
-                id="presentation"
-                name="presentation"
-                disabled
-                onChange={handleFileChange(setPresentation)}
               />
             </div>
           </div>
