@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./MyCreatedCourses.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import {
   deleteCreatedCourse,
@@ -73,6 +73,7 @@ const MyCreatedCourses: React.FC = () => {
       <h1 className="my-created-courses">MY CREATED COURSES</h1>
       {createdCourses?.map((course) => (
         <div className="created-course-item" key={course.id}>
+           <Link to={`/lessons/${course.id}`} className="course-link">
           <img src={course.photoPath} alt="Course" className="course-icon" />
           <div className="course-content">
             <div className="course-title">{course.title}</div>
@@ -82,6 +83,7 @@ const MyCreatedCourses: React.FC = () => {
                 : course.description}
             </div>
           </div>
+          </Link>
           <div className="course-buttons-container">
             <button
               onClick={() => handleAddLesson(course.id!)}
@@ -93,13 +95,13 @@ const MyCreatedCourses: React.FC = () => {
               onClick={() => handleEdit(course.id!)}
               className="edit-button"
             >
-              Edit
+              Edit Course
             </button>
             <button
               onClick={() => handleDelete(course.id!)}
               className="delete-button"
             >
-              Delete
+              Delete Course
             </button>
           </div>
         </div>

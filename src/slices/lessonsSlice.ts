@@ -1,7 +1,7 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import instance from '../api/axios';
-import { AxiosError } from 'axios';
-import { Lesson } from '../types/types';
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import instance from "../api/axios";
+import { AxiosError } from "axios";
+import { Lesson } from "../types/types";
 import { RootState } from "../store/store";
 
 interface LessonState {
@@ -20,58 +20,44 @@ export const createLesson = createAsyncThunk<
   Lesson,
   { courseId: string; lessonData: Lesson },
   { rejectValue: string }
->('lessons/createLesson', async ({ courseId, lessonData }, { rejectWithValue }) => {
-  try {
-    const response = await instance.post<Lesson>(`/lessons/${courseId}`, lessonData);
-    return response.data;
-  } catch (err) {
-    const error: AxiosError<{ message: string }> = err as AxiosError<{
+>(
+  "lessons/createLesson",
+  async ({ courseId, lessonData }, { rejectWithValue }) => {
+    try {
+      const response = await instance.post<Lesson>(
+        `/lessons/${courseId}`,
+        lessonData
+      );
+      return response.data;
+    } catch (err) {
+      const error: AxiosError<{ message: string }> = err as AxiosError<{
         message: string;
       }>;
       if (error.response && error.response.data.message) {
         return rejectWithValue(error.response.data.message);
       } else {
-        return rejectWithValue("An unknown error occurred");  
+        return rejectWithValue("An unknown error occurred");
       }
+    }
   }
-});
+);
 
 export const fetchLessons = createAsyncThunk<
   Lesson[],
   number,
   { rejectValue: string }
->(
-  'lessons/fetchLessons',
-  async (courseId, { rejectWithValue }) => {
-    try {
-      const response = await instance.get<Lesson[]>(`/lessons/${courseId}`);
-      return response.data;
-    } catch (err) {
-      const error = err as AxiosError;
-      return rejectWithValue(error.message);
-    }
+>("lessons/fetchLessons", async (courseId, { rejectWithValue }) => {
+  try {
+    const response = await instance.get<Lesson[]>(`/lessons/${courseId}`);
+    return response.data;
+  } catch (err) {
+    const error = err as AxiosError;
+    return rejectWithValue(error.message);
   }
-);
-
-export const fetchDemoLessons = createAsyncThunk<
-  Lesson[],
-  number,
-  { rejectValue: string }
->(
-  'lessons/fetchDemoLessons',
-  async (courseId, { rejectWithValue }) => {
-    try {
-      const response = await instance.get<Lesson[]>(`/lessons/demo/${courseId}`);
-      return response.data;
-    } catch (err) {
-      const error = err as AxiosError;
-      return rejectWithValue(error.message);
-    }
-  }
-);
+});
 
 const lessonsSlice = createSlice({
-  name: 'lessons',
+  name: "lessons",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -80,35 +66,30 @@ const lessonsSlice = createSlice({
         state.loading = true;
         state.error = null;
       })
-      .addCase(createLesson.fulfilled, (state, action: PayloadAction<Lesson>) => {
-        state.lessons.push(action.payload);
-        state.loading = false;
-      })
+      .addCase(
+        createLesson.fulfilled,
+        (state, action: PayloadAction<Lesson>) => {
+          state.lessons.push(action.payload);
+          state.loading = false;
+        }
+      )
       .addCase(createLesson.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || 'Failed to create lesson';
+        state.error = action.payload || "Failed to create lesson";
       })
       .addCase(fetchLessons.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchLessons.fulfilled, (state, action: PayloadAction<Lesson[]>) => {
-        state.lessons = action.payload;
-        state.loading = false;
-      })
+      .addCase(
+        fetchLessons.fulfilled,
+        (state, action: PayloadAction<Lesson[]>) => {
+          state.lessons = action.payload;
+          state.loading = false;
+        }
+      )
       .addCase(fetchLessons.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload || 'Failed to fetch lessons';
-      })
-      .addCase(fetchDemoLessons.pending, (state) => {
-        state.loading = true;
-      })
-      .addCase(fetchDemoLessons.fulfilled, (state, action: PayloadAction<Lesson[]>) => {
-        state.lessons = action.payload; 
-        state.loading = false;
-      })
-      .addCase(fetchDemoLessons.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload || 'Failed to fetch demo lessons';
+        state.error = action.payload || "Failed to fetch lessons";
       });
   },
 });

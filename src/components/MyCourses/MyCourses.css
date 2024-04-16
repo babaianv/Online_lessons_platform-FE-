@@ -18,17 +18,20 @@
   align-items: flex-start;
   margin-bottom: 20px;
   padding: 20px; /* Padding top and bottom */
-  border: #333 1px solid; /* Border around each item */
-  border-radius: 10px; /* Rounded corners */
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  box-shadow: 1px 3px 10px lightgray;
   cursor: pointer; /* Pointer cursor on hover */
   text-decoration: none;
   color: #333;
+  min-width: 350px;
 }
 
 .my-course-icon {
   margin-right: 16px;
   width: 100px;
   height: 100px;
+  border-radius: 10px;
 }
 
 .my-course-title {
@@ -46,4 +49,16 @@
   display: flex;
   flex-direction: column;
   margin-top: 5px;
+}
+
+@media (max-width: 1200px) { /* Или другой размер, на котором вы хотите изменить расположение */
+  .my-course-item {
+    flex-direction: column; /* Элементы теперь упорядочены вертикально */
+    align-items: center; /* Центрируем элементы для лучшего вида */
+  }
+
+  .my-course-icon {
+    margin: 0 auto; /* Центрируем картинку, если нужно */
+    margin-bottom: 10px; /* Добавляем отступ снизу картинки */
+  }
 }

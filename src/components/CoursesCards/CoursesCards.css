@@ -61,6 +61,13 @@
   text-decoration: none;
   color: black;
   margin-bottom: 20px;
+  min-height: 75px;
+  max-height: 75px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* Здесь указываем число строк после которого будет добавлено многоточие */
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .productCardPrice {
   color: #FF6F06;

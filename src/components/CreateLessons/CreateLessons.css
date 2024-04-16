@@ -9,6 +9,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+  max-height: 500px;
 }
 
 .create-lesson-list-container {
@@ -16,7 +17,7 @@
   padding: 20px;
   overflow-x: hidden; /* Предотвращаем горизонтальный скролл */
   overflow-y: auto;   /* Добавляем вертикальный скролл при необходимости */
-  max-height: 450px; 
+  
 }
 
 .create-lesson-form-container {
@@ -48,6 +49,13 @@
     resize: none;
   }
   
+  .create-lesson-form-group input[type="number"] {
+    width: 100px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
   .create-lesson-form-group input[type="text"],
   .create-lesson-form-group textarea {
     width: 100%;
@@ -110,9 +118,13 @@
   transform: scale(1.05);
 }
 
+.create-lesson-submit-all-container button {
+  font-size: 18px;
+}
+
 .create-lesson-list-item {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
   background: #f9f9f9;
   border: 1px solid #e1e1e1;

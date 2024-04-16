@@ -1,28 +1,32 @@
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { fetchLessons, selectLessons } from "../../slices/lessonsSlice";
 import { selectUser } from "../../slices/userSlice";
 import "./AllLessons.css";
-import { Lesson  } from "../../types/types";
+import { Lesson } from "../../types/types";
 
-const AllLessons: React.FC = () => {
+const AllLessons: React.FC<{ isDemo?: boolean }> = ({ isDemo }) => {
   const lessons = useAppSelector(selectLessons);
-  const loading = useAppSelector(state => state.lessons.loading);
-  const error = useAppSelector(state => state.lessons.error);
+  const sortedLessons = useMemo(() => lessons.slice().sort((a, b) => a.number - b.number), [lessons]);
+  const loading = useAppSelector((state) => state.lessons.loading);
+  const error = useAppSelector((state) => state.lessons.error);
   const user = useAppSelector(selectUser);
-  //   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { courseId } = useParams();
   const [lessonInfo, setLessonInfo] = useState<Lesson>({
     title: "",
     content: "",
     photoPath: "",
+    number: 0,
   });
-  console.log(lessonInfo);
+  // console.log(lessonInfo);
 
-  const handleLessonClick = (lesson: Lesson) => {
-    setLessonInfo(lesson);
+  const handleLessonClick = (lesson: Lesson, index: number) => {
+    if (!isDemo || index < 2) {
+      // Позволяет взаимодействие только с первыми двумя уроками в демо-режиме
+      setLessonInfo(lesson);
+    }
   };
 
   useEffect(() => {
@@ -31,37 +35,54 @@ const AllLessons: React.FC = () => {
     }
   }, [courseId, dispatch, user.userInfo?.name]);
 
-  if (loading) return <p id="loading">Loading...</p>;
+  if (loading) return <p className="lessons-loading">Loading...</p>;
 
   if (error) {
-    return <h2 id="error">No lessons found for this course</h2>;
+    return <h2 className="lessons-error">Error loading courses: {error}</h2>;
+  }
+
+  if (lessons.length === 0) {
+    // Проверяем, есть ли уроки в массиве
+    return (
+      <div className="lessons-main">
+        <p className="no-lessons">
+          There are currently no lessons for this course
+        </p>
+      </div>
+    );
   }
 
   return (
-    <div id="lessons-main">
-      <div id="choose-lesson-photo-container">
-        <div id="lessons-container">
-          {user.userInfo?.name &&
-            lessons.map((lesson, index) => (
-              <p
-                key={index}
-                id="choose-lesson-title"
-                onClick={() => handleLessonClick(lesson)}
+    <div className="lessons-main">
+      <ul className="lessons-container">
+        {user.userInfo?.name &&
+            sortedLessons.map((lesson, index) => (
+              <li
+                key={lesson.id}
+                className={`lesson-title ${lessonInfo.id === lesson.id ? "active" : ""} ${isDemo && index >= 2 ? "disabled" : ""}`}
+                onClick={() => handleLessonClick(lesson, index)}
               >
                 {lesson.title}
-              </p>
+              </li>
             ))}
-        </div>
-        <div id="title-photo-container">
-          <p id="lesson-title">{lessonInfo.title}</p>
+      </ul>
+      <div className="title-photo-content-container">
+        {" "}
+        {/* Контейнер для деталей урока */}
+        <div className="title-photo-container">
+          <p className="lesson-title-main">{lessonInfo.title}</p>
           {lessonInfo.photoPath && (
-            <div id="lesson-photo-container">
-              <img src={lessonInfo.photoPath} alt="lessonPhoto" id="lessonPhoto"/>
+            <div className="lesson-photo-container">
+              <img
+                src={lessonInfo.photoPath}
+                alt="lessonPhoto"
+                className="lesson-photo"
+              />
             </div>
           )}
         </div>
+        <p className="lesson-content">{lessonInfo.content}</p>
       </div>
-      <p id="content">{lessonInfo.content}</p>
     </div>
   );
 };

@@ -59,4 +59,5 @@ export interface Lesson {
   title: string;
   photoPath?: string;
   content: string;
+  number: number;
 }

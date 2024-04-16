@@ -1,23 +1,27 @@
-import React, { ChangeEvent, useRef, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import "./CreateLessons.css";
 import { useAppDispatch } from "../../hooks/hooks";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { uploadFile } from "../../slices/coursesSlice";
-import { createLesson } from "../../slices/lessonsSlice";
+import { createLesson, fetchLessons } from "../../slices/lessonsSlice";
 import axios from "axios";
+import { Lesson } from "../../types/types";
 
 interface LessonData {
   title: string;
   content: string;
   photoFile?: File;
+  number: number;
   previewUrl?: string;
 }
 
 const CreateLessons: React.FC = () => {
+  const [existingLessons, setExistingLessons] = useState<Lesson[]>([]);
   const [lesson, setLesson] = useState<LessonData>({
     title: "",
     content: "",
+    number: 0,
   });
   const [lessons, setLessons] = useState<LessonData[]>([]);
   const [lessonPhoto, setLessonPhoto] = useState<File | null>(null);
@@ -28,6 +32,18 @@ const CreateLessons: React.FC = () => {
   };
 
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    dispatch(fetchLessons(Number(courseId)))
+      .then((response) => {
+        // Assuming response.payload is Lesson[], explicitly assert the type
+        setExistingLessons(response.payload as Lesson[]);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch lessons:", error);
+        setExistingLessons([]);
+      });
+  }, [dispatch, courseId]);
 
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -58,6 +74,40 @@ const CreateLessons: React.FC = () => {
   const handleAddLesson = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    const num = Number(lesson.number);
+
+    if (!lesson.title.trim() || !lesson.content.trim() || !num) {
+      toast.error("Please fill in all the fields.", {
+        toastId: "lesson_fields_required",
+      });
+      return;
+    }
+
+    if (num < 1) {
+      toast.error("Lesson number must be at least 1 or more.");
+      return;
+    }
+
+    console.log("Checking number:", num);
+    console.log(
+      "Existing lessons numbers:",
+      existingLessons.map((l) => l.number)
+    );
+    console.log(
+      "Added lessons numbers:",
+      lessons.map((l) => l.number)
+    );
+
+    if (
+      existingLessons.some((l) => l.number === num) ||
+      lessons.some((l) => l.number === num)
+    ) {
+      toast.error(
+        "Lesson number is already in use. Please use a different number."
+      );
+      return;
+    }
+
     // Проверка выбран ли файл для загрузки
     if (!lessonPhoto) {
       toast.error("Please select a photo for the lesson.", {
@@ -66,20 +116,14 @@ const CreateLessons: React.FC = () => {
       return;
     }
 
-    if (!lesson.title.trim() || !lesson.content.trim()) {
-      toast.error("Please fill in all the fields.", {
-        toastId: "lesson_fields_required",
-      });
-      return;
-    }
-
     const newLesson = {
       ...lesson,
+      number: Number(lesson.number),
       photoFile: lessonPhoto,
       previewUrl: lesson.previewUrl,
     };
     setLessons([...lessons, newLesson]);
-    setLesson({ title: "", content: "", previewUrl: undefined }); // Reset form
+    setLesson({ title: "", content: "", number: 0, previewUrl: undefined }); // Reset form
     // Reset file input
     if (fileInputRef.current) {
       fileInputRef.current.value = "";
@@ -168,6 +212,16 @@ const CreateLessons: React.FC = () => {
         <div className="create-lesson-form-container">
           <form onSubmit={handleAddLesson} className="create-lesson-form">
             {/* Поля формы для ввода данных урока */}
+            <div className="create-lesson-form-group">
+              <label htmlFor="number">Lesson Number</label>
+              <input
+                type="number"
+                id="number"
+                name="number"
+                value={lesson.number || ""}
+                onChange={handleInputChange}
+              />
+            </div>
             <div className="create-lesson-form-group">
               <label htmlFor="title">Title</label>
               <input
