@@ -5,7 +5,7 @@ import { AxiosError } from "axios";
 
 interface CartItem {
   id: number;
-  name: string;
+  title: string;
   count: number;
   price: number;
 }
