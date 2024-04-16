@@ -16,12 +16,19 @@
   .created-course-item {
     display: flex;
     align-items: center;
+    flex-direction: row;
     margin-bottom: 20px;
     padding: 20px;
-    border: #333 1px solid; /* Border around each item */
-    border-radius: 10px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    box-shadow: 1px 3px 10px lightgray; 
+    cursor: pointer;
+    transition: transform 0.3s ease; 
+    min-width: 350px;
+  }
+
+  .created-course-item:hover {
+    transform: scale(1.05); /* Эффект при наведении */
   }
   
   .course-content {
@@ -82,12 +89,13 @@
     margin-right: 16px;
     width: 100px;
     height: 100px;
+    border-radius: 10px;
   }
 
   .create-course-button {
     padding: 0.5rem 1rem;
     border: none;
-    border-radius: 15px;
+    border-radius: 5px;
     cursor: pointer;
     background-color: #4CAF50; 
     color: white;
@@ -102,3 +110,33 @@
     text-align: right;
     margin-bottom: 20px;
   }
+
+  @media (max-width: 1400px) {
+    .created-course-item {
+      flex-direction: column; /* Переключение на вертикальное расположение элементов */
+      align-items: flex-start; /* Выравнивание элементов по началу контейнера */
+    }
+
+    .course-icon {
+      margin-bottom: 1rem; /* Добавляем нижний отступ между изображением и текстом */
+    }
+  
+    .course-buttons-container {
+      width: 100%; /* Устанавливаем ширину контейнера с кнопками на 100% */
+      margin-top: 10px; /* Добавляем отступ сверху для отделения от остального контента */
+      flex-wrap: wrap; /* Позволяет кнопкам обернуться при нехватке места */
+      justify-content: space-between; /* Равномерное распределение кнопок по ширине контейнера */
+    }
+  
+    .add-button, .edit-button, .delete-button {
+      width: 100%; /* Кнопки теперь занимают всю ширину, уменьшаем их чтобы они могли поместиться в одну строку */
+      margin-top: 10px;
+      margin-left: 0;
+    }
+
+    .course-content {
+      width: 100%; /* Контент курса на всю ширину контейнера */
+    }
+  }
+
+  

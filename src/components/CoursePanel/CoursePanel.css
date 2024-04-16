@@ -17,7 +17,9 @@
   }
   
   .course-panel-nav button {
-    display: block;
+    display: flex;
+    align-items: center; /* This will vertically center the items */
+    justify-content: flex-start; 
     width: 100%;
     padding: 10px;
     margin-bottom: 5px;
@@ -42,4 +44,10 @@
   .course-panel-content {
     flex-grow: 1;
     padding: 20px;
+  }
+
+  .course-panel-nav img {
+    height: 20px;
+    width: 20px;
+    margin-right: 7px;
   }

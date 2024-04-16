@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import MyAccountInfo from "../MyAccount/MyAccountInfo";
 import ChangePassword from "../ChangePassword/ChangePassword";
 import "./AccountPanel.css";
+import myAccountIcon from "/img/forAccountInfo.jpg";
+import changePasswordIcon from "/img/forPassword.png";
 
 const AccountPanel: React.FC = () => {
   const [activeView, setActiveView] = useState("accountInfo");
@@ -12,11 +14,13 @@ const AccountPanel: React.FC = () => {
         <ul>
           <li>
             <button onClick={() => setActiveView("accountInfo")}>
+              <img src={myAccountIcon} alt="myAccountIcon" />
               Account info
             </button>
           </li>
           <li>
             <button onClick={() => setActiveView("changePassword")}>
+              <img src={changePasswordIcon} alt="changePasswordIcon" />
               Change password
             </button>
           </li>
