@@ -16,6 +16,10 @@ const initialState: UserState = {
   error: null,
 };
 
+interface ErrorResponse {
+  message: string;
+}
+
 interface ChangePasswordPayload {
   oldPassword: string;
   newPassword: string;
@@ -62,6 +66,10 @@ export const changePassword = createAsyncThunk<
       );
     } catch (err) {
       const error = err as AxiosError;
+      if (error.response && error.response.data) {
+        const errorData = error.response.data as ErrorResponse; 
+        return rejectWithValue(errorData.message);
+      }
       return rejectWithValue(error.message);
     }
   }

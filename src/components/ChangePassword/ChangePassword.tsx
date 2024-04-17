@@ -1,6 +1,4 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../store/store";
 import "./ChangePassword.css";
 import { useAppDispatch } from "../../hooks/hooks";
 import {
@@ -8,7 +6,6 @@ import {
   resetChangePasswordStatus,
 } from "../../slices/myAccountSlice";
 import { toast } from "react-toastify";
-// import { useNavigate } from "react-router-dom";
 
 interface ChangePasswordData {
   oldPassword: string;
@@ -18,7 +15,6 @@ interface ChangePasswordData {
 
 const ChangePassword: React.FC = () => {
   const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
 
   const [changePasswordInfo, setChangePasswordInfo] =
     useState<ChangePasswordData>({
@@ -27,11 +23,27 @@ const ChangePassword: React.FC = () => {
       confirmNewPassword: "",
     });
 
-  const error = useSelector((state: RootState) => state.accountInfo.error);
-  const status = useSelector((state: RootState) => state.accountInfo.status);
+  const validatePassword = (password: string): string => {
+    const regexp = new RegExp(
+      "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!$#%])[a-zA-Z0-9!$#%]{8,}$"
+    );
+    return regexp.test(password) ? "" : "Invalid new password format";
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const passwordError = validatePassword(changePasswordInfo.newPassword);
+
+    if (passwordError) {
+      toast.error(passwordError);
+      return;
+    }
+
+    if (changePasswordInfo.newPassword === changePasswordInfo.oldPassword) {
+      toast.error("New password cannot be the same as the current password");
+      return;
+    }
 
     try {
       console.log("Changing password:", changePasswordInfo);
@@ -39,9 +51,14 @@ const ChangePassword: React.FC = () => {
       toast.success("Password changed successfully", {
         toastId: "change_password_success",
       });
-      // navigate("/change_password");
+      // Сброс значений полей после успешного изменения пароля
+      setChangePasswordInfo({
+        oldPassword: "",
+        newPassword: "",
+        confirmNewPassword: "",
+      });
     } catch (error) {
-      toast.error("Password changing error: " + error, {
+      toast.error(error as string, {
         toastId: "change_password_error",
       });
     }
@@ -79,18 +96,21 @@ const ChangePassword: React.FC = () => {
               className="input"
               id="oldPassword"
               name="oldPassword"
+              value={changePasswordInfo.oldPassword}
               onChange={handleInputChange}
             />
             <input
               className="input"
               id="newPassword"
               name="newPassword"
+              value={changePasswordInfo.newPassword}
               onChange={handleInputChange}
             />
             <input
               className="input"
               id="confrimNewPassword"
               name="confirmNewPassword"
+              value={changePasswordInfo.confirmNewPassword}
               onChange={handleInputChange}
             />
           </div>
@@ -101,13 +121,6 @@ const ChangePassword: React.FC = () => {
           </button>
         </div>
       </form>
-
-      {error && (
-        <h2 id="error">Incorrect current password or new password mismatch</h2>
-      )}
-      {status === "succeeded" && (
-        <h2 id="success">Password changed successfully</h2>
-      )}
     </div>
   );
 };
