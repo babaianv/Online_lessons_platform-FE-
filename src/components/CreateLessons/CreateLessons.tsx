@@ -84,26 +84,21 @@ const CreateLessons: React.FC = () => {
     }
 
     if (num < 1) {
-      toast.error("Lesson number must be at least 1 or more.");
+      toast.error("Lesson number must be at least 1 or more.", {
+        toastId: "lesson_number_invalid",
+      });
       return;
     }
-
-    console.log("Checking number:", num);
-    console.log(
-      "Existing lessons numbers:",
-      existingLessons.map((l) => l.number)
-    );
-    console.log(
-      "Added lessons numbers:",
-      lessons.map((l) => l.number)
-    );
 
     if (
       existingLessons.some((l) => l.number === num) ||
       lessons.some((l) => l.number === num)
     ) {
       toast.error(
-        "Lesson number is already in use. Please use a different number."
+        "Lesson number is already in use. Please use a different number.", 
+        {
+          toastId: "lesson_number_in_use",
+        }
       );
       return;
     }

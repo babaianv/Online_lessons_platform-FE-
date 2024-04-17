@@ -36,12 +36,14 @@ const ChangePassword: React.FC = () => {
     const passwordError = validatePassword(changePasswordInfo.newPassword);
 
     if (passwordError) {
-      toast.error(passwordError);
+      toast.error(passwordError, { toastId: "invalid_password_format" });
       return;
     }
 
     if (changePasswordInfo.newPassword === changePasswordInfo.oldPassword) {
-      toast.error("New password cannot be the same as the current password");
+      toast.error("New password cannot be the same as the current password", {
+        toastId: "new_password_same_as_old",
+      });
       return;
     }
 
