@@ -90,3 +90,10 @@
   margin-bottom: 50px;
   max-width: 800px;
 }
+
+.price-containter-course-details {
+  display: flex;
+  flex-direction: row;
+  margin: 14px 0px;
+  gap: 10px;
+}

@@ -100,7 +100,12 @@ const CourseDetails: React.FC<Props> = () => {
               <div className="courseDet">
                 <h1 className="titleDet">{courseDetails.title}</h1>
                 <p className="taxes">EUR(incl. of all taxes)</p>
-                <p className="priceDet">€{courseDetails.price}</p>
+                <div className="price-containter-course-details">
+                  <p className="productCardPrice">€{courseDetails.price}</p>
+                  <p className="productCardOldPrice">
+                    €{courseDetails.oldPrice}
+                  </p>
+                </div>
               </div>
               <div className="dividerCourseM"></div>
               <div className="coursePreviewWrapperBtnWrapper">
