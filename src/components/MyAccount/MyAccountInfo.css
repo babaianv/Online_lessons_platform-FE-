@@ -1,0 +1,75 @@
+.main-container-account {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  margin: 100px;
+  gap: 50px;
+  max-width: 420px
+}
+
+h1 {
+  font-size: 26px;
+  color: #6255A5;
+}
+
+.input-label-container {
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+}
+
+.label-container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.input {
+  border: 1px solid black;
+  border-radius: 7px;
+  padding: 7px;
+  width: 240px;
+}
+
+.label {
+  display: flex;
+  height: 31px;
+  align-items: center;
+}
+
+#error {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 30px;
+  color: red;
+}
+
+.btn-containerAcc {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#delete-btn {
+  width: 100px;
+  border-radius: 15px;
+  height: 30px;
+  color: white;
+  background-color:#d83b30;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+#delete-btn:hover {
+  transform: scale(1.05); 
+}

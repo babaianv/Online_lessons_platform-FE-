@@ -1,0 +1,145 @@
+.cartContainer {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 50px auto;
+}
+
+.shoppingCartTitle {
+  font-size: 30px;
+  margin-bottom: 15px;
+  color: #6255a5;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.emptyCart {
+  color: #555;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coursesList {
+  list-style: none;
+  padding: 0;
+}
+
+.addedCourse {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.addedCourseDet {
+  flex-grow: 1;
+}
+
+.removeBtn {
+  height: 60px;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.removeBtn:hover {
+  transform: scale(1.3);
+}
+
+.totalPrice {
+  margin-top: 85px;
+  font-weight: bold;
+  color: #6255a5;
+}
+
+.itemName,
+.itemCount {
+  max-width: 30%;
+  width: 100%;
+  color: #161515;
+}
+
+.itemCount {
+  text-align: center;
+}
+
+.itemPrice {
+  color: #6255a5;
+}
+
+
+.removeAllBtn {
+  background-color: #c84e41;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin: 20px 0 50px 0;
+  float: right;
+  height: 30px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.removeAllBtn:hover {
+  transform: scale(1.05);
+}
+
+.paypalCheckout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  margin-right: 10px;
+}
+
+.paypalIcon {
+  width: 70px;
+  margin-right: 10px;
+}
+
+.payNowBtn {
+  background-color: #29a354;
+  color: #fff;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  height: 30px;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payNowBtn:hover {
+  background-color: #45a049;
+}
+
+.payNowBtn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.paypalContainer {
+  display: flex;
+  align-items: center;
+}
+
+.payNowBtn {
+  margin-left: 10px;
+}

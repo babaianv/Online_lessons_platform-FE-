@@ -1,0 +1,8 @@
+.benefitContainerTeacher{
+    flex-direction: row-reverse;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    justify-content: space-between;
+    max-width: 1200px;
+}

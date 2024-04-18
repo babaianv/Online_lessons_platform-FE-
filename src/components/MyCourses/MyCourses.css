@@ -1,0 +1,72 @@
+.my-courses-container {
+  width: 50%; /* Or your preferred width */
+  margin: 0 auto; /* Center the container */
+  padding: 2rem;
+  background-color: #fff; /* White background */
+}
+
+.my-courses-header {
+  text-align: center; /* Center the title */
+  margin-bottom: 2rem; /* Spacing below the header */
+  color: #6255a5; /* Lila color for the text */
+  font-weight: bold; /* Bold font weight */
+  font-size: 32px;
+}
+
+.my-course-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding: 20px; /* Padding top and bottom */
+  border: 1px solid lightgray;
+  border-radius: 20px;
+  box-shadow: 1px 3px 10px lightgray;
+  cursor: pointer; /* Pointer cursor on hover */
+  text-decoration: none;
+  color: #333;
+  min-width: 350px;
+}
+
+.my-course-icon {
+  margin-right: 16px;
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+}
+
+.my-course-title {
+  font-weight: bold;
+  flex-grow: 1; /* Title takes up remaining space */
+  color: #333; /* Text color */
+  margin-bottom: 10px;
+}
+
+.my-course-description {
+  font-size: 0.9em;
+}
+
+.my-course-content {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+@media (max-width: 1200px) { /* Или другой размер, на котором вы хотите изменить расположение */
+  .my-course-item {
+    flex-direction: column; /* Элементы теперь упорядочены вертикально */
+    align-items: center; /* Центрируем элементы для лучшего вида */
+  }
+
+  .my-course-icon {
+    margin: 0 auto; /* Центрируем картинку, если нужно */
+    margin-bottom: 10px; /* Добавляем отступ снизу картинки */
+  }
+}
+
+.no-courses-message {
+  color: #6255A5; /* Цвет текста, совпадающий с заголовком */
+  text-align: center; /* Выравнивание текста по центру */
+  font-size: 28px; /* Размер шрифта */
+  margin-top: 100px; /* Отступ сверху */
+  font-weight: bold; /* Жирное начертание */
+}

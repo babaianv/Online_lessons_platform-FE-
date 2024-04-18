@@ -1,0 +1,98 @@
+.mainContainerCourses {
+  text-align: center;
+}
+
+
+.coursesTitle {
+  padding: 40px 0 10px 0;
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+  color: #6255A5;
+}
+
+.subtitleCourses {
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 200;
+  margin-bottom: 40px;
+  color: #827A7A;
+}
+
+.productCardWrapper {
+  width: 350px;
+  border: 2px lightgray solid;
+  border-radius: 20px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  padding: 25px;
+  box-shadow: 1px 3px 10px lightgray;
+  transition: transform 0.3s ease;
+  max-width: 1200px;
+
+}
+.cardsWrapperSmall{
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.productCardWrapper:hover {
+  transform: scale(1.05); 
+}
+
+.productCardImg {
+  width: 250px;
+  height: 200px;
+  border-radius: 20px;
+  display: flex;
+  margin: 0 auto 30px;
+}
+.productCardTitle {
+  text-decoration: none;
+  color: black;
+  margin-bottom: 20px;
+  min-height: 75px;
+  max-height: 75px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* Здесь указываем число строк после которого будет добавлено многоточие */
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.productCardPrice {
+  color: #FF6F06;
+  text-decoration: none;
+}
+.linkStyle {
+  text-decoration: none;
+}
+
+.moreButton {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 15px;
+  background-color: #6255A5;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+  margin-bottom: 50px;
+}
+
+.moreButton:hover {
+  transform: scale(1.05);
+}

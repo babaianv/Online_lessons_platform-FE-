@@ -1,0 +1,150 @@
+.my-created-courses-container {
+    width: 50%;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: #fff;
+  }
+
+  .my-created-courses {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #6255A5;
+    font-weight: bold;
+    font-size: 32px;
+  }
+  
+  .created-course-item {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid lightgray;
+    border-radius: 20px;
+    box-shadow: 1px 3px 10px lightgray; 
+    cursor: pointer;
+    transition: transform 0.3s ease; 
+    min-width: 350px;
+  }
+
+  .created-course-item:hover {
+    transform: scale(1.05); /* Эффект при наведении */
+  }
+  
+  .course-content {
+    flex-grow: 1;
+  }
+  
+  .course-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+    
+  }
+  
+  .course-description {
+    font-size: 0.9em;
+  }
+
+  .buttons-container {
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start; 
+  }
+  
+  .course-link {
+    all: unset; /* Сбрасывает все стандартные стили */
+    display: flex; /* Или 'flex', в зависимости от нужного поведения */
+    color: inherit; /* Убедитесь, что цвет текста соответствует ожидаемому */
+    text-decoration: none; /* Убирает подчёркивание ссылки */
+  }
+
+  .add-button, .edit-button, .delete-button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 120px;
+    height: 30px;
+  }
+
+  .add-button {
+    background-color: #4CAF50; 
+    color: white;
+  }
+
+  .edit-button {
+    background-color: #4CAF50; 
+    color: white;
+    margin-top: 10px;
+  }
+  
+  .delete-button {
+    background-color: #d83b30;
+    color: white;
+    margin-top: 10px;
+  }
+
+  .course-icon {
+    margin-right: 16px;
+    width: 100px;
+    height: 100px;
+    border-radius: 10px;
+  }
+
+  .create-course-button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #4CAF50; 
+    color: white;
+    transition: transform 0.2s; /* Добавляем transition для smooth hover effect */
+  }
+  
+  .create-course-button:hover {
+    transform: scale(1.05);
+  }
+  
+  .create-new-course-button-container {
+    text-align: right;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 1400px) {
+    .created-course-item {
+      flex-direction: column; /* Переключение на вертикальное расположение элементов */
+      align-items: flex-start; /* Выравнивание элементов по началу контейнера */
+    }
+
+    .course-icon {
+      margin-bottom: 1rem; /* Добавляем нижний отступ между изображением и текстом */
+    }
+  
+    .course-buttons-container {
+      width: 100%; /* Устанавливаем ширину контейнера с кнопками на 100% */
+      margin-top: 10px; /* Добавляем отступ сверху для отделения от остального контента */
+      flex-wrap: wrap; /* Позволяет кнопкам обернуться при нехватке места */
+      justify-content: space-between; /* Равномерное распределение кнопок по ширине контейнера */
+    }
+  
+    .add-button, .edit-button, .delete-button {
+      width: 100%; /* Кнопки теперь занимают всю ширину, уменьшаем их чтобы они могли поместиться в одну строку */
+      margin-top: 10px;
+      margin-left: 0;
+    }
+
+    .course-content {
+      width: 100%; /* Контент курса на всю ширину контейнера */
+    }
+  }
+
+
+  .no-created-courses-message {
+    color: #6255A5; /* Цвет текста, совпадающий с заголовком */
+    text-align: center; /* Выравнивание текста по центру */
+    font-size: 28px; /* Размер шрифта */
+    margin-top: 100px; /* Отступ сверху */
+    font-weight: bold; /* Жирное начертание */
+  }
+  

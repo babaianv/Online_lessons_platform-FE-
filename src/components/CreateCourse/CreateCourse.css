@@ -1,0 +1,114 @@
+.create-course-container {
+  max-width: 900px; /* Установите максимальную ширину контейнера */
+  margin: auto; /* Центрировать контейнер на странице */
+  padding: 40px; /* Добавить внутренние отступы */
+}
+
+.create-main-container {
+ display: grid; /* Использовать grid для размещения элементов */
+  grid-template-columns: 1fr 2fr; /* Две колонки, вторая шире */
+  grid-gap: 20px; /* Расстояние между колонками */
+  align-items: start; /* Выровнять элементы по верхнему краю */
+}
+
+.create-course-form-group textarea {
+  height: 150px; /* Установить высоту textarea */
+}
+
+.create-course-form-group {
+  margin-bottom: 20px; /* Отступ между группами форм */
+}
+
+.create-course-form-group label {
+  font-weight: bold; /* Сделать текст label полужирным */
+}
+
+.create-course-form-group textarea {
+  resize: none; /* Disable resizing */
+}
+
+.create-course-form-group input[type="text"],
+textarea {
+  width: 100%; /* Ширина поля на всю доступную ширину */
+  padding: 10px; /* Внутренний отступ в полях */
+  border: 1px solid #ddd; /* Тонкая граница для полей */
+  border-radius: 4px; /* Скругление углов полей ввода */
+  resize: none; /* Запретить изменение размера */;
+}
+
+.create-course-form-group input[type="file"] {
+  border: 2px dashed #ddd; /* Пунктирная граница для полей файлов */
+  text-align: center; /* Текст в центре */
+  padding: 20px; /* Внутренний отступ */
+  border-radius: 4px; /* Скругление углов */
+  background: #fafafa; /* Цвет фона */
+  cursor: pointer; /* Курсор в виде указателя */
+}
+
+.create-file-input-container {
+  display: flex; /* Выровнять блоки загрузки файлов горизонтально */
+  flex-direction: column; /* Элементы в столбец */
+  gap: 20px; /* Расстояние между элементами */
+}
+
+/* Отдельно стилизуем каждый блок загрузки файла */
+.cover-photo-container,
+.presentation-container {
+  /* Применяем общие стили, определенные выше для input[type="file"] */
+}
+
+.create-form-buttons {
+  display: flex; /* Выровнять кнопки горизонтально */
+  justify-content: flex-end; /* Выровнять кнопки по правому краю */
+  gap: 10px; /* Расстояние между кнопками */
+}
+
+.create-course-button-container button {
+  padding: 10px 20px; /* Внутренний отступ кнопок */
+  border: none; /* Убрать границу */
+  border-radius: 4px; /* Скругление углов */
+  cursor: pointer; /* Курсор в виде указателя */
+}
+
+.create-course-submit {
+  align-items: center;
+  width: 15%; 
+  height: 40px; 
+  padding: 5px 10px; 
+  border: none;
+  border-radius: 15px;
+  background-color: #29a354;
+  color: white;
+  font-size: 14px; 
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+
+.create-course-submit:hover {
+  transform: scale(1.05);
+}
+
+.create-course-header {
+  text-align: center;
+  margin-bottom: 45px;
+  font-size: 32px;
+  font-weight: 500;
+  letter-spacing: -3px;
+  color: #6255A5;
+
+}
+
+.create-course-button-container {
+  display: flex;
+  justify-content: center; /* Выравнивание по горизонтали */
+  align-items: center;
+  /* margin-left: 15px; */
+}
+
+.create-course-error {
+  color: red;
+  font-size: 14px;
+  /* margin-top: 5px; */
+}
+
